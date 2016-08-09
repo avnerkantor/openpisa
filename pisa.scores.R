@@ -1,34 +1,34 @@
 #choices = list("combined" = "combined", "male only" = "male", "female only" = "female")
 
-load("data/pisaData3.rda")
+load("data/pisaData1.rda")
 
 observe({
   if(input$calibrationCheck){
-    updateCheckboxGroupInput(session, inputId="Gender", label="מגדר", inline=T, choices = c(
+    updateCheckboxGroupInput(session, inputId="Gender", label="", choices = c(
       "בנות"="Female",
       "בנים"="Male"
     ), selected = NULL)
-    updateCheckboxGroupInput(session, inputId="Escs", label="מדד סוציואקונומי", inline=T, choices = c(
+    updateCheckboxGroupInput(session, inputId="Escs", label="", choices = c(
       "גבוה"="High",
       "בינוני"="Medium",
       "נמוך"="Low"
     ), selected = NULL)
   }
-
+# 
 })
-
+#לעשות תנאי שאם יש פתרון בעיות או פיננסים אז להציג נקודות
 observe({
   if(!is.null(input$Gender) || !is.null(input$Escs)){
-    updateCheckboxInput(session, inputId = "calibrationCheck", label="ראשי", value=FALSE)
+    updateCheckboxInput(session, inputId = "calibrationCheck", label="", value=FALSE)
   }
 })
 
 #todo לעשות הודעת שגיאה של לא נבחנו במקצוע. אם אין מידע
-observeEvent(input$worldOrIsrael,{
+observe({
   if (input$worldOrIsrael=="World") 
       {
             updateSelectInput(session, "Country1", choices = names(oecdList), selected = "ישראל")
-            updateSelectInput(session, "Country2", choices = names(oecdList), selected = "ארצות-הברית")
+            updateSelectInput(session, "Country2", choices = names(oecdList), selected = "בריטניה")
             updateSelectInput(session, "Country3", choices = names(oecdList), selected = "פינלנד")
             updateSelectInput(session, "Country4", choices = names(oecdList), selected = "דרום-קוריאה")
           } else {
@@ -40,103 +40,100 @@ observeEvent(input$worldOrIsrael,{
   })
 
 observe({
+  
   SubjectExpertiseLevels<-ExpertiseLevels %>%
     select(Level, contains(input$Subject))%>%
     filter(!is.na(input$Subject))
-  plotData<-pisaData3%>%filter(Subject==input$Subject, 
-   Gender==ifelse(is.null(input$Gender), 0, input$Gender),
-   ESCS==ifelse(is.null(input$Escs), 0, input$Escs),
-   Performers==0)
+  
+  plotData1<-pisaData1%>%filter(Subject==input$Subject, Performers==0)%>%select(-Subject, -Performers)
 
+  if (!is.null(input$Gender)){
+    if(!is.null(input$Escs)){
+      plotData2<- plotData1 %>%
+        filter(Gender %in% c(input$Gender))%>%
+        filter(ESCS %in% c(input$Escs))
+    } else {
+      plotData2<- plotData1 %>%
+        filter(Gender %in% c(input$Gender))%>%
+        filter(ESCS == 0)
+    }
+  } else {
+    if (!is.null(input$Escs)){
+      plotData2<- plotData1 %>%
+        filter(Gender == 0)%>%
+        filter(ESCS %in% c(input$Escs))
+    }
+   else {
+    plotData2<-plotData1%>%
+      filter(Gender==0, ESCS==0)
+   }
+  }
   # output$text1 <- renderText(
   #   asSubjectExpertiseLevelsBreaks[1]
   # )
+  #output$table1 <- renderTable({
+    #SubjectExpertiseLevelsBreaks
+   # plotData
+  #})
   
-  
-  output$Country1Plot<-renderPlot({
-    plotData<-plotData %>% filter(Country==as.vector(unlist(Countries%>%filter(Hebrew==input$Country1)%>%select(CNT)))) %>%
-      select(-Country)
-    output$table1 <- renderTable({
-      #SubjectExpertiseLevelsBreaks
-      plotData
-    })
-    ggplot(plotData, aes(x=Year, y=Average, colour=Gender)) +
+  #color Palettes
+  # generalPalette <- c("#7b3a96", "#bc99c7", "#b276b2")
+  # girlsPalette<-c("#e5126f", "#f17cb0", "#f6aac9")
+  # boysPalette<-c("#265dab", "#5da5da", "#88bde6")
+ 
+  scoresPlotFunction<-function(country){
+    plotData3 <- plotData2%>%filter(Country==as.vector(unlist(Countries%>%filter(Hebrew==country)%>%select(CNT))))%>%select(-Country)
+    #ggplot(plotData3, aes(x=Year, y=Average, colour=ESCS, group=interaction(ESCS, Gender))) +
+    ggplot(plotData3, aes(x=Year, y=Average, colour=ESCS, fill=Gender)) +
       geom_line() +
-      geom_point() + 
+      scale_colour_manual("Male", values = c("#265dab", "#5da5da", "#88bde6")) +
+      scale_fill_manual("Female", values = c("#7b3a96", "#bc99c7", "#b276b2")) +
+      #      scale_fill_manual(values=c("Male" = boysPalette, "Female"=girlsPalette)) +
       theme_bw()+
       guides(colour=FALSE) +
-      scale_x_continuous(breaks=c(2006,2009,2012)) +
-      scale_y_continuous(breaks=SubjectExpertiseLevels[2], labels=SubjectExpertiseLevels[1], limits = c(200, 800)) +
-      labs(title=" ", y="" ,x= " ")
+      scale_x_discrete(breaks=c(2006,2009,2012), limits=c(2006,2009, 2012)) +
+      scale_y_continuous(breaks=SubjectExpertiseLevels[2], labels=SubjectExpertiseLevels[1], 
+          limits = c(min(SubjectExpertiseLevels[2], na.rm = TRUE), 
+                     max(SubjectExpertiseLevels[2], na.rm = TRUE))) +
+      labs(title=" ", y="רמה" ,x= " ") 
+    
+    #print(min(SubjectExpertiseLevels[2], na.rm = TRUE))
+  }
+  
+  output$pisaScoresTable <- DT::renderDataTable(options=list(
+    pageLength = 5,
+    searching=FALSE,
+    autoWidth = TRUE
+  ), rownames= FALSE,
+  {
+    plotData3<-plotData2%>%
+      filter(Country=="ISR")%>%select(-Country)
+
+  })
+
+  output$Country1Plot<-renderPlot({
+    scoresPlotFunction(input$Country1)
   })
   
   output$Country2Plot<-renderPlot({
-    plotData<-plotData %>% filter(Country==as.vector(unlist(Countries%>%filter(Hebrew==input$Country2)%>%select(CNT)))) %>%
-      select(-Country)
-    output$table1 <- renderTable({
-      #SubjectExpertiseLevelsBreaks
-      plotData
-    })
-    ggplot(plotData, aes(x=Year, y=Average, colour=Gender)) +
-      geom_line() +
-      geom_point() + 
-      theme_bw()+
-      guides(colour=FALSE) +
-      scale_x_continuous(breaks=c(2006,2009,2012)) +
-      scale_y_continuous(breaks=SubjectExpertiseLevels[2], labels=SubjectExpertiseLevels[1], limits = c(200, 800)) +
-      labs(title=" ", y="" ,x= " ")
+    scoresPlotFunction(input$Country2)
   })
   
   output$Country3Plot<-renderPlot({
-    plotData<-plotData %>% filter(Country==as.vector(unlist(Countries%>%filter(Hebrew==input$Country3)%>%select(CNT)))) %>%
-      select(-Country)
-    output$table1 <- renderTable({
-      #SubjectExpertiseLevelsBreaks
-      plotData
-    })
-    ggplot(plotData, aes(x=Year, y=Average, colour=Gender)) +
-      geom_line() +
-      geom_point() + 
-      theme_bw()+
-      guides(colour=FALSE) +
-      scale_x_continuous(breaks=c(2006,2009,2012)) +
-      scale_y_continuous(breaks=SubjectExpertiseLevels[2], labels=SubjectExpertiseLevels[1], limits = c(200, 800)) +
-      labs(title=" ", y="" ,x= " ")
+    scoresPlotFunction(input$Country3)
   })
   
   output$Country4Plot<-renderPlot({
-    plotData<-plotData %>% filter(Country==as.vector(unlist(Countries%>%filter(Hebrew==input$Country4)%>%select(CNT)))) %>%
-      select(-Country)
-    output$table1 <- renderTable({
-      #SubjectExpertiseLevelsBreaks
-      plotData
-    })
-    ggplot(plotData, aes(x=Year, y=Average, colour=Gender)) +
-      geom_line() +
-      geom_point() + 
-      theme_bw()+
-      guides(colour=FALSE) +
-      scale_x_continuous(breaks=c(2006,2009,2012)) +
-      scale_y_continuous(breaks=SubjectExpertiseLevels[2], labels=SubjectExpertiseLevels[1], limits = c(200, 800)) +
-      labs(title=" ", y="" ,x= " ")
+    scoresPlotFunction(input$Country4)
   })
 })
 
-output$pisaScoresTable <- DT::renderDataTable(options=list(
-  pageLength = 5,
-  searching=FALSE,
-  autoWidth = TRUE
-), rownames= FALSE,
-{
-  pisaData3%>%select(-Performers)
-  #%>%filter(Country==input)
-})
 
 observeEvent(input$Subject,{
   minLevel<-min(LevelExplenation%>%filter(Subject==input$Subject)%>%select(Level))
   maxLevel<-max(LevelExplenation%>%filter(Subject==input$Subject)%>%select(Level))
   
-  updateNumericInput(session, "levelNumber", "רמה", min=minLevel, max=maxLevel, value=3, step=1)
+  updateNumericInput(session, "levelNumber", "", min=minLevel, max=maxLevel, value=3, step=1)
   
   
   

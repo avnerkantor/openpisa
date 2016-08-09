@@ -1,0 +1,24 @@
+GoogleClound Console
+
+#Links
+* https://superuser.com/questions/969666/copy-files-from-google-compute-engine-instance-to-google-cloud-storage-bucket?newreg=dfee1a35051e43b081f41338bd4fb414
+* https://cloud.google.com/storage/docs/authentication
+* https://cloud.google.com/storage/docs/quickstart-console
+
+gcloud auth login
+
+#Create folder
+sudo gsutil mb gs://oecd-pisa/
+
+#Copy GoogleCompute files to GoogleStorage
+gsutil -m cp -r pisa-data gs://oecd-pisa/
+
+#Move files in GoogleStorage 
+gsutil mv -p gs://oecd-pisa/pisa-data/finStudent2012.rda gs://oecd-pisa/
+gsutil mv -p gs://oecd-pisa/pisa-data/original/*.* gs://oecd-pisa/original
+
+#Set the project in GoogleCloud
+gcloud config set project r-shiny-1141
+
+#Public Link for the data
+https://storage.googleapis.com/oecd-pisa/newStudent2012.rda

@@ -9,3 +9,9 @@
 #          "מתקשים"="Low"
 #        ))
 # ),
+
+
+
+
+#pisaData3Expertise<-pisaData3%>%filter(Performers!=0)
+#pisaData3Expertise$Average<-round(pisaData3Expertise$Average, digits = 1)

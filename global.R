@@ -1,6 +1,7 @@
 library(shiny)
 library(ggplot2)
-library(plotly)
+#library(plotly)
+#library(ggiraph)
 
 oecdCountries<-read.csv("data/oecdCountries.csv", header = TRUE, sep=",")
 oecdList<-oecdCountries$CNT
