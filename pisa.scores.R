@@ -68,9 +68,9 @@ observe({
       filter(Gender==0, ESCS==0)
    }
   }
-  # output$text1 <- renderText(
-  #   asSubjectExpertiseLevelsBreaks[1]
-  # )
+  output$text1 <- renderText(
+    SubjectExpertiseLevelsBreaks[1]
+  )
   #output$table1 <- renderTable({
     #SubjectExpertiseLevelsBreaks
    # plotData

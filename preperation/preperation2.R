@@ -39,6 +39,9 @@ rownames(df)<-c()
 pisaData<-filter(pisaData, Average<700)
 pisaData<-filter(pisaData, Average!=0)
 
+#USA
+pisaData1<-pisaData1%>%filter(Average!=100)
+
 isrPerformers<-pisaData%>%filter(Performers!=0, Country=="ISR", Subject=="Math")
 isrPerformers$Average<-round(isrPerformers$Average, digits = 1)
 write.csv(isrPerformers, file="isrPerformers.csv", row.names = FALSE, quote = FALSE)

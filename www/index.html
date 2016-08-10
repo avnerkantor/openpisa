@@ -2,7 +2,6 @@
 <html lang="he">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,17 +25,6 @@
     <script type="application/shiny-singletons"></script>
     <script type="application/html-dependencies">
         json2[2014.02.04];jquery[1.11.3];shiny[0.13.2];selectize[0.11.2];bootstrap[3.3.5]
-
-
-
-
-
-
-
-
-
-
-
     </script>
     <script src="shared/json2-min.js"></script>
     <script src="shared/jquery.min.js"></script>
@@ -153,51 +141,50 @@
             <div class="col-sm-8 well" style="background-color:white">
                 <div class="col-sm-6">
                     <span>מדד סוציואקונומי</span>
-              <div id="Escs" class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
-                <!--<label class="control-label" for="Escs">מדד סוציואקונומי</label>-->
-                <div class="shiny-options-group">
-                  <label class="checkbox-inline">
-                    <input type="checkbox" name="Escs" value="High"/>
-                    <span>גבוה</span>
-                  </label>
-                  <label class="checkbox-inline">
-                    <input type="checkbox" name="Escs" value="Medium"/>
-                    <span>בינוני</span>
-                  </label>
-                  <label class="checkbox-inline">
-                    <input type="checkbox" name="Escs" value="Low"/>
-                    <span>נמוך</span>
-                  </label>
-                </div>
-              </div>
+                    <div id="Escs"
+                         class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
+                        <!--<label class="control-label" for="Escs">מדד סוציואקונומי</label>-->
+                        <div class="shiny-options-group">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="Escs" value="High"/>
+                                <span>גבוה</span>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="Escs" value="Medium"/>
+                                <span>בינוני</span>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="Escs" value="Low"/>
+                                <span>נמוך</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-4">
                     <span>מגדר</span>
-              <div id="Gender" class="form-group shiny-input-checkboxgroup shiny-input-container">
-                <!--<label class="control-label" for="Gender">מגדר</label>-->
-                <div class="shiny-options-group">
-                  <!--<label class="checkbox-inline">-->
-                    <input type="checkbox" name="Gender" value="Female"/>
-                    <span>בנות</span>
-                  <!--</label>-->
-                  <!--<label class="checkbox-inline">-->
-                    <input type="checkbox" name="Gender" value="Male"/>
-                    <span>בנים</span>
-                  <!--</label>-->
-                </div>
-              </div>
+                    <div id="Gender" class="form-group shiny-input-checkboxgroup shiny-input-container">
+                        <!--<label class="control-label" for="Gender">מגדר</label>-->
+                        <div class="shiny-options-group">
+                            <!--<label class="checkbox-inline">-->
+                            <input type="checkbox" name="Gender" value="Female"/>
+                            <span>בנות</span>
+                            <!--</label>-->
+                            <!--<label class="checkbox-inline">-->
+                            <input type="checkbox" name="Gender" value="Male"/>
+                            <span>בנים</span>
+                            <!--</label>-->
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-2">
-                     <div class="form-group shiny-input-container">
-                <div class="checkbox">
-                  <label>
-                    <input id="calibrationCheck" type="checkbox" checked="checked"/>
-
-                  </label>
-                     <span>ראשי</span>
-                </div>
-              </div>
-
+                    <div class="form-group shiny-input-container">
+                        <div class="checkbox">
+                            <label>
+                                <input id="calibrationCheck" type="checkbox" checked="checked"/>
+                            </label>
+                            <span>ראשי</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-4">
@@ -222,6 +209,7 @@
             </div>
         </div>
         <div class="row" style="text-align: center">
+                <div id="text1" class="shiny-text-output"></div>
             <div class="col-sm-3">
                 <div class="form-group shiny-input-container">
                     <label class="control-label" for="Country4"></label>
@@ -288,6 +276,12 @@
                 <h6>מקור: ראמ"ה</h6>
                 <h5>פער של 35 נקודות הוא שווה ערך לפיגור בשנת לימודים שלמה.</h5>
                 <h5>הפער בין רמה לרמה הוא שווה ערך לפיגור בשתי שנות לימוד.</h5>
+                <p>
+                    המדד הסוציואקונומי של פיז"ה הוא מדד חברתי-תרבותי-כלכלי (ESCS – index of Economic Social and Cultural
+                    Status). המדד מחושב על סמך נתונים שנאספו בשיטת דיווח עצמי בשאלון שהועבר לכל התלמידים מיד לאחר מבחני
+                    ההישגים. המדד נקבע כך שיהיה בעל ממוצע אפס וסטיית תקן של 1 במדינות ה-OECD. הנבחנים מוצגים בשלוש
+                    קטגוריות: רקע נמוך – אחוזונים 30-0; רקע בינוני – אחוזונים 70-31; רקע גבוה – אחוזונים 100-71.
+                </p>
             </div>
         </div>
     </div>
@@ -297,150 +291,33 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                hi
+                <h1>בקיאות</h1>
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-diamond text-primary sr-icons"></i>
-                    <h3>Sturdy Templates</h3>
-                    <p class="text-muted">Our templates are updated regularly so they don't break.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
-                    <h3>Ready to Ship</h3>
-                    <p class="text-muted">You can use this theme as is, or you can make changes!</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
-                    <h3>Up to Date</h3>
-                    <p class="text-muted">We update dependencies to keep things fresh.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-heart text-primary sr-icons"></i>
-                    <h3>Made with Love</h3>
-                    <p class="text-muted">You have to make your websites with love these days!</p>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </section>
 
 <section id="survey">
     <div class="container-fluid">
-        <div class="row no-gutter popup-gallery">
-            <div class="col-lg-4 col-sm-6">
-                <a href="img/portfolio/fullsize/1.jpg" class="portfolio-box">
-                    <img src="img/portfolio/thumbnails/1.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                Category
-                            </div>
-                            <div class="project-name">
-                                Project Name
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="img/portfolio/fullsize/2.jpg" class="portfolio-box">
-                    <img src="img/portfolio/thumbnails/2.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                Category
-                            </div>
-                            <div class="project-name">
-                                Project Name
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="img/portfolio/fullsize/3.jpg" class="portfolio-box">
-                    <img src="img/portfolio/thumbnails/3.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                Category
-                            </div>
-                            <div class="project-name">
-                                Project Name
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="img/portfolio/fullsize/4.jpg" class="portfolio-box">
-                    <img src="img/portfolio/thumbnails/4.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                Category
-                            </div>
-                            <div class="project-name">
-                                Project Name
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="img/portfolio/fullsize/5.jpg" class="portfolio-box">
-                    <img src="img/portfolio/thumbnails/5.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                Category
-                            </div>
-                            <div class="project-name">
-                                Project Name
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="img/portfolio/fullsize/6.jpg" class="portfolio-box">
-                    <img src="img/portfolio/thumbnails/6.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                Category
-                            </div>
-                            <div class="project-name">
-                                Project Name
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
+        <h1>אקלים</h1>
+        <p>
+            חשוב לשים לב כי נתוני השאלון מבוססים על דיווח עצמי של תלמידים ולכן עלולים להיות מושפעים מהטיות שונות כגון
+            רצייה חברתית ונוהגים תרבותיים. לפיכך הנתונים שיוצגו בדוח משקפים את תפיסת התלמידים ומציירים תמונה כללית
+            ומגמות, אך אינם בהכרח אומדים במדויק את המתרחש בפועל.
+        </p>
     </div>
 </section>
 
-<aside class="bg-dark">
-    <div class="container text-center">
-        <div class="call-to-action">
-            <h2>Free Download at Start Bootstrap!</h2>
-            <a href="http://startbootstrap.com/template-overviews/creative/" class="btn btn-default btn-xl sr-button">Download
-                Now!</a>
-        </div>
-    </div>
-</aside>
+<!--<aside class="bg-dark">-->
+<!--<div class="container text-center">-->
+<!--<div class="call-to-action">-->
+<!--<h2>Free Download at Start Bootstrap!</h2>-->
+<!--<a href="http://startbootstrap.com/template-overviews/creative/" class="btn btn-default btn-xl sr-button">Download-->
+<!--Now!</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</aside>-->
 
 <section id="analyze">
     <div class="container">
