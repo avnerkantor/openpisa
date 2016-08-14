@@ -9,26 +9,24 @@
     <meta name="author" content="">
 
     <title>תיק-חינוך</title>
-    <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
           rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
           rel='stylesheet' type='text/css'>
-    <!-- Plugin CSS -->
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
-    <!-- Theme CSS -->
     <link href="css/style.css" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script type="application/shiny-singletons"></script>
     <script type="application/html-dependencies">
         json2[2014.02.04];jquery[1.11.3];shiny[0.13.2];selectize[0.11.2];bootstrap[3.3.5]
+
+
     </script>
     <script src="shared/json2-min.js"></script>
     <script src="shared/jquery.min.js"></script>
-    <link href="shared/shiny.css" rel="stylesheet"/>
+    <!--<link href="shared/shiny.css" rel="stylesheet"/>-->
     <script src="shared/shiny.min.js"></script>
     <link href="shared/selectize/css/selectize.bootstrap3.css" rel="stylesheet"/>
     <!--[if lt IE 9]>
@@ -38,7 +36,6 @@
 
     <script src="shared/selectize/js/selectize.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link href="shared/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="shared/bootstrap/js/bootstrap.min.js"></script>
     <script src="shared/bootstrap/shim/html5shiv.min.js"></script>
     <script src="shared/bootstrap/shim/respond.min.js"></script>
@@ -93,112 +90,137 @@
 
         <h1 class="header-text">כיצד מתקדמת מערכת החינוך?</h1>
 
-        <h4>תיק-חינוך הוא יוזמה מדליקה</h4>
+        <h4>אתר תיק-חינוך הוקם במטרה להנגיש לציבור הרחב את נתוני מבחן פיז"ה הבינלאומיים. <br>
+            הצגת הנתונים וניתוחם מאפשרת לקבל תמונה של החינוך בישראל.<br>
+            תיק-חינוך הוא יוזמה משותפת לקרן טראמפ ולמרכז לחקר האינטרנט באוניברסיטת חיפה.</h4>
     </div>
 </header>
 
 <section id="scores">
-    <div class="container" style="direction: rtl">
+    <div style="direction: rtl; margin-right: 10px; margin-left: 10px">
         <div class="row">
-            <div id="Subject"
+            <div id="Subject" style=""
                  class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
                 <br>
                 <div class="shiny-options-group">
                     <form class="form-horizontal" method="post" action="">
                         <div data-toggle="buttons">
-                            <label class="radio-inline btn btn-default btn-circle btn-lg active text-center">
-                                <input type="radio" name="Subject" value="Math" checked="checked"/>
-                                <i><img src="img/math.png" class="subjectImage "/></i>
-                                <p>מתמטיקה</p>
-                            </label>
-                            <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
-                                <input type="radio" name="Subject" value="Science"/>
-                                <span><img src="img/science.png" class="subjectImage"/></span>
-                                <p>מדעים</p>
-                            </label>
-                            <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
-                                <input type="radio" name="Subject" value="Reading"/>
-                                <span><img src="img/reading.png" class="subjectImage"/></span>
+                            <!--<div class="col-sm-8"></div>-->
+
+                            <div class="col-sm-8">
+                                <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
+                                    <input type="radio" name="Subject" value="Financial"/>
+                                    <span><img src="img/financial.png" class="subjectImage"/></span>
+                                </label>
+                                <p>אוריינות<br>פיננסית</p>
+
+                            </div>
+                              <div class="col-sm-1">
+                                <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
+                                    <input type="radio" name="Subject" value="ProblemSolving"/>
+                                    <span><img src="img/problemSolving.png" class="subjectImage"/></span>
+                                </label>
+                                <p>פתרון<br>בעיות</p>
+                            </div>
+                                 <div class="col-sm-1">
+                                <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
+                                    <input type="radio" name="Subject" value="Reading"/>
+                                    <span><img src="img/reading.png" class="subjectImage"/></span>
+                                </label>
                                 <p>קריאה</p>
-                            </label>
-                            <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
-                                <input type="radio" name="Subject" value="ProblemSolving"/>
-                                <span><img src="img/problemSolving.png" class="subjectImage"/></span>
-                                <p>פתרון בעיות</p>
-                            </label>
-                            <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
-                                <input type="radio" name="Subject" value="Financial"/>
-                                <span><img src="img/financial.png" class="subjectImage"/></span>
-                                <p>פיננסים</p>
-                            </label>
+                            </div>
+      <div class="col-sm-1">
+                                <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
+                                    <input type="radio" name="Subject" value="Science"/>
+                                    <span><img src="img/science.png" class="subjectImage"/></span>
+                                </label>
+                                <p>מדעים</p>
+                            </div>
+
+                                  <div class="col-sm-1">
+                                <label class="radio-inline btn btn-default btn-circle btn-lg text-center active">
+                                    <input type="radio" name="Subject" value="Math" checked="checked"/>
+                                    <span><img src="img/math.png" class="subjectImage "/></span>
+
+                                </label>
+                                <p>מתמטיקה</p>
+                            </div>
+
                         </div>
                     </form>
                 </div>
             </div>
 
         </div>
+
         <div class="row">
-            <div class="col-sm-8 well" style="background-color:white">
-                <div class="col-sm-6">
+            <div class="col-sm-9 well" style="background-color:white; margin-left: 10px; padding-top: 2px; padding-bottom: 2px">
+                <div class="col-sm-9">
                     <span>מדד סוציואקונומי</span>
                     <div id="Escs"
                          class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
                         <!--<label class="control-label" for="Escs">מדד סוציואקונומי</label>-->
-                        <div class="shiny-options-group">
-                            <label class="checkbox-inline">
+                        <div class="shiny-options-group btn-group" data-toggle="buttons">
+                            <!--<label class="checkbox-inline">-->
+                            <label class="btn btn-sample">
                                 <input type="checkbox" name="Escs" value="High"/>
                                 <span>גבוה</span>
                             </label>
-                            <label class="checkbox-inline">
+                            <!--<label class="checkbox-inline">-->
+                            <label class="btn btn-sample">
                                 <input type="checkbox" name="Escs" value="Medium"/>
                                 <span>בינוני</span>
                             </label>
-                            <label class="checkbox-inline">
+                            <!--<label class="checkbox-inline">-->
+                            <label class="btn btn-sample">
                                 <input type="checkbox" name="Escs" value="Low"/>
                                 <span>נמוך</span>
                             </label>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <span>מגדר</span>
-                    <div id="Gender" class="form-group shiny-input-checkboxgroup shiny-input-container">
+                    <div id="Gender"
+                         class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
                         <!--<label class="control-label" for="Gender">מגדר</label>-->
-                        <div class="shiny-options-group">
+                        <div class="shiny-options-group btn-group " data-toggle="buttons">
                             <!--<label class="checkbox-inline">-->
-                            <input type="checkbox" name="Gender" value="Female"/>
-                            <span>בנות</span>
-                            <!--</label>-->
-                            <!--<label class="checkbox-inline">-->
-                            <input type="checkbox" name="Gender" value="Male"/>
-                            <span>בנים</span>
-                            <!--</label>-->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-group shiny-input-container">
-                        <div class="checkbox">
-                            <label>
-                                <input id="calibrationCheck" type="checkbox" checked="checked"/>
+                            <label class="btn btn-sample">
+                                <input type="checkbox" name="Gender" value="Female"/>
+                                <span>בנות</span>
                             </label>
-                            <span>ראשי</span>
+                            <!--<label class="checkbox-inline">-->
+                            <label class="btn btn-sample">
+                                <input type="checkbox" name="Gender" value="Male"/>
+                                <span>בנים</span>
+                            </label>
                         </div>
                     </div>
                 </div>
+                <!--<div class="col-sm-2">-->
+                <!--<div class="form-group shiny-input-container">-->
+                <!--<div class="checkbox">-->
+                <!--<label>-->
+                <!--<input id="calibrationCheck" type="checkbox" checked="checked"/>-->
+                <!--</label>-->
+                <!--<span>ראשי</span>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3" style="margin-left: -10px">
                 <div id="worldOrIsrael"
                      class="form-group shiny-input-radiogroup shiny-input-container">
                     <form class="form-horizontal" method="post" action="">
                         <div data-toggle="buttons">
                             <label class="control-label" for="worldOrIsrael"></label>
                             <div class="shiny-options-group">
-                                <label class="radio btn btn-default btn-lg active text-center">
+                                <label class="radio btn btn-default btn-lg text-center btn-countries active">
                                     <input type="radio" name="worldOrIsrael" value="World" checked="checked"/>
                                     <span>מדינות</span>
                                 </label>
-                                <label class="radio btn btn-default btn-lg text-center">
+                                <label class="radio btn btn-default btn-lg text-center btn-countries">
                                     <input type="radio" name="worldOrIsrael" value="Israel"/>
                                     <span>ישראל</span>
                                 </label>
@@ -209,7 +231,7 @@
             </div>
         </div>
         <div class="row" style="text-align: center">
-                <div id="text1" class="shiny-text-output"></div>
+            <div id="text1" class="shiny-text-output"></div>
             <div class="col-sm-3">
                 <div class="form-group shiny-input-container">
                     <label class="control-label" for="Country4"></label>

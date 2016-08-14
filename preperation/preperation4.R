@@ -51,3 +51,11 @@ for (x in countries){
   dm<-data.frame(Year=2012, Country=x, ID=e$L1, Gender=0, Performers=e$labels, ESCS=0, Average=e$value)
   df<-rbind(df, dm)    
 }
+
+#Israel
+s2012dict<-as.data.frame(student2012dict)
+s2012dict$ID<-rownames(s2012dict)
+mm<-left_join(israelSurvey, s2012dict, by="ID")
+israelSurvey2<-mm%>%select(ID, description=student2012dict, Country, Year, Gender, ESCS, Performers, Average)
+write.csv(israelSurvey2, file="israelSurvey2.csv")
+

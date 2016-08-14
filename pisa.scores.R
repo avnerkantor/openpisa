@@ -2,26 +2,25 @@
 
 load("data/pisaData1.rda")
 
-observe({
-  if(input$calibrationCheck){
-    updateCheckboxGroupInput(session, inputId="Gender", label="", choices = c(
-      "בנות"="Female",
-      "בנים"="Male"
-    ), selected = NULL)
-    updateCheckboxGroupInput(session, inputId="Escs", label="", choices = c(
-      "גבוה"="High",
-      "בינוני"="Medium",
-      "נמוך"="Low"
-    ), selected = NULL)
-  }
-# 
-})
+#observe({
+#  if(input$calibrationCheck){
+#    updateCheckboxGroupInput(session, inputId="Gender", inline=T, label="", choices = c(
+#      "בנות"="Female",
+#      "בנים"="Male"
+#    ), selected = NULL)
+#    updateCheckboxGroupInput(session, inputId="Escs", inline=T, label="", choices = c(
+#      "גבוה"="High",
+#      "בינוני"="Medium",
+#      "נמוך"="Low"
+#    ), selected = NULL)
+#  }
+#})
 #לעשות תנאי שאם יש פתרון בעיות או פיננסים אז להציג נקודות
-observe({
-  if(!is.null(input$Gender) || !is.null(input$Escs)){
-    updateCheckboxInput(session, inputId = "calibrationCheck", label="", value=FALSE)
-  }
-})
+#observe({
+#  if(!is.null(input$Gender) || !is.null(input$Escs)){
+#    updateCheckboxInput(session, inputId = "calibrationCheck", inline=T, label="", value=FALSE)
+#  }
+#})
 
 #todo לעשות הודעת שגיאה של לא נבחנו במקצוע. אם אין מידע
 observe({
@@ -62,15 +61,12 @@ observe({
       plotData2<- plotData1 %>%
         filter(Gender == 0)%>%
         filter(ESCS %in% c(input$Escs))
-    }
-   else {
-    plotData2<-plotData1%>%
+    } else {
+    plotData2<-plotData1 %>%
       filter(Gender==0, ESCS==0)
    }
   }
-  output$text1 <- renderText(
-    SubjectExpertiseLevelsBreaks[1]
-  )
+
   #output$table1 <- renderTable({
     #SubjectExpertiseLevelsBreaks
    # plotData
@@ -106,11 +102,13 @@ observe({
     autoWidth = TRUE
   ), rownames= FALSE,
   {
-    plotData3<-plotData2%>%
-      filter(Country=="ISR")%>%select(-Country)
+    plotData3<-plotData1%>%
+      filter(Country=="ISR")%>%filter(Gender %in% c(input$Female, input$Male))
 
   })
-
+  output$text1 <- renderText(
+    paste(c(input$Female))
+  )
   output$Country1Plot<-renderPlot({
     scoresPlotFunction(input$Country1)
   })

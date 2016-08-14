@@ -30,6 +30,8 @@ shinyUI(fluidPage(
                                   "נמוך"="Low"
                                 )), selected=NULL),
                          column(2,
+                                # actionButton("Female", "Female"),
+                                # actionButton("Male", "Male")),
                                 checkboxGroupInput(inputId="Gender", label="מגדר", inline=T, choices = c(
                                   "בנות"="Female",
                                   "בנים"="Male"
