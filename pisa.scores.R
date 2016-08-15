@@ -78,7 +78,10 @@ observe({
   # boysPalette<-c("#265dab", "#5da5da", "#88bde6")
  
   scoresPlotFunction<-function(country){
-    plotData3 <- plotData2%>%filter(Country==as.vector(unlist(Countries%>%filter(Hebrew==country)%>%select(CNT))))%>%select(-Country)
+    plotData3 <- plotData2%>%
+      filter(Country==
+        as.vector(unlist(Countries%>%filter(Hebrew==country)%>%select(CNT))))
+    #%>%select(-Country)
     #ggplot(plotData3, aes(x=Year, y=Average, colour=ESCS, group=interaction(ESCS, Gender))) +
     ggplot(plotData3, aes(x=Year, y=Average, colour=ESCS, fill=Gender)) +
       geom_line() +

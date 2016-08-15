@@ -1,13 +1,13 @@
 {
-    "path" : "~/R/tikhinuch4/preperation/server",
+    "path" : "~/R/tikhinuch4",
     "sortOrder" : [
-        {
-            "ascending" : true,
-            "columnIndex" : 2
-        },
         {
             "ascending" : false,
             "columnIndex" : 4
+        },
+        {
+            "ascending" : true,
+            "columnIndex" : 2
         }
     ]
 }
