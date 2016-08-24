@@ -65,7 +65,7 @@ shinyUI(fluidPage(
                          ),
                          column(3,
                                 selectInput(inputId="Country1", label="", choices = ""),
-                                plotOutput("Country1Plot", height = 200)
+                                plotlyOutput("Country1Plot", height = 200)
                          )
                        ),
                        br(),br(),br(),

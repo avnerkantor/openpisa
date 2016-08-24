@@ -3,10 +3,16 @@
 html,
 body {
     /*background-color:  "white" ;*/
-    /*height: 100%;*/
+    height: 100%;
+    min-height: 100%;
     /*width: 100%;*/
+    direction: rtl;
+    /*margin-right: 5px;*/
+    margin-right: 5px;
+    margin-left: 5px;
     font-family: 'OpenSansHebrewRegular', sans-serif;
     background-image: url("../img/bg.jpg");
+    position: relative;
 }
 
 nav {
@@ -15,7 +21,8 @@ nav {
 
 .header-image {
     position: relative;
-    width: 100%;
+    width: 105%;
+    margin-right: -15px;
 }
 
 .header-text {
@@ -24,7 +31,6 @@ nav {
     left: 60px;
     width: 90%;
     color: #fff;
-
 }
 
 .subjectImage {
@@ -35,145 +41,39 @@ nav {
 }
 
 .radio input {
-    /*margin-right: -20px;*/
     display: none;
 }
 
 .radio-inline input {
-    /*margin-right: 20px;*/
+    display: none;
+}
+
+input[type="checkbox"] {
     display: none;
     /*visibility: hidden;*/
-    /*margin: 0 auto;*/
 }
 
-.checkbox {
-    display: none;
-      /*margin-right: -20px;*/
-
-}
-
-#calibrationCheck {
-    /*display: none;*/
-}
-
-
-.radio {
-    /*margin-right: 20px;*/
-
-}
-
-.radio label {
-    /*margin-right: 20px;*/
-}
-
-
-
-.radio-inline {
-    /*margin-right: 20px;*/
-}
-
-.radio-inline label {
-    /*margin-right: 20px;*/
-    /*display: inline-block;*/
-}
-
-
-
-.checkbox input {
-    /*margin-right: 20px;*/
-    /*visibility: hidde/n;*/
-    /*display: none;*/
-}
-
-
-.checkbox-inline {
-    /*margin-right: 20px;*/
-}
-
-.checkbox-inline label {
-    /*margin-right: 20px;*/
-}
-
-.checkbox-inline input {
-    /*margin-right: -20px;*/
-    /*display: none;*/
-}
-
-.btn-sample {
-  color: #777777;
-  background-color: #E0E0E0;
-  border-color: #C7C7C7;
-}
-
-/*.btn-sample:hover,*/
-/*.btn-sample:focus,*/
-/*.btn-sample:active,*/
-/*.btn-sample.active,*/
-/*.open .dropdown-toggle.btn-sample {*/
-  /*color: #777777;*/
-  /*background-color: #F6AAC9;*/
-  /*border-color: #C7C7C7;*/
-/*}*/
-
-/*.btn-sample:active,*/
-/*.btn-sample.active,*/
-/*.open .dropdown-toggle.btn-sample {*/
-  /*background-image: none;*/
-/*}*/
-
-/*.btn-sample.disabled,*/
-/*.btn-sample[disabled],*/
-/*fieldset[disabled] .btn-sample,*/
-/*.btn-sample.disabled:hover,*/
-/*.btn-sample[disabled]:hover,*/
-/*fieldset[disabled] .btn-sample:hover,*/
-/*.btn-sample.disabled:focus,*/
-/*.btn-sample[disabled]:focus,*/
-/*fieldset[disabled] .btn-sample:focus,*/
-/*.btn-sample.disabled:active,*/
-/*.btn-sample[disabled]:active,*/
-/*fieldset[disabled] .btn-sample:active,*/
-/*.btn-sample.disabled.active,*/
-/*.btn-sample[disabled].active,*/
-/*fieldset[disabled] .btn-sample.active {*/
-  /*background-color: #E0E0E0;*/
-  /*border-color: #C7C7C7;*/
-/*}*/
-
-/*.btn-sample .badge {*/
-  /*color: #E0E0E0;*/
-  /*background-color: #777777;*/
-/*}*/
-
-
-.btn-sample .badge {
-    width: 50px;
-    height: 50px;
+.btn-pisa {
+    color: #777777;
     background-color: #E0E0E0;
     border-color: #777777;
+    border-width: 2px;
+
 }
 
-.btn-sample:active,
-.btn-sample.active{
+
+.btn-pisa:active,
+.btn-pisa.active {
     background-color: #f17cb0;
+    color: #FFFFFF;
+    /*border-color: #777777;*/
 }
 
-.btn-sample:hover,
-.btn-sample.hover{
+.btn-pisa:hover,
+.btn-pisa.hover {
     background-color: #e5126f;
+    color: #FFFFFF;
 }
-
-
-
-/*.btn-circle {*/
-  /*width: 80px;*/
-  /*height: 80px;*/
-  /*text-align: center;*/
-  /*padding: 6px 0;*/
-  /*font-size: 12px;*/
-  /*line-height: 1.42;*/
-  /*border-radius: 15px;*/
-/*}*/
 
 .btn-circle {
     width: 60px;
@@ -189,32 +89,161 @@ nav {
 }
 
 .btn-circle.btn-lg:active,
-.btn-circle.btn-lg.active{
+.btn-circle.btn-lg.active {
     background-color: #777777;
+    -webkit-filter: invert(100%) !important;
+    filter: invert(100%) !important;
 }
 
 .btn-circle.btn-lg:hover,
-.btn-circle.btn-lg.hover{
+.btn-circle.btn-lg.hover {
     background-color: #777777;
+    -webkit-filter: invert(100%) !important;
+    filter: invert(100%) !important;
 }
-
 
 .btn-countries {
     background-color: #E0E0E0;
     border-color: #777777;
+    border-width: 1px;
 }
 
-.btn-countries:active{
+.btn-countries:active,
+.btn-countries.active {
+    background-color: #777777;
+    color: #FFFFFF;
+}
+
+.btn-countries:hover,
+.btn-countries.hover {
     background-color: #777777;
 }
 
-.btn-countries.active{
-    background-color: #777777;
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    border-bottom: 2px solid #777777;
 }
 
-/*.btn-countries:hover{*/
-      /*background-color: #777777;*/
+.navbar-default .navbar-nav > li > a:active,
+.navbar-default .navbar-nav > li > a:active {
+    border-bottom: 2px solid #777777;
+}
+
+.navbar-default .navbar-nav > li.active a,
+.navbar-default .navbar-nav > li.active a {
+    border-bottom: 2px solid #777777;
+}
+
+.plotTooltip {
+    /*visibility: hidden;*/
+    top: 0px;
+    /*left: 0px;*/
+    width: 80px;
+    z-index: 1;
+    padding: 0;
+    color: #e5126f;
+    background-color: #FFFFFF;
+    border-radius: 0px;
+    /*border: 1px solid  #e5126f;*/
+}
+
+/*a.tooltips {*/
+/*position: relative;*/
+/*display: inline;*/
 /*}*/
-/*.btn-countries.hover{*/
-   /*background-color: #777777;*/
+/*a.tooltips span {*/
+/*position: absolute;*/
+/*width:140px;*/
+/*color: #E5126F;*/
+/*background: #FFFFFF;*/
+/*border: 2px solid #E5126F;*/
+/*height: 30px;*/
+/*line-height: 30px;*/
+/*text-align: center;*/
+/*visibility: hidden;*/
+/*border-radius: 0px;*/
 /*}*/
+/*a.tooltips span:before {*/
+/*content: '';*/
+/*position: absolute;*/
+/*top: 100%;*/
+/*left: 50%;*/
+/*margin-left: -12px;*/
+/*width: 0; height: 0;*/
+/*border-top: 12px solid #E5126F;*/
+/*border-right: 12px solid transparent;*/
+/*border-left: 12px solid transparent;*/
+/*}*/
+/*a.tooltips span:after {*/
+/*content: '';*/
+/*position: absolute;*/
+/*top: 100%;*/
+/*left: 50%;*/
+/*margin-left: -8px;*/
+/*width: 0; height: 0;*/
+/*border-top: 8px solid #FFFFFF;*/
+/*border-right: 8px solid transparent;*/
+/*border-left: 8px solid transparent;*/
+/*}*/
+/*a:hover.tooltips span {*/
+/*visibility: visible;*/
+/*opacity: 0.8;*/
+/*bottom: 30px;*/
+/*left: 50%;*/
+/*margin-left: -76px;*/
+/*z-index: 999;*/
+/*}*/
+
+/*#dashboard{*/
+/*!*top:270px;*!*/
+/*!*right: 5px;*!*/
+/*position: fixed;*/
+    /*top: 250px;*/
+    /*width: 100%*/
+/*}*/
+
+
+/*#dashboard.affix{*/
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*width: 100%*/
+/*}*/
+
+/*.affix + .container-fluid {*/
+    /*padding-top:50px*/
+/*}*/
+
+#surveyDashboard {
+    display: none;
+}
+#mydashboard.affix {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background-image: url("../img/bg.jpg");
+
+}
+
+/*#scores,#expertise, #survey, #analyze, #about{*/
+/*overflow-y: hidden;*/
+/*overflow-x: hidden*/
+/*position: relative;*/
+/*}*/
+
+/*.affix {*/
+/*!*top: 0px; *!*/
+/*z-index: 9999;*/
+/*width: 100%;*/
+/*!*position: fixed;*!*/
+/*overflow: scroll;*/
+/*}*/
+
+/*#mainNav{*/
+/*!*z-index: 9999;*!*/
+/*position: fixed;*/
+    /*top: 0;*/
+    /*width: 100%*/
+/*}*/
+
+/*!*The Bootstrap grid system has four classes: xs (phones), sm (tablets), md (desktops), and lg (larger desktops).*/

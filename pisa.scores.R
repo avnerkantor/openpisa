@@ -1,43 +1,3 @@
-#choices = list("combined" = "combined", "male only" = "male", "female only" = "female")
-
-load("data/pisaData2.rda")
-
-#observe({
-#  if(input$calibrationCheck){
-#    updateCheckboxGroupInput(session, inputId="Gender", inline=T, label="", choices = c(
-#      "בנות"="Female",
-#      "בנים"="Male"
-#    ), selected = NULL)
-#    updateCheckboxGroupInput(session, inputId="Escs", inline=T, label="", choices = c(
-#      "גבוה"="High",
-#      "בינוני"="Medium",
-#      "נמוך"="Low"
-#    ), selected = NULL)
-#  }
-#})
-#לעשות תנאי שאם יש פתרון בעיות או פיננסים אז להציג נקודות
-#observe({
-#  if(!is.null(input$Gender) || !is.null(input$Escs)){
-#    updateCheckboxInput(session, inputId = "calibrationCheck", inline=T, label="", value=FALSE)
-#  }
-#})
-
-#todo לעשות הודעת שגיאה של לא נבחנו במקצוע. אם אין מידע
-observe({
-  if (input$worldOrIsrael=="World") 
-  {
-    updateSelectInput(session, "Country1", choices = names(oecdList), selected = "ישראל")
-    updateSelectInput(session, "Country2", choices = names(oecdList), selected = "בריטניה")
-    updateSelectInput(session, "Country3", choices = names(oecdList), selected = "פינלנד")
-    updateSelectInput(session, "Country4", choices = names(oecdList), selected = "דרום-קוריאה")
-  } else {
-    updateSelectInput(session, "Country1", choices = names(israelList), selected = "חינוך-ממלכתי")
-    updateSelectInput(session, "Country2", choices = names(israelList), selected = "ממלכתי-דתי")
-    updateSelectInput(session, "Country3", choices = names(israelList), selected = "חרדים-בנות")
-    updateSelectInput(session, "Country4", choices = names(israelList), selected = "דוברי ערבית")
-  }
-})
-
 observe({
   
   SubjectExpertiseLevels<-ExpertiseLevels %>%
@@ -73,23 +33,49 @@ observe({
   #})
   
   scoresPlotFunction<-function(country){
-    plotData3 <- plotData2%>%
-      filter(Country==
-               as.vector(unlist(Countries%>%filter(Hebrew==country)%>%select(CNT))))%>%select(-Country)
-
+    x<-Countries%>%filter(Hebrew==country)%>%select(CNT)
+    plotData3 <- plotData2%>%filter(Country==x[1,1])
+    #output$text1<- renderPrint({
+    #print(as.vector(unlist(x)))
+    #})
     #ggplot(plotData3, aes(x=Year, y=Average, colour=ESCS, group=interaction(ESCS, Gender))) +
-    #ggplot(plotData3, aes(x=Year, y=Average, colour=ESCS, fill=Gender)) +    
-      ggplot(plotData3, aes(x=Year, y=Average, colour=GenderESCS)) +
+    #ggplot(plotData3, aes(x=Year, y=Average, colour=ESCS, fill=Gender)) +
+    ggplot(plotData3, aes(x=Year, y=Average, colour=GenderESCS)) +
       geom_line() +
       scale_colour_manual(values = c("General"="#b276b2", "Male"="#5da5da", "Female"="#f17cb0", "GeneralLow"="#bc99c7", "GeneralMedium"="#b276b2", "GeneralHigh"="#7b3a96", "MaleHigh"="#265dab", "MaleLow"="#88bde6", "MaleMedium"="#5da5da", "FemaleHigh"="#e5126f", "FemaleLow"="#f6aac9", "FemaleMedium"="#f17cb0")) +
-      theme_bw()+
       guides(colour=FALSE) +
-      scale_x_discrete(breaks=c(2006,2009,2012), limits=c(2006,2009, 2012)) +
-      scale_y_continuous(breaks=SubjectExpertiseLevels[2], labels=SubjectExpertiseLevels[1], 
-                         limits = c(min(SubjectExpertiseLevels[2], na.rm = TRUE), 
-                                    max(SubjectExpertiseLevels[2], na.rm = TRUE))) +
-      labs(title=" ", y="" ,x= " ") 
+      labs(title="", y="" ,x= "") +
+      theme_bw() +
+      theme(plot.margin=unit(c(0,15,0,0), "pt"),
+            panel.border = element_blank(),
+            #panel.grid.major=element_blank(),
+            axis.ticks = element_blank(),
+            #panel.grid.minor = element_line(colour="#e0e0e0", size=1),
+            axis.line.x = element_line(color="#c7c7c7", size = 0.3),
+            axis.line.y = element_line(color="#c7c7c7", size = 0.3)) 
+      # scale_x_discrete(breaks=c(2006,2009,2012), limits=c(2006,2009, 2012)) +
+      # scale_y_continuous(minor_breaks=SubjectExpertiseLevels[2],
+      #                    breaks=SubjectExpertiseLevels[2],
+      #                    labels=SubjectExpertiseLevels[1],
+      #                    #name="רמה",
+      #                    limits=c(280,750)
+      #                    #breaks=c(SubjectExpertiseLevels[2]),
+      #                    #labels=c(SubjectExpertiseLevels[1]),
+      #                    #limits = c(min(SubjectExpertiseLevels[2], na.rm = TRUE),
+      #                    #     max(SubjectExpertiseLevels[2], na.rm = TRUE)),
+      #                    #na.value = "",
+      #                    #expand = c(0, 0)
+       # )
   }
+  #http://webcache.googleusercontent.com/search?q=cache:qSFaw5CtYcwJ:stackcode.xyz/sc%3Fid%3Dis38917101+&cd=1&hl=en&ct=clnk&gl=il&client=ubuntu
+  # tooltipPlotFunction<-function(country, hover){
+  #   plotData3 <- plotData2%>%
+  #     filter(Country==as.vector(unlist(Countries%>%
+  #               filter(Hebrew==country)%>%select(CNT))))%>%select(-Country)
+  #     x <- nearPoints(plotData3, hover, threshold = 10, maxpoints=1)
+  #     y<-round(x$Average)
+  #     paste(y)
+  # }
   
   # output$pisaScoresTable <- DT::renderDataTable(options=list(
   #   pageLength = 5,
@@ -99,26 +85,38 @@ observe({
   # {
   #   plotData3<-plotData1%>%
   #     filter(Country=="ISR")%>%filter(Gender %in% c(input$Female, input$Male))
-  #   
+  #
   # })
-  # output$text1 <- renderText(
-  #   paste(c(input$Female))
-  # )
+
+  
+  
   output$Country1Plot<-renderPlot({
     scoresPlotFunction(input$Country1)
   })
+  # output$Country1PlotTooltip <- renderUI({
+  #   tooltipPlotFunction(input$Country1, input$plot_hover1)
+  # })
   
   output$Country2Plot<-renderPlot({
     scoresPlotFunction(input$Country2)
   })
+  # output$Country2PlotTooltip <- renderUI({
+  #   tooltipPlotFunction(input$Country2, input$plot_hover2)
+  # })
   
   output$Country3Plot<-renderPlot({
     scoresPlotFunction(input$Country3)
   })
+  # output$Country3PlotTooltip <- renderUI({
+  #   tooltipPlotFunction(input$Country3, input$plot_hover3)
+  # })
   
   output$Country4Plot<-renderPlot({
     scoresPlotFunction(input$Country4)
   })
+  # output$Country4PlotTooltip <- renderUI({
+  #   tooltipPlotFunction(input$Country4, input$plot_hover4)
+  # })
 })
 
 
