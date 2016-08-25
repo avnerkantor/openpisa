@@ -5,34 +5,59 @@ body {
     /*background-color:  "white" ;*/
     height: 100%;
     min-height: 100%;
-    /*width: 100%;*/
+    width: 100%;
     direction: rtl;
+    width: 100%;
     /*margin-right: 5px;*/
-    margin-right: 5px;
-    margin-left: 5px;
+    /*margin-right: 5px;*/
+    /*margin-left: 5px;*/
     font-family: 'OpenSansHebrewRegular', sans-serif;
     background-image: url("../img/bg.jpg");
     position: relative;
 }
 
+/*navbar*/
 nav {
     background-image: url("../img/bg.jpg");
 }
 
-.header-image {
-    position: relative;
-    width: 105%;
-    margin-right: -15px;
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    border-bottom: 2px solid #777777;
 }
 
-.header-text {
+.navbar-default .navbar-nav > li > a:active,
+.navbar-default .navbar-nav > li > a:active {
+    border-bottom: 2px solid #777777;
+}
+
+.navbar-default .navbar-nav > li.active a,
+.navbar-default .navbar-nav > li.active a {
+    border-bottom: 2px solid #777777;
+}
+
+/*heaer*/
+.header-image {
+    position: absolute;
+    /*width: 50%;*/
+    height: 80px;
+    /*margin-right: -15px;*/
+}
+
+#header-text {
     position: absolute;
     top: 120px;
-    left: 60px;
-    width: 90%;
+    /*right: 10px;*/
+    /*width: 90%;*/
     color: #fff;
+    font-size: 36pt;
+}
+#underHeaderText{
+    /*margin-right:15px;*/
+    font-size: 18pt;
 }
 
+/*subject items*/
 .subjectImage {
     width: 27px;
     height: 27px;
@@ -40,39 +65,9 @@ nav {
     margin-top: 5px;
 }
 
-.radio input {
-    display: none;
-}
-
-.radio-inline input {
-    display: none;
-}
-
-input[type="checkbox"] {
-    display: none;
-    /*visibility: hidden;*/
-}
-
-.btn-pisa {
-    color: #777777;
-    background-color: #E0E0E0;
-    border-color: #777777;
-    border-width: 2px;
-
-}
-
-
-.btn-pisa:active,
-.btn-pisa.active {
-    background-color: #f17cb0;
-    color: #FFFFFF;
-    /*border-color: #777777;*/
-}
-
-.btn-pisa:hover,
-.btn-pisa.hover {
-    background-color: #e5126f;
-    color: #FFFFFF;
+.subjectButtons{
+ width:80px;
+    float:right;
 }
 
 .btn-circle {
@@ -102,10 +97,68 @@ input[type="checkbox"] {
     filter: invert(100%) !important;
 }
 
-.btn-countries {
+.radio input {
+    display: none;
+}
+
+.radio-inline input {
+    display: none;
+}
+
+/*dashboard buttons*/
+input[type="checkbox"] {
+    display: none;
+    /*visibility: hidden;*/
+}
+
+.btn-pisa {
+    color: #777777;
     background-color: #E0E0E0;
     border-color: #777777;
     border-width: 1px;
+    font-size: 12pt;
+    line-height: 0.7;
+}
+
+.btn-pisa:active,
+.btn-pisa.active {
+    background-color: #f17cb0;
+    color: #FFFFFF;
+    border-width: 2px;
+    /*border-color: #777777;*/
+}
+
+.btn-pisa:hover,
+.btn-pisa.hover {
+    background-color: #e5126f;
+    color: #FFFFFF;
+    border-width: 2px;
+}
+
+#theWell{
+   background-color:white;
+/*line-height: 0.9;*/
+    border-width: 1px;
+    border-color: #c7c7c7;
+    border-radius: 0;
+    padding: 0;
+    height: 52px;
+    margin-top: 8px;
+    /*margin-right: 10px;*/
+    /*padding-bottom: 0;*/
+/*width: 95%;*/
+}
+
+/*countries*/
+
+.btn-countries {
+    background-color: #E0E0E0;
+    border-color: #c7c7c7;
+    border-width: 1px;
+    border-radius: 0;
+    font-size: 16pt;
+    color: #777777;
+    float: right;
 }
 
 .btn-countries:active,
@@ -119,20 +172,14 @@ input[type="checkbox"] {
     background-color: #777777;
 }
 
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-    border-bottom: 2px solid #777777;
+.selectize-input{
+    border-radius: 0;
+    line-height: 1.333333333;
+    font-size: 18pt;
+    color: #777777;
 }
 
-.navbar-default .navbar-nav > li > a:active,
-.navbar-default .navbar-nav > li > a:active {
-    border-bottom: 2px solid #777777;
-}
-
-.navbar-default .navbar-nav > li.active a,
-.navbar-default .navbar-nav > li.active a {
-    border-bottom: 2px solid #777777;
-}
+/*tooltip*/
 
 .plotTooltip {
     /*visibility: hidden;*/
@@ -216,6 +263,7 @@ input[type="checkbox"] {
 #surveyDashboard {
     display: none;
 }
+
 #mydashboard.affix {
     position: fixed;
     top: 0;

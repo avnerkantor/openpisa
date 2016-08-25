@@ -1,10 +1,9 @@
 library(shiny)
 library(ggplot2)
 #library(Cairo)
-library(bigrquery)
+#library(bigrquery)
 library(dplyr)
 #library(scales)
-library(validate)
 
 oecdCountries<-read.csv("data/oecdCountries.csv", header = TRUE, sep=",")
 oecdList<-oecdCountries$CNT

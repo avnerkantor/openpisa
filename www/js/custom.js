@@ -3,16 +3,6 @@ $(document).on('click', '#calibrationCheck', function (e) {
     // #alert("df");
 });
 
-// $(document).ready(function () {
-//     $(".shiny-plot-output").mousemove(function (e) {
-//         // $(".plotTooltip").show();
-//         $(".plotTooltip").css({
-//             top: (e.clientY - 180) + "px",
-//             left: (e.clientX - 720) + "px"
-//         });
-//     });
-// });
-
 $(document).ready(function () {
     $(".shiny-plot-output").mousemove(function (event) {
         $(".plotTooltip").show();
@@ -41,3 +31,7 @@ $(function() {
     });
     });
 
+$('#survey').on('activate.bs.scrollspy', function () {
+    // $("span").css( "display", "inline" ).fadeOut( "slow" );
+    alert("asd");
+});
