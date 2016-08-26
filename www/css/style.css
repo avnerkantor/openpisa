@@ -120,17 +120,60 @@ input[type="checkbox"] {
     line-height: 0.7;
 }
 
+
+#generalBtn.active,
+#generalBtn:active,
+#generalBtn:hover,
+#generalBtn.hover{
+    background-color: #b276b2;
+}
+
+#malelBtn.active,
+#malelBtn:active,
+#malelBtn:hover,
+#malelBtn.hover{
+    background-color: #5da5da;
+}
+
+#femaleBtn.active,
+#femaleBtn:active,
+#femaleBtn:hover,
+#femaleBtn.hover{
+    background-color: #f17cb0;
+}
+
+#lowBtn.active,
+#lowBtn:active,
+#lowBtn:hover,
+#lowBtn.hover{
+    background-color: #bc99c7;
+}
+
+#mediumBtn.active,
+#mediumBtn:active,
+#mediumBtn:hover,
+#mediumBtn.hover{
+    background-color: #b276b2;
+}
+
+#highBtn.active,
+#highBtn:active,
+#highBtn:hover,
+#highBtn.hover{
+    background-color: #7b3a96;
+}
+
 .btn-pisa:active,
 .btn-pisa.active {
-    background-color: #f17cb0;
+    /*background-color: #f17cb0;*/
     color: #FFFFFF;
     border-width: 2px;
-    /*border-color: #777777;*/
+    border-color: #777777;
 }
 
 .btn-pisa:hover,
 .btn-pisa.hover {
-    background-color: #e5126f;
+    /*background-color: #e5126f;*/
     color: #FFFFFF;
     border-width: 2px;
 }
@@ -159,6 +202,7 @@ input[type="checkbox"] {
     font-size: 16pt;
     color: #777777;
     float: right;
+    /*width: 30%;*/
 }
 
 .btn-countries:active,
@@ -177,7 +221,12 @@ input[type="checkbox"] {
     line-height: 1.333333333;
     font-size: 18pt;
     color: #777777;
+    /*width: 100%;*/
 }
+
+/*.shiny-input-container{*/
+    /*width: 100%;*/
+/*}*/
 
 /*tooltip*/
 
@@ -261,7 +310,7 @@ input[type="checkbox"] {
 /*}*/
 
 #surveyDashboard {
-    display: none;
+    /*display: none;*/
 }
 
 #mydashboard.affix {

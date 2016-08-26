@@ -24,10 +24,13 @@
     <script type="application/html-dependencies">
      json2[2014.02.04];jquery[1.11.3];shiny[0.13.2];selectize[0.11.2];bootstrap[3.3.5]
 
+
+
+
     </script>
     <script src="shared/json2-min.js"></script>
     <script src="shared/jquery.min.js"></script>
-    <link href="shared/shiny.css" rel="stylesheet"/>
+    <!--<link href="shared/shiny.css" rel="stylesheet"/>-->
     <script src="shared/shiny.min.js"></script>
     <link href="shared/selectize/css/selectize.bootstrap3.css" rel="stylesheet"/>
     <script src="shared/selectize/js/selectize.min.js"></script>
@@ -49,56 +52,54 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target="#mainNav">
-<div class="container-fluid">
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top nav-tabs" role="tablist" >
-        <div class="container-fluid" id="mainmainNAV">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">ניווט</span> תפריט <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top"></a>
-            </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <!--http://en.opisa.org-->
-                        <a class="page-scroll" href="http://tikhinuch.org/en">אנגלית</a>
-                    </li>
-                    <li>
-                        <!--http://opisa.org/blog-->
-                        <a class="page-scroll" href="http://tikhinuch.herokuapp.com/blog/">בלוג</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#about">אודות</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#analyze">ניתוח</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#survey">אקלים</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#expertise">בקיאות</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#scores">הישגים</a>
-                    </li>
-                </ul>
-            </div>
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top nav-tabs" role="tablist">
+    <div class="container-fluid" id="mainmainNAV">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">ניווט</span> תפריט <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top"></a>
         </div>
-    </nav>
-</div>
 
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <!--http://en.opisa.org-->
+                    <a class="page-scroll" href="http://tikhinuch.org/en">אנגלית</a>
+                </li>
+                <li>
+                    <!--http://opisa.org/blog-->
+                    <a class="page-scroll" href="http://tikhinuch.herokuapp.com/blog/">בלוג</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#about">אודות</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#analyze">ניתוח</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#survey">אקלים</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#expertise">בקיאות</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#scores">הישגים</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <section>
     <div id="dashboard" class="container-fluid">
         <div class="row">
             <img src="img/PISA_TopBG.jpg" id="header-image" alt="">
-            <p id="header-text" class="col-sm-12">מה מספר מבחן פיז"ה על החינוך</p>
-            <p id="underHeaderText" class="col-sm-12">
+            <p id="header-text">מה מספר מבחן פיז"ה על החינוך</p>
+            <p id="underHeaderText">
                 המחקר הבין-לאומי בוחן רמת אורינות של תלמידים בני 15 במתמטיקה, מדעים וקריאה.
                 <!--<br>-->
                 ניתוח הנתונים מראה כיצד מתקדמת מערכת החינוך בישראל.
@@ -198,50 +199,50 @@
                     </div>
                 </div>
             </div>
-            <div id="measurmentsDashboard" class="row col-sm-12" style="float: right">
-                <div id="theWell" class="col-sm-9 well">
+            <div id="measurmentsDashboard" class="row">
+                <div id="theWell" class="col-sm-9 col-md-9 well">
 
-                    <div class="col-sm-7">
+                    <div class="col-sm-7 col-md-9">
                         <small>מדד סוציואקונומי</small>
                         <div id="Escs"
                              class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
                             <div class="shiny-options-group btn-group" data-toggle="buttons">
-                                <label class="btn btn-pisa">
+                                <label class="btn btn-pisa" id="highBtn">
                                     <input type="checkbox" name="Escs" value="High" autocomplete="yes"/>
                                     <span>גבוה</span>
                                 </label>
-                                <label class="btn btn-pisa">
+                                <label class="btn btn-pisa" id="mediumBtn">
                                     <input type="checkbox" name="Escs" value="Medium" autocomplete="yes"/>
                                     <span>בינוני</span>
                                 </label>
-                                <label class="btn btn-pisa">
+                                <label class="btn btn-pisa" id="lowBtn">
                                     <input type="checkbox" name="Escs" value="Low" autocomplete="yes"/>
                                     <span>נמוך</span>
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 col-md-2">
                         <small>מגדר</small>
                         <div id="Gender"
                              class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
                             <div class="shiny-options-group btn-group" data-toggle="buttons">
-                                <label class="btn btn-pisa">
+                                <label class="btn btn-pisa" id="femaleBtn">
                                     <input type="checkbox" name="Gender" value="Female" autocomplete="off"/>
                                     <span>בנות</span>
                                 </label>
-                                <label class="btn btn-pisa">
+                                <label class="btn btn-pisa" id="maleBtn">
                                     <input type="checkbox" name="Gender" value="Male" autocomplete="off"/>
                                     <span>בנים</span>
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-2 col-md-1">
                         <small>כללי</small>
                         <div class="form-group shiny-input-container" style="margin-top: -10px">
                             <div class="checkbox">
-                                <label class="btn btn-pisa">
+                                <label class="btn btn-pisa" id="generalBtn">
                                     <input type="checkbox" id="calibrationCheck" checked="checked"/>
                                     <span>איפוס</span>
                                 </label>
@@ -249,7 +250,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3" >
+                <div class="col-sm-3 col-md-3">
                     <div id="worldOrIsrael"
                          class="form-group shiny-input-radiogroup shiny-input-container">
                         <form class="form-horizontal" method="post" action="">
@@ -260,6 +261,7 @@
                                         <input type="radio" name="worldOrIsrael" value="World" checked="checked"/>
                                         <span>מדינות</span>
                                     </label>
+                                    <!--&nbsp;-->
                                     <label class="radio btn text-center btn-countries">
                                         <input type="radio" name="worldOrIsrael" value="Israel"/>
                                         <span>ישראל</span>
@@ -325,7 +327,7 @@
 
 <section>
     <div id="scores" class="container-fluid">
-        <div class="row ">
+        <div class="row">
             <div class="col-sm-3 col-md-3">
                 <div id="Country4Plot" class="shiny-plot-output" style="height: 200px"></div>
                 <!--data-hover-id="plot_hover4" data-hover-delay="0" data-hover-delay-type="debounce"-->
@@ -353,54 +355,52 @@
                 <!--<span></span>-->
             </div>
         </div>
-    </div>
-    <div class="row ">
-        <div>
-            <h4>מידע</h4>
-            <span>רמה</span>
-            <div class="form-group shiny-input-container" style="width: 8%;">
-                <!--<label for="levelNumber">רמה</label>-->
+
+        <div class="row ">
+            <div class="col-sm-12 col-md-12">
+                <!--<h6>מקור: ראמ"ה</h6>-->
+                <!--<h5>פער של 35 נקודות הוא שווה ערך לפיגור בשנת לימודים שלמה.</h5>-->
+                <!--<h5>הפער בין רמה לרמה הוא שווה ערך לפיגור בשתי שנות לימוד.</h5>-->
+
+                * סולם הציונים נקבעים כך שבכל מחזור מחקרים ממוצע המדינות שהשתתפו בו יעמוד על 500 נקודות וסטיית התקן תהיה 100 נקודות.
+          בנוסף, הסולם מחולק לרמות בקיאות המייצגות שינוי איכותי ברמת האוריינות. כל רמה מאפיינת רמה ידע ומיומנויות שונות.
+
+            </div>
+
+            <div id="ExplenationTable" class="shiny-html-output col-sm-11 col-md-11"></div>
+            <div class="form-group shiny-input-container col-sm-1 col-md-1">
                 <input id="levelNumber" type="number" class="form-control" value="3" min="1" max="6" step="1"/>
             </div>
-            <div id="ExplenationTable" class="shiny-html-output"></div>
-            <h6>מקור: ראמ"ה</h6>
-            <h5>פער של 35 נקודות הוא שווה ערך לפיגור בשנת לימודים שלמה.</h5>
-            <h5>הפער בין רמה לרמה הוא שווה ערך לפיגור בשתי שנות לימוד.</h5>
-            <p>
-                המדד הסוציואקונומי של פיז"ה הוא מדד חברתי-תרבותי-כלכלי (ESCS – index of Economic Social and Cultural
-                Status). המדד מחושב על סמך נתונים שנאספו בשיטת דיווח עצמי בשאלון שהועבר לכל התלמידים מיד לאחר מבחני
-                ההישגים. המדד נקבע כך שיהיה בעל ממוצע אפס וסטיית תקן של 1 במדינות ה-OECD. הנבחנים מוצגים בשלוש
-                קטגוריות: רקע נמוך – אחוזונים 30-0; רקע בינוני – אחוזונים 70-31; רקע גבוה – אחוזונים 100-71.
-            </p>
+            <div class="col-sm-12 col-md-12">
+                <p>* המדד הסוציואקונומי מחושב על בסיס שאלונים שמעוברים לתלמידים לאחר מבחני ההישגים. הנבחנים מחולקים לפי רקע נמוך (אחוזונים 30-0), בינוני (אחוזונים 70-31) וגבוה (אחוזונים 100-71).</p>
+</div>
         </div>
-    </div>
     </div>
 </section>
 
 <section>
     <div id="expertise" class="container-fluid ">
-
-        <div class="row col-sm-12">
+        <div class="row">
             <h3>מצטיינים</h3>
-            <div class="col-sm-3">
+            <div class="col-sm-3 col-md-3">
                 <div id="Country4HighPlot" class="shiny-plot-output" style="height: 200px"></div>
                 <!--data-hover-id="plot_hover4" data-hover-delay="0" data-hover-delay-type="debounce"-->
                 <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"-->
                 <!--<div id="Country4HighPlotTooltip" class="shiny-html-output plotTooltip"></div>-->
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 col-md-3">
                 <div id="Country3HighPlot" class="shiny-plot-output" style="height: 200px"></div>
                 <!--data-hover-id="plot_hover3" data-hover-delay="0" data-hover-delay-type="debounce"-->
                 <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
                 <!--<div id="Country3HighPlotTooltip" class="shiny-html-output plotTooltip"></div>-->
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 col-md-3">
                 <div id="Country2HighPlot" class="shiny-plot-output" style="height: 200px"></div>
                 <!--data-hover-id="plot_hover2" data-hover-delay="0" data-hover-delay-type="debounce"-->
                 <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
                 <!--<div id="Country2HighPlotTooltip" class="shiny-html-output plotTooltip"></div>-->
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 col-md-3">
                 <div id="Country1HighPlot" class="shiny-plot-output" style="height: 200px"></div>
                 <!--data-hover-id="plot_hover1" data-hover-delay="0" data-hover-delay-type="debounce"-->
                 <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
@@ -408,47 +408,43 @@
                 <span></span>
             </div>
         </div>
-    </div>
+        <div class="row">
 
-    <div class="row col-sm-12">
+            <h3>מתקשים</h3>
 
-        <h3>מתקשים</h3>
-
-        <div class="col-sm-3">
-            <div id="Country4LowPlot" class="shiny-plot-output" style="height: 200px"></div>
-            <!--data-hover-id="plot_hover4" data-hover-delay="0" data-hover-delay-type="debounce"-->
-            <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
-            <!--<div id="Country4LowPlotTooltip" class="shiny-html-output plotTooltip"></div>-->
+            <div class="col-sm-3 col-md-3">
+                <div id="Country4LowPlot" class="shiny-plot-output" style="height: 200px"></div>
+                <!--data-hover-id="plot_hover4" data-hover-delay="0" data-hover-delay-type="debounce"-->
+                <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
+                <!--<div id="Country4LowPlotTooltip" class="shiny-html-output plotTooltip"></div>-->
+            </div>
+            <div class="col-sm-3 col-md-3">
+                <div id="Country3LowPlot" class="shiny-plot-output" style="height: 200px"></div>
+                <!--data-hover-id="plot_hover3" data-hover-delay="0" data-hover-delay-type="debounce"-->
+                <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
+                <!--<div id="Country3LowPlotTooltip" class="shiny-html-output plotTooltip"></div>-->
+            </div>
+            <div class="col-sm-3 col-md-3">
+                <div id="Country2LowPlot" class="shiny-plot-output" style="height: 200px"></div>
+                <!--data-hover-id="plot_hover2" data-hover-delay="0" data-hover-delay-type="debounce"-->
+                <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
+                <!--<div id="Country2LowPlotTooltip" class="shiny-html-output plotTooltip"></div>-->
+            </div>
+            <div class="col-sm-3 col-md-3">
+                <div id="Country1LowPlot" class="shiny-plot-output" style="height: 200px"></div>
+                <!--data-hover-id="plot_hover1" data-hover-delay="0" data-hover-delay-type="debounce"-->
+                <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
+                <!--<div id="Country1LowPlotTooltip" class="shiny-html-output plotTooltip">-->
+                <span></span>
+            </div>
         </div>
-        <div class="col-sm-3">
-            <div id="Country3LowPlot" class="shiny-plot-output" style="height: 200px"></div>
-            <!--data-hover-id="plot_hover3" data-hover-delay="0" data-hover-delay-type="debounce"-->
-            <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
-            <!--<div id="Country3LowPlotTooltip" class="shiny-html-output plotTooltip"></div>-->
-        </div>
-        <div class="col-sm-3">
-            <div id="Country2LowPlot" class="shiny-plot-output" style="height: 200px"></div>
-            <!--data-hover-id="plot_hover2" data-hover-delay="0" data-hover-delay-type="debounce"-->
-            <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
-            <!--<div id="Country2LowPlotTooltip" class="shiny-html-output plotTooltip"></div>-->
-        </div>
-        <div class="col-sm-3">
-            <div id="Country1LowPlot" class="shiny-plot-output" style="height: 200px"></div>
-            <!--data-hover-id="plot_hover1" data-hover-delay="0" data-hover-delay-type="debounce"-->
-            <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
-            <!--<div id="Country1LowPlotTooltip" class="shiny-html-output plotTooltip">-->
-            <span></span>
-        </div>
-    </div>
-    </div>
-
     </div>
 </section>
 
 <section>
     <div id="survey" class="container-fluid">
         <h1>אקלים</h1>
-        <div class="row col-sm-12 col-md-12"  data-spy="scroll" data-target="#survey">
+        <div class="row" data-spy="scroll" data-target="#survey">
             <div class="col-sm-3 col-md-3">
                 <div id="Country4SurveyPlot" class="shiny-plot-output" style="height: 200px">
                     <!--data-hover-id="plot_hover4" data-hover-delay="0" data-hover-delay-type="debounce"-->
@@ -479,14 +475,11 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row col-sm-12">
-        <p>
-            חשוב לשים לב כי נתוני השאלון מבוססים על דיווח עצמי של תלמידים ולכן עלולים להיות מושפעים מהטיות שונות כגון
-            רצייה חברתית ונוהגים תרבותיים. לפיכך הנתונים שיוצגו בדוח משקפים את תפיסת התלמידים ומציירים תמונה כללית
-            ומגמות, אך אינם בהכרח אומדים במדויק את המתרחש בפועל.
-        </p>
-    </div>
+        <div class="row col-md-12">
+            <p>
+            * הנתונים מבוססים על דיווח עצמי של תלמידים ועשויים להיות מושפעים מהטיות שונות כגון רצייה חברתית ונוהגים תרבותיים.
+            </p>
+        </div>
     </div>
 </section>
 
@@ -494,26 +487,26 @@
     <div id="analyze" class="container-fluid">
         <h1>ניתוח</h1>
         <div class="row">
-            <!--<div class="col-sm-3">-->
-            <!--<div id="CountryAnalyzePlot" class="shiny-plot-output" style="height: 200px"-->
+            <div class="col-sm-3 col-md-3">
+            <div id="CountryAnalyze4Plot" class="shiny-plot-output" style="height: 200px"/>
             <!--data-hover-id="plot_hover4" data-hover-delay="0" data-hover-delay-type="debounce"-->
             <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
             <!--<div id="CountryAnalyzePlotTooltip" class="shiny-html-output plotTooltip"></div>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-            <!--<div id="CountryAnalyze3Plot" class="shiny-plot-output" style="height: 200px"-->
+            </div>
+            <div class="col-sm-3 col-md-3">
+            <div id="CountryAnalyze3Plot" class="shiny-plot-output" style="height: 200px"/>
             <!--data-hover-id="plot_hover3" data-hover-delay="0" data-hover-delay-type="debounce"-->
             <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
             <!--<div id="CountryAnalyze3PlotTooltip" class="shiny-html-output plotTooltip"></div>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-            <!--<div id="CountryAnalyzeSurvey2Plot" class="shiny-plot-output" style="height: 200px"-->
+            </div>
+            <div class="col-sm-3 col-md-3">
+            <div id="CountryAnalyze2Plot" class="shiny-plot-output" style="height: 200px"/>
             <!--data-hover-id="plot_hover2" data-hover-delay="0" data-hover-delay-type="debounce"-->
             <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
             <!--<div id="CountryAnalyze2PlotTooltip" class="shiny-html-output plotTooltip"></div>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-            <!--<div id="CountryAnalyze1Plot" class="shiny-plot-output" style="height: 200px"-->
+            </div>
+            <div class="col-sm-3 col-md-3">
+            <div id="CountryAnalyze1Plot" class="shiny-plot-output" style="height: 200px"/>
             <!--data-hover-id="plot_hover1" data-hover-delay="0" data-hover-delay-type="debounce"-->
             <!--data-hover-clip="TRUE" data-hover-null-outside="TRUE"></div>-->
             <!--<div id="CountryAnalyze1PlotTooltip" class="shiny-html-output plotTooltip">-->
@@ -523,47 +516,20 @@
             <!--</div>-->
         </div>
         <div class="row">
-            <!--<div id="pisaScoresTable" style="width:100%; height:auto; "-->
-            <!--class="datatables html-widget html-widget-output"></div>-->
+            <div id="pisaScoresTable" style="width:100%; height:auto; "
+            class="datatables html-widget html-widget-output"></div>
         </div>
     </div>
 </section>
 
-
 <section>
     <div id="about" class="container-fluid">
-        <div class="row col-sm-12">
-            <h1>אודות</h1>
-            <p>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית להאמית קרהשק סכעיט דז מא, מנכם למטכין נשואי מנורך.
-                גולר מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק ליץ, קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת
-                נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו
-                בלוקריה שיצמה ברורק.
+         <h1>אודות</h1>
+        <div class="row col-md-12">
 
-                מוסן מנת. להאמית קרהשק סכעיט דז מא, מנכם למטכין נשואי מנורך. הועניב היושבב שערש שמחויט - שלושע ותלברו
-                חשלו שעותלשך וחאית נובש ערששף. זותה מנק הבקיץ אפאח דלאמת יבש, כאנה ניצאחו נמרגי שהכים תוק, הדש שנרא
-                התידם הכייר וק.
-
-                קולהע צופעט למרקוח איבן איף, ברומץ כלרשט מיחוצים. קלאצי קונדימנטום קורוס בליקרה, נונסטי קלובר בריקנה
-                סטום, לפריקך תצטריק לרטי.
-
-                גולר מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק ליץ, ושבעגט ליבם סולגק. בראיט ולחת צורק מונחף, בגורמי
-                מגמש. תרבנך וסתעד לכנו סתשם השמה - לתכי מורגם בורק? לתיג ישבעס.
-
-                לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית. סת אלמנקום ניסי נון ניבאה. דס איאקוליס וולופטה
-                דיאם. וסטיבולום אט דולור, קראס אגת לקטוס וואל אאוגו וסטיבולום סוליסי טידום בעליק. קונדימנטום קורוס
-                בליקרה, נונסטי קלובר בריקנה סטום, לפריקך תצטריק לרטי.
-
-                קולהע צופעט למרקוח איבן איף, ברומץ כלרשט מיחוצים. קלאצי סחטיר בלובק. תצטנפל בלינדו למרקל אס לכימפו, דול,
-                צוט ומעיוט - לפתיעם ברשג - ולתיעם גדדיש. קוויז דומור ליאמום בלינך רוגצה. לפמעט
-
-                נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט
-                למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח. לת צשחמי קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח.
-                עמחליף קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף הועניב היושבב שערש שמחויט - שלושע ותלברו חשלו
-                שעותלשך וחאית נובש ערששף. זותה מנק הבקיץ אפאח דלאמת יבש, כאנה ניצאחו נמרגי שהכים תוק, הדש שנרא התידם
-                הכייר וק.
-
-                נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט
-                למסון בלרק - וענוף </p>
+             <p>תיק חינוך הוא יוזמה משותפת של קרן טראמפ ושל המרכז לחקר האינטרנט באוניברסיטת חיפה.</p>
+            <p>מטרת היוזמה היא להנגיש לציבור את הנתונים של מבחן פיז"ה יחד עם פלטפורמת מחקר שמאפשרת להציג ולנתח אותם.</p>
+            <p>השימוש במערכת, במידע ובקוד הוא חופשי.</p>
             <p>ראו גם</p>
         </div>
     </div>

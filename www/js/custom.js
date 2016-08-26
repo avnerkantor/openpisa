@@ -23,15 +23,15 @@ $(document).ready(function () {
 //       }
 // });
 
-$(function() {
-    $('#dashboard').height($("#mydashboard").height());
-    
-    $('#mydashboard').affix({
-        offset: { top: $('#mydashboard').offset().top }
-    });
-    });
-
-$('#survey').on('activate.bs.scrollspy', function () {
-    // $("span").css( "display", "inline" ).fadeOut( "slow" );
-    alert("asd");
-});
+// $(function() {
+//     $('#dashboard').height($("#mydashboard").height());
+//
+//     $('#mydashboard').affix({
+//         offset: { top: $('#mydashboard').offset().top }
+//     });
+//     });
+//
+// $('#survey').on('activate.bs.scrollspy', function () {
+//     // $("span").css( "display", "inline" ).fadeOut( "slow" );
+//     alert("asd");
+// });
