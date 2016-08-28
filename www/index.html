@@ -51,14 +51,13 @@
 
 </head>
 
-<body id="page-top" data-spy="scroll" data-target="#mainNav">
+<body id="page-top" data-spy="scroll" data-target="#mydashboard">
 
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top nav-tabs" role="tablist">
     <div class="container-fluid" id="mainmainNAV">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse">
                 <span class="sr-only">ניווט</span> תפריט <i class="fa fa-bars"></i>
             </button>
             <a class="navbar-brand page-scroll" href="#page-top"></a>
@@ -84,6 +83,9 @@
                 <li>
                     <a class="page-scroll" href="#survey">אקלים</a>
                 </li>
+                <!--<li>-->
+                    <!--<a class="page-scroll" href="#heterogeneity">פיזור</a>-->
+                <!--</li>-->
                 <li>
                     <a class="page-scroll" href="#expertise">בקיאות</a>
                 </li>
@@ -105,7 +107,8 @@
                 ניתוח הנתונים מראה כיצד מתקדמת מערכת החינוך בישראל.
             </p>
         </div>
-        <div id="mydashboard">
+        <div id="mydashboard" class="affix" data-spy="affix" data-offset-top="60">
+            <br>
             <div id="subjectsDashboard" class="row text-center">
                 <div id="Subject"
                      class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
@@ -200,7 +203,7 @@
                 </div>
             </div>
             <div id="measurmentsDashboard" class="row">
-                <div id="theWell" class="col-sm-9 col-md-9 well">
+                <div id="theWell" class="col-sm-9 col-md-9">
 
                     <div class="col-sm-7 col-md-9">
                         <small>מדד סוציואקונומי</small>
@@ -444,7 +447,7 @@
 <section>
     <div id="survey" class="container-fluid">
         <h1>אקלים</h1>
-        <div class="row" data-spy="scroll" data-target="#survey">
+        <div class="row">
             <div class="col-sm-3 col-md-3">
                 <div id="Country4SurveyPlot" class="shiny-plot-output" style="height: 200px">
                     <!--data-hover-id="plot_hover4" data-hover-delay="0" data-hover-delay-type="debounce"-->

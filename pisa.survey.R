@@ -72,19 +72,14 @@ observe({
       labs(title="", y="" ,x= "") +
       #scale_y_discrete(breaks=c(0, 100))
       theme_bw() +
-      facet_grid(. ~group)
-  #   ggplot(data=surveyData, aes(x=answer, y=freq)) +
-  #     geom_bar(position="dodge",stat="identity", fill="#b276b2") + 
-  #     coord_flip() +
-  #     labs(title="", y="" ,x= "") +
-  #     #scale_y_discrete(breaks=c(0, 100))
-  #     theme_bw() +
-  #     theme(
-  #       panel.border = element_blank(),
-  #       panel.grid.major=element_blank(),
-  #       axis.ticks = element_blank(),
-  #       panel.grid.minor = element_blank() )
-  
+      facet_grid(. ~group) +
+      theme(
+        panel.border = element_blank(),
+        panel.grid.major=element_blank(),
+        axis.ticks = element_blank(),
+        legend.position="none",
+        strip.text.x = element_blank(),
+        panel.grid.minor = element_blank() )
      }
   
 
