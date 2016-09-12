@@ -23,7 +23,7 @@ Female<-collect(Female)
 Female<-Female%>%mutate(freq = round(100 * n/sum(n), 1), group="Female")%>%rename_(answer="IC01Q05")
 
 #ESCS
-High<-Student2012%>%filter(CNT=="ISR", ESCS>"0.7")%>%count_("IC01Q05")
+High<-student2012%>%filter(CNT=="ISR", ESCS=="High")%>%count_("IC01Q05")
 High<-collect(High)
 High<-High%>%mutate(freq = round(100 * n/sum(n), 1), group="High")%>%rename_(answer="IC01Q05")
 

@@ -1,8 +1,12 @@
 library(shiny)
 library(ggplot2)
-#library(Cairo)
+library(Cairo)
+#library(httr)
 library(bigrquery)
 library(dplyr)
+#library(plotly)
+library(DT)
+
 #library(scales)
 
 oecdCountries<-read.csv("data/oecdCountries.csv", header = TRUE, sep=",")
@@ -20,5 +24,6 @@ names(countriesList)<-Countries$Hebrew
 ExpertiseLevels<-read.csv("data/ExpertiseLevels.csv", header = TRUE, sep=",")
 
 LevelExplenation<-read.csv("data/LevelExplenation.csv", header = TRUE, sep=",")
+
 
 
