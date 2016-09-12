@@ -14,8 +14,8 @@ body {
     font-family: 'OpenSansHebrewRegular', sans-serif;
     background-image: url("img/bg.jpg");
     position: relative;
-    margin:0;
-    z-index:1;
+    margin: 0;
+    z-index: 1;
 }
 
 /*navbar*/
@@ -34,15 +34,15 @@ nav {
 
 /*heaer*/
 
-.header{
-  margin-right:-31px;
-  margin-left:0px;
+.header {
+    margin-right: -31px;
+    margin-left: 0px;
 }
 
 #header-image {
-  
+
     background-image: url("img/PISA_TopBG.jpg");
-    background-position:right;
+    background-position: right;
     width: 100%;
     height: 180px;
     right: 10px;
@@ -52,16 +52,15 @@ nav {
     */
 }
 
-#text-image{
-      color: #fff;
+#text-image {
+    color: #fff;
     font-size: 36pt;
-    margin-top:-64px;
-    
+    margin-top: -64px;
+
 }
 
-
-#underHeaderText{
-    right:10px;
+#underHeaderText {
+    right: 10px;
     font-size: 18pt;
 }
 
@@ -73,9 +72,9 @@ nav {
     margin-top: 5px;
 }
 
-.subjectButtons{
- width:80px;
-    float:right;
+.subjectButtons {
+    width: 80px;
+    float: right;
 }
 
 .btn-circle {
@@ -119,8 +118,7 @@ input[type="checkbox"] {
     /*visibility: hidden;*/
 }
 
-
-#generalBtn, #maleBtn, #femaleBtn, #lowBtn, #mediumBtn, #highBtn{
+#generalBtn, #maleBtn, #femaleBtn, #lowBtn, #mediumBtn, #highBtn {
     color: #777777;
     background-color: #E0E0E0;
     border-color: #777777;
@@ -130,7 +128,7 @@ input[type="checkbox"] {
 }
 
 #generalBtn.active,
-#generalBtn:hover{
+#generalBtn:hover {
     background-color: #b276b2;
     color: #FFFFFF;
     border-width: 2px;
@@ -138,7 +136,7 @@ input[type="checkbox"] {
 }
 
 #maleBtn.active,
-#maleBtn:hover{
+#maleBtn:hover {
     background-color: #5da5da;
     color: #FFFFFF;
     border-width: 2px;
@@ -146,7 +144,7 @@ input[type="checkbox"] {
 }
 
 #femaleBtn.active,
-#femaleBtn:hover{
+#femaleBtn:hover {
     background-color: #f17cb0;
     color: #FFFFFF;
     border-width: 2px;
@@ -154,7 +152,7 @@ input[type="checkbox"] {
 }
 
 #lowBtn.active,
-#lowBtn:hover{
+#lowBtn:hover {
     background-color: #bc99c7;
     color: #FFFFFF;
     border-width: 2px;
@@ -162,7 +160,7 @@ input[type="checkbox"] {
 }
 
 #mediumBtn.active,
-#mediumBtn:hover{
+#mediumBtn:hover {
     background-color: #b276b2;
     color: #FFFFFF;
     border-width: 2px;
@@ -170,7 +168,7 @@ input[type="checkbox"] {
 }
 
 #highBtn.active,
-#highBtn:hover{
+#highBtn:hover {
     background-color: #7b3a96;
     color: #FFFFFF;
     border-width: 2px;
@@ -181,16 +179,16 @@ input[type="checkbox"] {
     margin-left: 15px;
 }
 
-#theWell{
-   background-color:white;
-/*line-height: 0.9;*/
+#theWell {
+    background-color: white;
+    /*line-height: 0.9;*/
     border-width: 1px;
     border-color: #c7c7c7;
     border-radius: 0;
     height: 52px;
-    margin-top:16px;
-    margin-left:-15px;
-    margin-right:15px;
+    margin-top: 16px;
+    margin-left: -15px;
+    margin-right: 15px;
 }
 
 /*countries*/
@@ -217,7 +215,7 @@ input[type="checkbox"] {
     background-color: #777777;
 }
 
-.selectize-input{
+.selectize-input {
     border-radius: 0;
     line-height: 1.333333333;
     font-size: 18pt;
@@ -226,166 +224,168 @@ input[type="checkbox"] {
 }
 
 /*.shiny-input-container{*/
-    /*width: 100%;*/
+/*width: 100%;*/
 /*}*/
 
 /*tooltip*/
 
 .plotTooltip {
     /*visibility: hidden;*/
-    top: 0px;
+    /*top: 0px;*/
     /*left: 0px;*/
-    width: 80px;
+    width: 40px;
     z-index: 100;
     padding: 0;
     color: #e5126f;
     background-color: #FFFFFF;
     border-radius: 0px;
-    /*position: absolute;*/
-    border: 1px solid  #e5126f;
+    position: fixed;
+    border: 1px solid #e5126f;
+    border-top: 1px;
     text-align: center;
+    cursor:crosshair;
 }
 
 /*a.tooltips {*/
-    /*position: relative;*/
-    /*display: inline;*/
+/*position: relative;*/
+/*display: inline;*/
 /*}*/
 
 /*a.tooltips span {*/
-    /*position: absolute;*/
-    /*width: 140px;*/
-    /*color: #E5126F;*/
-    /*background: #FFFFFF;*/
-    /*border: 2px solid #E5126F;*/
-    /*height: 30px;*/
-    /*line-height: 30px;*/
-    /*text-align: center;*/
-    /*visibility: hidden;*/
-    /*border-radius: 0px;*/
+/*position: absolute;*/
+/*width: 140px;*/
+/*color: #E5126F;*/
+/*background: #FFFFFF;*/
+/*border: 2px solid #E5126F;*/
+/*height: 30px;*/
+/*line-height: 30px;*/
+/*text-align: center;*/
+/*visibility: hidden;*/
+/*border-radius: 0px;*/
 /*}*/
 
 /*a.tooltips span:before {*/
-    /*content: '';*/
-    /*position: absolute;*/
-    /*top: 100%;*/
-    /*left: 50%;*/
-    /*margin-left: -12px;*/
-    /*width: 0;*/
-    /*height: 0;*/
-    /*border-top: 12px solid #E5126F;*/
-    /*border-right: 12px solid transparent;*/
-    /*border-left: 12px solid transparent;*/
+/*content: '';*/
+/*position: absolute;*/
+/*top: 100%;*/
+/*left: 50%;*/
+/*margin-left: -12px;*/
+/*width: 0;*/
+/*height: 0;*/
+/*border-top: 12px solid #E5126F;*/
+/*border-right: 12px solid transparent;*/
+/*border-left: 12px solid transparent;*/
 /*}*/
 
 /*a.tooltips span:after {*/
-    /*content: '';*/
-    /*position: absolute;*/
-    /*top: 100%;*/
-    /*left: 50%;*/
-    /*margin-left: -8px;*/
-    /*width: 0;*/
-    /*height: 0;*/
-    /*border-top: 8px solid #FFFFFF;*/
-    /*border-right: 8px solid transparent;*/
-    /*border-left: 8px solid transparent;*/
+/*content: '';*/
+/*position: absolute;*/
+/*top: 100%;*/
+/*left: 50%;*/
+/*margin-left: -8px;*/
+/*width: 0;*/
+/*height: 0;*/
+/*border-top: 8px solid #FFFFFF;*/
+/*border-right: 8px solid transparent;*/
+/*border-left: 8px solid transparent;*/
 /*}*/
 
 /*a:hover.tooltips span {*/
-    /*visibility: visible;*/
-    /*opacity: 0.8;*/
-    /*bottom: 30px;*/
-    /*left: 50%;*/
-    /*margin-left: -76px;*/
-    /*z-index: 999;*/
+/*visibility: visible;*/
+/*opacity: 0.8;*/
+/*bottom: 30px;*/
+/*left: 50%;*/
+/*margin-left: -76px;*/
+/*z-index: 999;*/
 /*}*/
 
 /*#dashboard{*/
 /*!*top:270px;*!*/
 /*!*right: 5px;*!*/
 /*position: fixed;*/
-    /*top: 250px;*/
-    /*width: 100%*/
+/*top: 250px;*/
+/*width: 100%*/
 /*}*/
 
-
 /*#dashboard.affix{*/
-    /*position: fixed;*/
-    /*top: 0;*/
-    /*width: 100%*/
+/*position: fixed;*/
+/*top: 0;*/
+/*width: 100%*/
 /*}*/
 
 /*.affix + .container-fluid {*/
-    /*padding-top:50px*/
+/*padding-top:50px*/
 /*}*/
 
 /*
 #dashboard.affix {
     !*right: 0;*!*/
-    /*margin-top: 0;*/
-    /*margin-right: 5px;*/
-    /*margin:0px 5px 0px 5px;
-    
-    
-    background-image: url("../img/bg.jpg");
-     position: fixed;
-     top: 51px;
-     width: 100%;
-     z-index: 2;
+/*margin-top: 0;*/
+/*margin-right: 5px;*/
+/*margin:0px 5px 0px 5px;
+
+
+background-image: url("../img/bg.jpg");
+ position: fixed;
+ top: 51px;
+ width: 100%;
+ z-index: 2;
 }
 */
 /* http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_scrollspy_affix&stacked=h */
 
-  .affix {
-      top: 50px;
-      width: 100%;
-      background-image: url("img/bg.jpg");
-      z-index:2;
-  }
-  .affix ~ .container-fluid {
-      position:relative;
-      padding-top: 200px;
-  }
-  
-  
-  #dashboard{
-  }
-  #scores{
-    padding-top:0;
-    /*height:500px;*/
-  }
-  
-#expertise{
-    padding-top:0;
-/*    height:500px;*/
-  }
-
-#survey{
-    padding-top:0;
-  /*  height:500px;*/
-  }
-
-#about{
-    padding-top:0;
-    /* height:500px; */
-  }
-  
-#surveyDashboard{
-  display:none;
+.affix {
+    top: 50px;
+    width: 100%;
+    background-image: url("img/bg.jpg");
+    z-index: 2;
 }
 
-/*.affix ~ .container-fluid {*/
-     /*position: relative;*/
-     /*top: 550px;*/
-  /*}*/
+.affix ~ .container-fluid {
+    position: relative;
+    padding-top: 200px;
+}
 
-/*#expertise{*/
-    /*padding-top:50px;height:500px;*/
+#dashboard {
+}
+
+#scores {
+    padding-top: 0;
+    /*height:500px;*/
+}
+
+#expertise {
+    padding-top: 0;
+    /*    height:500px;*/
+}
+
+#survey {
+    padding-top: 0;
+    /*  height:500px;*/
+}
+
+#about {
+    padding-top: 0;
+    /* height:500px; */
+}
+
+/*#surveyDashboard {*/
+    /*display: none;*/
 /*}*/
 
-#levelNumber{
+/*.affix ~ .container-fluid {*/
+/*position: relative;*/
+/*top: 550px;*/
+/*}*/
+
+/*#expertise{*/
+/*padding-top:50px;height:500px;*/
+/*}*/
+
+#levelNumber {
     width: 60px;
 }
 
-.container-fluid{
- 
+.container-fluid {
+
 }

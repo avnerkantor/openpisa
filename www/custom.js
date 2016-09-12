@@ -10,7 +10,7 @@ $(document).on('click', '#maleBtn, femaleBtn', function (e) {
 
 
 $(document).ready(function () {
-     $("#generalBtn").addClass('active');
+    $("#generalBtn").addClass('active');
 });
 
 // $(document).ready(function() {
@@ -18,8 +18,6 @@ $(document).ready(function () {
 //         $("#lowBtn").css("background-color","#f6aac9");
 //     });
 // });
-
-
 
 
 // })
@@ -37,42 +35,56 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $(".shiny-plot-output").mousemove(function (event) {
-        $(".plotTooltip").show();
-        $(".plotTooltip").css({
-            position: "fixed",
-            // visibility: "visible",
-            top: (event.pageY-80)+"px",
-            left: (event.pageX-60)+"px"});
-         // top: (event.pageY+5)+"px",
-         //    left: (event.pageX+5)+"px"});
+        $(".plotTooltip").show().css({
+            top: (event.pageY - 80) + "px",
+            left: (event.pageX - 60) + "px"
+        });
     });
 });
 
 //http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_js_scrollspy_activate&stacked=h
-$(document).ready(function(){
+$(document).ready(function () {
     //removeSection = function(e){
-     //   $(e).parents("#myScrollspy > div").remove();
-      //  $('#myScrollspy').each(function(){
-       //     $(this).scrollspy('refresh');
-       // });
+    //   $(e).parents("#myScrollspy > div").remove();
+    //  $('#myScrollspy').each(function(){
+    //     $(this).scrollspy('refresh');
+    // });
     //};
     $("#page-top").scrollspy({target: "#mainNav"});
-    $("#mainNav").on("activate.bs.scrollspy", function(){
-        var x = $(".nav li.active > a").attr('href')
+    $("#mainNav").on("activate.bs.scrollspy", function () {
+        var x = $(".nav li.active > a").attr('href');
         //$("#demo").empty().html("You are currently viewing: " + x);
-       if(x!="#survey") {
-       $("#surveyDashboard").hide()
-        $("#subjectsDashboard").show()
-       
-       } else {
-       //if (x!="#survey") {
-         $("#surveyDashboard").show()
-         $("#subjectsDashboard").hide()
-       }
+        switch (x) {
+            case "#survey":
+                $("#surveyDashboard").show();
+                $("#subjectsDashboard").hide();
+                break;
+            case "#analyze":
+                $("#surveyDashboard").show();
+                $("#subjectsDashboard").show();
+                break;
+            case "#about":
+                $("#surveyDashboard").show();
+                $("#subjectsDashboard").show();
+                break;
+            default:
+                $("#surveyDashboard").hide();
+                $("#subjectsDashboard").show();
+                break;
+        }
+        //
+        //  if(x!="#survey") {
+        // $("#surveyDashboard").hide()
+        //  $("#subjectsDashboard").show()
+        //
+        // } else {
+        // //if (x!="#survey") {
+        //   $("#surveyDashboard").show()
+        //   $("#subjectsDashboard").hide()
+        // }
     })
 
 });
-
 
 
 //$('#survey').on('activate.bs.scrollspy', function () {
@@ -82,16 +94,16 @@ $(document).ready(function(){
 //affixed.bs.affix
 //activate.bs.scrollspy
 //$('#dashboard').affix({
-     // offset: $('#mainNav').position()
-     //offset: {
-        //top: $('#dashboard').height()
-        //top:60
-       //}
- //});
+// offset: $('#mainNav').position()
+//offset: {
+//top: $('#dashboard').height()
+//top:60
+//}
+//});
 
 //$(document).ready(function(){
-    /* affix the navbar after scroll below header */
-  //  $("#dashboard").affix({offset: {top: $("header").outerHeight(true)} });
+/* affix the navbar after scroll below header */
+//  $("#dashboard").affix({offset: {top: $("header").outerHeight(true)} });
 //});
 
 
