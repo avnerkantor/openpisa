@@ -1,5 +1,39 @@
+#Analyze
+
+observe({
+  updateSelectizeInput(session, 'analyzeVariables',
+                       choices = as.character(PisaSelectIndex$ID),
+                       selected = "WEALTH",
+                       options=list(placeholder="בחר משתנים"))
+  
+})
+observe({
+  
+  updateSelectInput(session, inputId="statisticalFunction", label="", choices = c(
+    "מתאם"="AB",
+    "רגרסיה לינארית"="CD",
+    "רגרסיה מרובה"="ED",
+    "FG"="FG"
+  ),
+  selected="AB")
+})
+
+output$pisaScoresTable <- DT::renderDataTable(
+  filter='bottom',
+  colnames = c('משתנה', 'תיאור באנגלית', 'נושא', 'קטגוריה', 'תת-קטגוריה'),
+  options=list(
+    pageLength = 5,
+    searching=TRUE,
+    autoWidth = TRUE
+  ), rownames= FALSE,
+  {
+    PisaSelectIndex%>%select(ID, Measure, HebSubject, HebCategory, HebSubCategory)%>%
+      filter(HebSubject=="מדדים")
+    
+  })
 
 
+##############33
 pisadb<-src_bigquery("r-shiny-1141", "pisa")
 student2012<- tbl(pisadb, "student2012")
 

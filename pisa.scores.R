@@ -1,3 +1,28 @@
+###UI
+observeEvent(input$calibrationCheck, {
+  updateCheckboxGroupInput(session, inputId="Gender", selected = "")
+})
+
+# observeEvent(input$calibrationCheck, {
+#   updateCheckboxGroupInput(session, inputId="Escs", selected = "")
+# })
+
+#todo לעשות הודעת שגיאה של לא נבחנו במקצוע. אם אין מידע
+observe({
+  if (input$worldOrIsrael=="World")
+  {
+    updateSelectInput(session, "Country1", choices = names(oecdList), selected = "ישראל")
+    updateSelectInput(session, "Country2", choices = names(oecdList), selected = "בריטניה")
+    updateSelectInput(session, "Country3", choices = names(oecdList), selected = "פינלנד")
+    updateSelectInput(session, "Country4", choices = names(oecdList), selected = "דרום-קוריאה")
+  } else {
+    updateSelectInput(session, "Country1", choices = names(israelList), selected = "חינוך-ממלכתי")
+    updateSelectInput(session, "Country2", choices = names(israelList), selected = "ממלכתי-דתי")
+    updateSelectInput(session, "Country3", choices = names(israelList), selected = "חרדים-בנות")
+    updateSelectInput(session, "Country4", choices = names(israelList), selected = "דוברי ערבית")
+  }
+})
+####
 observe({
   
   SubjectExpertiseLevels<-ExpertiseLevels %>%
@@ -36,7 +61,7 @@ observe({
   scoresPlotFunction<-function(country){
     x<-Countries%>%filter(Hebrew==country)%>%select(CNT)
     plotData3 <- plotData2%>%filter(Country==x[1,1])
-    gg<-ggplot(plotData3, aes(x=Year, y=Average, colour=GenderESCS)) +
+    gg<-ggplot(plotData3, aes(x=Year, y=Average, colour=GenderESCS, label=Average)) +
       scale_colour_manual(values = c(
         "General"="#b276b2", 
         "Male"="#5da5da", 
@@ -52,8 +77,9 @@ observe({
         "FemaleMedium"="#f17cb0"
       )) +
       guides(colour=FALSE) +
-      labs(title="", y="" ,x= "") +
+      labs(title="", y="רמה" ,x= "") +
       theme_bw() +
+      #geom_label() +
       theme(plot.margin=unit(c(0,15,0,0), "pt"),
             panel.border = element_blank(),
             axis.ticks = element_blank(),
@@ -70,10 +96,13 @@ observe({
     
     if("2012" %in% plotData3$Year) {
       if("2009" %in% plotData3$Year) {
-      #gp<-
-        gg+geom_line(size=1)
-      #ggplotly(gp)
-      
+      gp<-        gg+geom_line(size=1)
+      #ggObj <- plotly(gp)
+      #layout(ggObj, hovermode = 'closest')
+      #ggplotly(gp, tooltip = c("label"))
+      gn<-plotly_build(gp)
+      #gn$data[[1]]$text<-paste(round(plotData3$Average))
+      gn
       } else{
       #gp<-
         gg+geom_point(size=2)
@@ -81,54 +110,57 @@ observe({
       
       }
     } 
-    #else (gg <- ggplotly(p))
+    else #(gg <- ggplotly(p))
       #http://shiny.rstudio.com/reference/shiny/latest/Progress.html
-    #   {
-    #   gg+annotate("text", label = "Didn't participate", 
-    #               x = 2012, y = 500, size = 6, 
-    #               colour = "red")
-    # }
+       {
+       #gp<-
+         gg+annotate("text", label = "Didn't participate",
+                   x = 2012, y = 500, size = 6, 
+                   colour = "#c7c7c7")
+       #ggplotly(gp)
+     }
     
   }
   #http://webcache.googleusercontent.com/search?q=cache:qSFaw5CtYcwJ:stackcode.xyz/sc%3Fid%3Dis38917101+&cd=1&hl=en&ct=clnk&gl=il&client=ubuntu
   # http://www.vardump.pw/sc?id=is38917101+&cd=1&hl=en&ct=clnk&gl=il&client=ubuntu
-    tooltipPlotFunction<-function(country, hover){
-    cnt<-Countries%>%filter(Hebrew==country)%>%select(CNT)
-    plotData3 <- plotData2%>%filter(Country==cnt[1,1])
-
-    x <- nearPoints(plotData3, hover, threshold = 40, maxpoints=3)
-    y<-round(x$Average)
-    paste(y, sep="\n")
-  }
+    # tooltipPlotFunction<-function(country, hover){
+    # cnt<-Countries%>%filter(Hebrew==country)%>%select(CNT)
+    # plotData3 <- plotData2%>%filter(Country==cnt[1,1])
+    # 
+    # x <- nearPoints(plotData3, hover, threshold = 40, maxpoints=3)
+    # y<-round(x$Average)
+    # paste(y, sep="\n")
+    # }
+    
   if(!input$Country1==""){
     #print(input$Country1)
-  output$Country1Plot<-renderPlot({
+  output$Country1Plot<-renderPlotly({
     scoresPlotFunction(input$Country1)
   })
-  output$Country1PlotTooltip <- renderText({
-    tooltipPlotFunction(input$Country1, input$scoresPlot_hover1)
-  })
-  
-  output$Country2Plot<-renderPlot({
+  # output$Country1PlotTooltip <- renderText({
+  #   tooltipPlotFunction(input$Country1, input$scoresPlot_hover1)
+  # })
+  # 
+  output$Country2Plot<-renderPlotly({
     scoresPlotFunction(input$Country2)
   })
-  output$Country2PlotTooltip <- renderText({
-    tooltipPlotFunction(input$Country2, input$scoresPlot_hover2)
-  })
-  
-  output$Country3Plot<-renderPlot({
+  # output$Country2PlotTooltip <- renderText({
+  #   tooltipPlotFunction(input$Country2, input$scoresPlot_hover2)
+  # })
+  # 
+  output$Country3Plot<-renderPlotly({
     scoresPlotFunction(input$Country3)
   })
-  output$Country3PlotTooltip <- renderText({
-    tooltipPlotFunction(input$Country3, input$scoresPlot_hover3)
-  })
-  
-  output$Country4Plot<-renderPlot({
+  # output$Country3PlotTooltip <- renderText({
+  #   tooltipPlotFunction(input$Country3, input$scoresPlot_hover3)
+  # })
+  # 
+  output$Country4Plot<-renderPlotly({
     scoresPlotFunction(input$Country4)
   })
-  output$Country4PlotTooltip <- renderText({
-    tooltipPlotFunction(input$Country4, input$scoresPlot_hover4)
-  })
+  # output$Country4PlotTooltip <- renderText({
+  #   tooltipPlotFunction(input$Country4, input$scoresPlot_hover4)
+  # })
   }
 })
 

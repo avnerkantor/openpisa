@@ -1,33 +1,83 @@
-# https://cran.r-project.org/web/packages/dplyr/vignettes/databases.html
-# https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html
+####loading data####
 
-# https://bigquery.cloud.google.com/queries/r-shiny-1141
-
-# ST04Q01 %IN% Gender
-# ST04Q01 == Gender
-# !is.na(ST04Q01 == Gender)
-
-#Bigquery Approach
-
-# endpoint_gce <- oauth_endpoints("google")
-# secrets_gce <- jsonlite::fromJSON("ShinyServer-41d749479100.json")
-# scope_gce_bigqr <- c("https://www.googleapis.com/auth/bigquery")
-# token <- oauth_service_token(endpoint = endpoint_gce,secrets = secrets_gce,scope = scope_gce_bigqr)
-# set_access_cred(token)
 pisadb<-src_bigquery("r-shiny-1141", "pisa")
-student2012<- tbl(pisadb, "student2012")
-school2012<- tbl(pisadb, "school2012")
+pisa2012<- tbl(pisadb, "pisa2012")
+pisa2009<- tbl(pisadb, "pisa2009")
+pisa2006<- tbl(pisadb, "pisa2006")
 
-#loading data
+
+
+######UI #####
+observe({
+  updateSelectInput(session, inputId="SurveyYear", label="", 
+                    choices = c(2012)
+                      #list(
+                      #  'מבחן פיז"ה 2015 - בקרוב'=c('שאלון תלמידים'='student2015', 'שאלון בתי ספר'='school2015'),
+                      #'מבחן פיז"ה 2012'=c('שאלון תלמידים'='student2012', 'שאלון בתי ספר'='school2012')
+                      # 'מבחן פיז"ה 2009'=c("שאלון תלמידים"="student2009", "שאלון בתי ספר"="school2009"),
+                      #  'מבחן פיז"ה 2006'=c("שאלון תלמידים"="student2006", "שאלון בתי ספר"="school2006"),
+                      # 'שאלונים חוזרים - בקרוב'=c("זמינות ושימוש באמצעי תקשוב"="t1", "פתרון בעיות"="t2")
+                    , selected = 2012)
+})
+
+observeEvent(input$SurveyYear,{
+  switch (input$SurveyYear,
+          "2012" = {
+            updateSelectInput(session, inputId="SurveySubject", label="", choices = c(
+              # "אוריינות פיננסית" = "אוריינות פיננסית"
+              #"אוריינות מחשב" = "אוריינות מחשב",
+              "זמינות ושימוש באמצעי תקשוב"="זמינות ושימוש באמצעי תקשוב",
+              "משפחה ובית"="משפחה ובית",
+              "פתרון בעיות"="פתרון בעיות",
+              "לימודי מתמטיקה"="לימודי מתמטיקה",
+              "אופי בית הספר"="אופי בית הספר",
+              "מורים"="מורים",
+              "משאבי בית הספר"="משאבי בית הספר",
+              "תכנית הלימודים"="תכנית הלימודים",
+              "בית הספר"="בית הספר",
+              "מדיניות בית הספר"="מדיניות בית הספר"
+              #"מנהיגות חינוכית"="מנהיגות חינוכית"
+              
+            ),
+            selected="לימודי מתמטיקה"
+            )
+          },
+          "2009"={print("asdf") }
+  )
+})
+
+
+
+
+observeEvent(input$SurveySubject,{
+  
+  updateSelectInput(session, "SurveyCategory", "", as.vector(unlist(select(filter(pisaDictionary, Year == input$SurveyYear, HebSubject == input$SurveySubject), HebCategory))))
+})
+
+observeEvent(input$SurveyCategory,{
+  updateSelectInput(session, "SurveySubCategory", "", as.vector(unlist(select(filter(pisaDictionary, Year == input$SurveyYear, HebSubject == input$SurveySubject, HebCategory==input$SurveyCategory), HebSubCategory)))
+  )
+})
+
 
 
 observe({
-  SurveySelectedID <- as.vector(unlist(select(filter(PisaSelectIndex, HebSubject == input$SurveySubject, HebCategory==input$SurveyCategory, HebSubCategory==input$SurveySubCategory), ID)))      
   
+  SurveySelectedID <- as.vector(unlist(select(filter(pisaDictionary, Year == input$SurveyYear, HebSubject == input$SurveySubject, HebCategory==input$SurveyCategory, HebSubCategory==input$SurveySubCategory), ID))) 
+
   surveyPlotFunction<-function(country) {
     
     Country<-as.vector(unlist(Countries%>%filter(Hebrew==country)%>%select(CNT)))
-    surveyData1<-student2012%>%select_("CNT", SurveySelectedID, "ST04Q01", "ESCS")%>%filter(CNT==Country)
+    
+      # switch (object,
+      #   case = action
+      # )
+      
+      if(input$SurveyYear==2012)
+        surveyData<-pisa2012
+      
+      
+      surveyData1<-surveyData%>%select_("CNT", SurveySelectedID, "ST04Q01", "ESCS")%>%filter(CNT==Country)
     
     if(is.null(input$Gender)){
       if(is.null(input$Escs)){
@@ -82,9 +132,10 @@ observe({
           rename_(answer=SurveySelectedID, group="ST04Q01")
       } 
     }
-    
 
-    ggplot(data=surveyTable, aes(x=answer, y=freq, fill=group)) +
+    
+####ggplot####
+    gh<-ggplot(data=surveyTable, aes(x=answer, y=freq, fill=group)) +
       geom_bar(position="dodge",stat="identity") + 
       coord_flip() +
       labs(title="", y="" ,x= "") +
@@ -116,24 +167,25 @@ observe({
         axis.line.x = element_line(color="#c7c7c7", size = 0.3),
         axis.line.y = element_line(color="#c7c7c7", size = 0.3)) 
         
+      ggplotly(gh)
+      
      }
- 
     
 ### Plots ####
   if(length(SurveySelectedID)==1){
-  output$Country1SurveyPlot<-renderPlot({
+  output$Country1SurveyPlot<-renderPlotly({
     surveyPlotFunction(input$Country1)
   })
   # output$Country1PlotTooltip <- renderUI({
   #   CountrySurvey1PlotTooltip(input$Country1, input$surveyPlot_hover1)
   # })
-  output$Country2SurveyPlot<-renderPlot({
+  output$Country2SurveyPlot<-renderPlotly({
     surveyPlotFunction(input$Country2)
   })
   # output$Country2PlotTooltip <- renderUI({
   #   CountrySurvey2PlotTooltip(input$Country2, input$surveyPlot_hover2)
   # })
-  output$Country3SurveyPlot<-renderPlot({
+  output$Country3SurveyPlot<-renderPlotly({
     surveyPlotFunction(input$Country3)
     
   })
@@ -141,7 +193,7 @@ observe({
   #   CountrySurvey3PlotTooltip(input$Country3, input$surveyPlot_hover3)
   # })
   
-  output$Country4SurveyPlot<-renderPlot({
+  output$Country4SurveyPlot<-renderPlotly({
     surveyPlotFunction(input$Country4)
   })
   

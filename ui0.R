@@ -1,3 +1,4 @@
+library(plotly)
 shinyUI(fluidPage(
   
   includeCSS("www/style0.css"),  

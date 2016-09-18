@@ -33,14 +33,14 @@ $(document).ready(function () {
 
 // });
 
-$(document).ready(function () {
-    $(".shiny-plot-output").mousemove(function (event) {
-        $(".plotTooltip").show().css({
-            top: (event.pageY - 80) + "px",
-            left: (event.pageX - 60) + "px"
-        });
-    });
-});
+// $(document).ready(function () {
+//     $(".shiny-plot-output").mousemove(function (event) {
+//         $(".plotTooltip").show().css({
+//             top: (event.pageY - 80) + "px",
+//             left: (event.pageX - 60) + "px"
+//         });
+//     });
+// });
 
 //http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_js_scrollspy_activate&stacked=h
 $(document).ready(function () {

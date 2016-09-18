@@ -65,54 +65,57 @@ observe({
     
     if("2012" %in% plotHighData3$Year) {
       if("2009" %in% plotHighData3$Year) {
-        gh+geom_line(size=1)
+        gd<-gh+geom_line(size=1)
+        ggplotly(gd)
       } else{
-        gh+geom_point(size=2)
+        gd<-gh+geom_point(size=2)
+        ggplotly(gd)
       }
     } else {
-      gh+annotate("text", label = "Didn't participate", 
+      gd<-gh+annotate("text", label = "Didn't participate", 
                   x = 2012, y = 500, size = 6, 
                   colour = "red")
+      ggplotly(gd)
     }
   }
   
-  tooltipExpertiseHighPlotFunction<-function(country, hover){
-    cnt<-Countries%>%filter(Hebrew==country)%>%select(CNT)
-    plotHighData3 <- plotHighData2%>%filter(Country==cnt[1,1])
-    
-    x <- nearPoints(plotHighData3, hover, threshold = 40, maxpoints=3)
-    y<-round(x$Average)
-    paste(y, sep="\n")
-  }
+  # tooltipExpertiseHighPlotFunction<-function(country, hover){
+  #   cnt<-Countries%>%filter(Hebrew==country)%>%select(CNT)
+  #   plotHighData3 <- plotHighData2%>%filter(Country==cnt[1,1])
+  # 
+  #   x <- nearPoints(plotHighData3, hover, threshold = 40, maxpoints=3)
+  #   y<-round(x$Average)
+  #   paste(y, sep="\n")
+  # }
   
   if(!input$Country1==""){
-  output$Country1HighPlot<-renderPlot({
+  output$Country1HighPlot<-renderPlotly({
     expertiseHighPlotFunction(input$Country1)
   })
-  output$Country1PlotTooltip <- renderText({
-    tooltipExpertiseHighPlotFunction(input$Country1, input$highPlot_hover1)
-  })
+  # output$Country1PlotTooltip <- renderText({
+  #   tooltipExpertiseHighPlotFunction(input$Country1, input$highPlot_hover1)
+  # })
   
-  output$Country2HighPlot<-renderPlot({
+  output$Country2HighPlot<-renderPlotly({
     expertiseHighPlotFunction(input$Country2)
   })
-  output$Country2PlotTooltip <- renderText({
-    tooltipExpertiseHighPlotFunction(input$Country2, input$highPlot_hover2)
-  })
+  # output$Country2PlotTooltip <- renderText({
+  #   tooltipExpertiseHighPlotFunction(input$Country2, input$highPlot_hover2)
+  # })
   
-  output$Country3HighPlot<-renderPlot({
+  output$Country3HighPlot<-renderPlotly({
     expertiseHighPlotFunction(input$Country3)
   })
-  output$Country3PlotTooltip <- renderText({
-    tooltipExpertiseHighPlotFunction(input$Country3, input$highPlot_hover3)
-  })
+  # output$Country3PlotTooltip <- renderText({
+  #   tooltipExpertiseHighPlotFunction(input$Country3, input$highPlot_hover3)
+  # })
   
-  output$Country4HighPlot<-renderPlot({
+  output$Country4HighPlot<-renderPlotly({
     expertiseHighPlotFunction(input$Country4)
   })
-  output$Country4PlotTooltip <- renderText({
-    tooltipExpertiseHighPlotFunction(input$Country4, input$highPlot_hover4)
-  })
+  # output$Country4PlotTooltip <- renderText({
+  #   tooltipExpertiseHighPlotFunction(input$Country4, input$highPlot_hover4)
+  # })
   }
 })
 
@@ -186,52 +189,55 @@ observe({
     
     if("2012" %in% plotLowData3$Year) {
       if("2009" %in% plotLowData3$Year) {
-        gh+geom_line(size=1)
+        gd<-gh+geom_line(size=1)
+        ggplotly(gd)
       } else{
-        gh+geom_point(size=2)
+        gd<-gh+geom_point(size=2)
+        ggplotly(gd)
       }
     } else {
-      gh+annotate("text", label = "Didn't participate", 
+      gd<-gh+annotate("text", label = "Didn't participate", 
                   x = 2012, y = 500, size = 6, 
                   colour = "red")
+      ggplotly(gd)
     }
   }
   
-  tooltipExpertiseLowPlotFunction<-function(country, hover){
-    cnt<-Countries%>%filter(Hebrew==country)%>%select(CNT)
-    plotLowData3 <- plotLowData2%>%filter(Country==cnt[1,1])
-    
-    x <- nearPoints(plotLowData3, hover, threshold = 40, maxpoints=3)
-    y<-round(x$Average)
-    paste(y, sep="\n")
-  }
+  # tooltipExpertiseLowPlotFunction<-function(country, hover){
+  #   cnt<-Countries%>%filter(Hebrew==country)%>%select(CNT)
+  #   plotLowData3 <- plotLowData2%>%filter(Country==cnt[1,1])
+  # 
+  #   x <- nearPoints(plotLowData3, hover, threshold = 40, maxpoints=3)
+  #   y<-round(x$Average)
+  #   paste(y, sep="\n")
+  # }
   
-  output$Country1LowPlot<-renderPlot({
+  output$Country1LowPlot<-renderPlotly({
     expertiseLowPlotFunction(input$Country1)
   })
-  output$Country1PlotTooltip <- renderText({
-    tooltipExpertiseLowPlotFunction(input$Country1, input$lowPlot_hover1)
-  })
+  # output$Country1PlotTooltip <- renderText({
+  #   tooltipExpertiseLowPlotFunction(input$Country1, input$lowPlot_hover1)
+  # })
   
-  output$Country2LowPlot<-renderPlot({
+  output$Country2LowPlot<-renderPlotly({
     expertiseLowPlotFunction(input$Country2)
   })
-  output$Country2PlotTooltip <- renderText({
-    tooltipExpertiseLowPlotFunction(input$Country2, input$lowPlot_hover2)
-  })
+  # output$Country2PlotTooltip <- renderText({
+  #   tooltipExpertiseLowPlotFunction(input$Country2, input$lowPlot_hover2)
+  # })
   
-  output$Country3LowPlot<-renderPlot({
+  output$Country3LowPlot<-renderPlotly({
     expertiseLowPlotFunction(input$Country3)
   })
-  output$Country3PlotTooltip <- renderText({
-    tooltipExpertiseLowPlotFunction(input$Country3, input$lowPlot_hover3)
-  })
+  # output$Country3PlotTooltip <- renderText({
+  #   tooltipExpertiseLowPlotFunction(input$Country3, input$lowPlot_hover3)
+  # })
   
-  output$Country4LowPlot<-renderPlot({
+  output$Country4LowPlot<-renderPlotly({
     expertiseLowPlotFunction(input$Country4)
   })
-  output$Country4PlotTooltip <- renderText({
-    tooltipExpertiseLowPlotFunction(input$Country4, input$lowPlot_hover4)
-  })
+  # output$Country4PlotTooltip <- renderText({
+  #   tooltipExpertiseLowPlotFunction(input$Country4, input$lowPlot_hover4)
+  # })
 })
 

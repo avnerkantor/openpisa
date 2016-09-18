@@ -229,22 +229,22 @@ input[type="checkbox"] {
 
 /*tooltip*/
 
-.plotTooltip {
-    /*visibility: hidden;*/
-    /*top: 0px;*/
-    /*left: 0px;*/
-    width: 40px;
-    z-index: 100;
-    padding: 0;
-    color: #e5126f;
-    background-color: #FFFFFF;
-    border-radius: 0px;
-    position: fixed;
-    border: 1px solid #e5126f;
-    border-top: 1px;
-    text-align: center;
-    cursor:crosshair;
-}
+/*.plotTooltip {*/
+    /*!*visibility: hidden;*!*/
+    /*!*top: 0px;*!*/
+    /*!*left: 0px;*!*/
+    /*width: 40px;*/
+    /*z-index: 100;*/
+    /*padding: 0;*/
+    /*color: #e5126f;*/
+    /*background-color: #FFFFFF;*/
+    /*border-radius: 0px;*/
+    /*position: fixed;*/
+    /*border: 1px solid #e5126f;*/
+    /*border-top: 1px;*/
+    /*text-align: center;*/
+    /*cursor:crosshair;*/
+/*}*/
 
 /*a.tooltips {*/
 /*position: relative;*/
@@ -389,3 +389,10 @@ background-image: url("../img/bg.jpg");
 .container-fluid {
 
 }
+
+/*.hovertext text {*/
+    /*font-size: 100px !important;*/
+/*}*/
+/*.legendtext {*/
+    /*font-size: 30px !important;*/
+/*}*/
