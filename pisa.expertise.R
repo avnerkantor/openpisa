@@ -34,7 +34,7 @@ observe({
     x<-Countries%>%filter(Hebrew==country)%>%select(CNT)
     plotHighData3 <- plotHighData2%>%filter(Country==x[1,1])
     
-    gh<-ggplot(plotHighData3, aes(x=Year, y=Average, colour=GenderESCS)) +
+    gh<-ggplot(plotHighData3, aes(x=Year, y=Average, colour=GenderESCS, text=round(Average))) +
       scale_colour_manual(values = c(
         "General"="#b276b2", 
         "Male"="#5da5da", 
@@ -55,10 +55,12 @@ observe({
       theme(plot.margin=unit(c(0,15,0,0), "pt"),
             panel.border = element_blank(),
             axis.ticks = element_blank(),
+            legend.position="none",
             panel.grid.major.x=element_blank(),
             panel.grid.major.y = element_line(colour="#e0e0e0", size=0.3),
             axis.line.x = element_line(color="#c7c7c7", size = 0.3),
-            axis.line.y = element_line(color="#c7c7c7", size = 0.3)) + 
+            axis.line.y = element_line(color="#c7c7c7", size = 0.3)
+            ) + 
       scale_x_continuous(breaks=c(2006, 2009, 2012)) +
       scale_y_continuous(limits=c(0, 100), breaks=c(0, 20, 40, 60, 80, 100),
                          expand = c(0,0))
@@ -66,56 +68,38 @@ observe({
     if("2012" %in% plotHighData3$Year) {
       if("2009" %in% plotHighData3$Year) {
         gd<-gh+geom_line(size=1)
-        ggplotly(gd)
+        ggplotly(gd, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
+                                                   modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d", "hoverClosestCartesian"))
       } else{
         gd<-gh+geom_point(size=2)
-        ggplotly(gd)
+        ggplotly(gd, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
+                                                   modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d", "hoverClosestCartesian"))
       }
     } else {
-      gd<-gh+annotate("text", label = "Didn't participate", 
+      gh+annotate("text", label = "לא נבחנה",
                   x = 2012, y = 500, size = 6, 
-                  colour = "red")
-      ggplotly(gd)
+                  colour = "#c7c7c7")%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
+                                               modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d", "hoverClosestCartesian"))
     }
   }
-  
-  # tooltipExpertiseHighPlotFunction<-function(country, hover){
-  #   cnt<-Countries%>%filter(Hebrew==country)%>%select(CNT)
-  #   plotHighData3 <- plotHighData2%>%filter(Country==cnt[1,1])
-  # 
-  #   x <- nearPoints(plotHighData3, hover, threshold = 40, maxpoints=3)
-  #   y<-round(x$Average)
-  #   paste(y, sep="\n")
-  # }
   
   if(!input$Country1==""){
   output$Country1HighPlot<-renderPlotly({
     expertiseHighPlotFunction(input$Country1)
   })
-  # output$Country1PlotTooltip <- renderText({
-  #   tooltipExpertiseHighPlotFunction(input$Country1, input$highPlot_hover1)
-  # })
-  
+
   output$Country2HighPlot<-renderPlotly({
     expertiseHighPlotFunction(input$Country2)
   })
-  # output$Country2PlotTooltip <- renderText({
-  #   tooltipExpertiseHighPlotFunction(input$Country2, input$highPlot_hover2)
-  # })
   
   output$Country3HighPlot<-renderPlotly({
     expertiseHighPlotFunction(input$Country3)
   })
-  # output$Country3PlotTooltip <- renderText({
-  #   tooltipExpertiseHighPlotFunction(input$Country3, input$highPlot_hover3)
-  # })
   
   output$Country4HighPlot<-renderPlotly({
     expertiseHighPlotFunction(input$Country4)
   })
-  # output$Country4PlotTooltip <- renderText({
-  #   tooltipExpertiseHighPlotFunction(input$Country4, input$highPlot_hover4)
-  # })
+
   }
 })
 
@@ -158,7 +142,7 @@ observe({
     x<-Countries%>%filter(Hebrew==country)%>%select(CNT)
     plotLowData3 <- plotLowData2%>%filter(Country==x[1,1])
     
-    gh<-ggplot(plotLowData3, aes(x=Year, y=Average, colour=GenderESCS)) +
+    gh<-ggplot(plotLowData3, aes(x=Year, y=Average, colour=GenderESCS, text=round(Average))) +
       scale_colour_manual(values = c(
         "General"="#b276b2", 
         "Male"="#5da5da", 
@@ -180,64 +164,50 @@ observe({
             panel.border = element_blank(),
             axis.ticks = element_blank(),
             panel.grid.major.x=element_blank(),
+            legend.position="none",
             panel.grid.major.y = element_line(colour="#e0e0e0", size=0.3),
             axis.line.x = element_line(color="#c7c7c7", size = 0.3),
-            axis.line.y = element_line(color="#c7c7c7", size = 0.3)) + 
+            axis.line.y = element_line(color="#c7c7c7", size = 0.3)
+            ) + 
       scale_x_continuous(breaks=c(2006, 2009, 2012)) +
-      scale_y_continuous(limits=c(0, 100), breaks=c(0, 20, 40, 60, 80, 100),
+      scale_y_continuous(limits=c(0, 100), breaks=c(20, 40, 60, 80),
                          expand = c(0,0))
     
     if("2012" %in% plotLowData3$Year) {
       if("2009" %in% plotLowData3$Year) {
         gd<-gh+geom_line(size=1)
-        ggplotly(gd)
+        ggplotly(gd, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
+                                                   modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d", "hoverClosestCartesian"))
       } else{
         gd<-gh+geom_point(size=2)
-        ggplotly(gd)
+        ggplotly(gd, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
+                                                   modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d", "hoverClosestCartesian"))
       }
     } else {
-      gd<-gh+annotate("text", label = "Didn't participate", 
+      gh+annotate("text", label = "לא נבחנה",
                   x = 2012, y = 500, size = 6, 
-                  colour = "red")
-      ggplotly(gd)
+                  colour = "#c7c7c7")%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
+                                               modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d", "hoverClosestCartesian"))
     }
   }
-  
-  # tooltipExpertiseLowPlotFunction<-function(country, hover){
-  #   cnt<-Countries%>%filter(Hebrew==country)%>%select(CNT)
-  #   plotLowData3 <- plotLowData2%>%filter(Country==cnt[1,1])
-  # 
-  #   x <- nearPoints(plotLowData3, hover, threshold = 40, maxpoints=3)
-  #   y<-round(x$Average)
-  #   paste(y, sep="\n")
-  # }
+
   
   output$Country1LowPlot<-renderPlotly({
     expertiseLowPlotFunction(input$Country1)
   })
-  # output$Country1PlotTooltip <- renderText({
-  #   tooltipExpertiseLowPlotFunction(input$Country1, input$lowPlot_hover1)
-  # })
+
   
   output$Country2LowPlot<-renderPlotly({
     expertiseLowPlotFunction(input$Country2)
   })
-  # output$Country2PlotTooltip <- renderText({
-  #   tooltipExpertiseLowPlotFunction(input$Country2, input$lowPlot_hover2)
-  # })
   
   output$Country3LowPlot<-renderPlotly({
     expertiseLowPlotFunction(input$Country3)
   })
-  # output$Country3PlotTooltip <- renderText({
-  #   tooltipExpertiseLowPlotFunction(input$Country3, input$lowPlot_hover3)
-  # })
   
   output$Country4LowPlot<-renderPlotly({
     expertiseLowPlotFunction(input$Country4)
   })
-  # output$Country4PlotTooltip <- renderText({
-  #   tooltipExpertiseLowPlotFunction(input$Country4, input$lowPlot_hover4)
-  # })
+
 })
 

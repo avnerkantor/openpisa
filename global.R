@@ -5,6 +5,8 @@ library(Cairo)
 library(bigrquery)
 library(dplyr)
 library(plotly)
+library(htmltools)
+library(htmlwidgets)
 #library(gridExtra)
 #library(DT)
 

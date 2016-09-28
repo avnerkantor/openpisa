@@ -168,38 +168,27 @@ observe({
         axis.line.y = element_line(color="#c7c7c7", size = 0.3)) 
         
       ggplotly(gh)
-      
      }
-    
-### Plots ####
+  
+### Plots ####  
+
   if(length(SurveySelectedID)==1){
   output$Country1SurveyPlot<-renderPlotly({
     surveyPlotFunction(input$Country1)
   })
-  # output$Country1PlotTooltip <- renderUI({
-  #   CountrySurvey1PlotTooltip(input$Country1, input$surveyPlot_hover1)
-  # })
+
   output$Country2SurveyPlot<-renderPlotly({
     surveyPlotFunction(input$Country2)
   })
-  # output$Country2PlotTooltip <- renderUI({
-  #   CountrySurvey2PlotTooltip(input$Country2, input$surveyPlot_hover2)
-  # })
+
   output$Country3SurveyPlot<-renderPlotly({
     surveyPlotFunction(input$Country3)
     
   })
-  # output$Country3PlotTooltip <- renderUI({
-  #   CountrySurvey3PlotTooltip(input$Country3, input$surveyPlot_hover3)
-  # })
   
   output$Country4SurveyPlot<-renderPlotly({
     surveyPlotFunction(input$Country4)
   })
-  
-  # output$Country4PlotTooltip <- renderUI({
-  #   CountrySurvey4PlotTooltip(input$Country4, input$surveyPlot_hover4)
-  # })
   
   }
 })

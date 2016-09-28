@@ -223,116 +223,6 @@ input[type="checkbox"] {
     /*width: 100%;*/
 }
 
-/*.shiny-input-container{*/
-/*width: 100%;*/
-/*}*/
-
-/*tooltip*/
-
-/*.plotTooltip {*/
-    /*!*visibility: hidden;*!*/
-    /*!*top: 0px;*!*/
-    /*!*left: 0px;*!*/
-    /*width: 40px;*/
-    /*z-index: 100;*/
-    /*padding: 0;*/
-    /*color: #e5126f;*/
-    /*background-color: #FFFFFF;*/
-    /*border-radius: 0px;*/
-    /*position: fixed;*/
-    /*border: 1px solid #e5126f;*/
-    /*border-top: 1px;*/
-    /*text-align: center;*/
-    /*cursor:crosshair;*/
-/*}*/
-
-/*a.tooltips {*/
-/*position: relative;*/
-/*display: inline;*/
-/*}*/
-
-/*a.tooltips span {*/
-/*position: absolute;*/
-/*width: 140px;*/
-/*color: #E5126F;*/
-/*background: #FFFFFF;*/
-/*border: 2px solid #E5126F;*/
-/*height: 30px;*/
-/*line-height: 30px;*/
-/*text-align: center;*/
-/*visibility: hidden;*/
-/*border-radius: 0px;*/
-/*}*/
-
-/*a.tooltips span:before {*/
-/*content: '';*/
-/*position: absolute;*/
-/*top: 100%;*/
-/*left: 50%;*/
-/*margin-left: -12px;*/
-/*width: 0;*/
-/*height: 0;*/
-/*border-top: 12px solid #E5126F;*/
-/*border-right: 12px solid transparent;*/
-/*border-left: 12px solid transparent;*/
-/*}*/
-
-/*a.tooltips span:after {*/
-/*content: '';*/
-/*position: absolute;*/
-/*top: 100%;*/
-/*left: 50%;*/
-/*margin-left: -8px;*/
-/*width: 0;*/
-/*height: 0;*/
-/*border-top: 8px solid #FFFFFF;*/
-/*border-right: 8px solid transparent;*/
-/*border-left: 8px solid transparent;*/
-/*}*/
-
-/*a:hover.tooltips span {*/
-/*visibility: visible;*/
-/*opacity: 0.8;*/
-/*bottom: 30px;*/
-/*left: 50%;*/
-/*margin-left: -76px;*/
-/*z-index: 999;*/
-/*}*/
-
-/*#dashboard{*/
-/*!*top:270px;*!*/
-/*!*right: 5px;*!*/
-/*position: fixed;*/
-/*top: 250px;*/
-/*width: 100%*/
-/*}*/
-
-/*#dashboard.affix{*/
-/*position: fixed;*/
-/*top: 0;*/
-/*width: 100%*/
-/*}*/
-
-/*.affix + .container-fluid {*/
-/*padding-top:50px*/
-/*}*/
-
-/*
-#dashboard.affix {
-    !*right: 0;*!*/
-/*margin-top: 0;*/
-/*margin-right: 5px;*/
-/*margin:0px 5px 0px 5px;
-
-
-background-image: url("../img/bg.jpg");
- position: fixed;
- top: 51px;
- width: 100%;
- z-index: 2;
-}
-*/
-/* http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_scrollspy_affix&stacked=h */
 
 .affix {
     top: 50px;
@@ -346,8 +236,6 @@ background-image: url("../img/bg.jpg");
     padding-top: 200px;
 }
 
-#dashboard {
-}
 
 #scores {
     padding-top: 0;
@@ -385,14 +273,18 @@ background-image: url("../img/bg.jpg");
 #levelNumber {
     width: 60px;
 }
-
-.container-fluid {
-
+.hovertext text {
+    font-size: 15px !important;
+    /*position: relative;*/
+    /*bordercolor: #5da5da !important;*/
+    /*margin-left:30px !important;*/
 }
 
-/*.hovertext text {*/
-    /*font-size: 100px !important;*/
-/*}*/
-/*.legendtext {*/
-    /*font-size: 30px !important;*/
-/*}*/
+.hovertext{
+    direction: ltr !important;
+}
+.legendtext {
+    font-size: 30px !important;
+}
+
+/*a[data-title="save and edit plot in cloud"]{display:none;}*/
