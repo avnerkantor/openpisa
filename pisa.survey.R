@@ -167,15 +167,18 @@ observe({
         axis.line.x = element_line(color="#c7c7c7", size = 0.3),
         axis.line.y = element_line(color="#c7c7c7", size = 0.3)) 
     
+    ggplotly(gh, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
+                                               modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d", "hoverClosestCartesian"))
+    
   }
   
   ### Plots ####  
   
   if(length(SurveySelectedID)==1){
     #print(is.data.frame(get("surveyData")))
-    print(exists("surveyData"))
-    print(is.null(surveyData))
-    print(is.data.frame(get("surveyData")))
+    # print(exists("surveyData"))
+    # print(is.null(surveyData))
+    # print(is.data.frame(get("surveyData")))
     
     output$Country1SurveyPlot<-renderPlotly({
       surveyPlotFunction(input$Country1)

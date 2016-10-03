@@ -1,6 +1,6 @@
 library(shiny)
 #library(ggplot2)
-library(Cairo)
+#library(Cairo)
 #library(httr)
 library(bigrquery)
 library(dplyr)
@@ -9,7 +9,6 @@ library(htmltools)
 library(htmlwidgets)
 #library(gridExtra)
 #library(DT)
-
 #library(scales)
 
 

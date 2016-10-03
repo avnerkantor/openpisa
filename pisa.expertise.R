@@ -101,12 +101,10 @@ observe({
   })
 
   }
-})
 
 ##############################################
 
-observe({
-  
+
   
   plotLowData<-pisaData2%>%filter(Subject==input$Subject, Performers=="Low")%>%select(-Subject)
   
@@ -191,7 +189,8 @@ observe({
     }
   }
 
-  
+  if(!input$Country1==""){
+    
   output$Country1LowPlot<-renderPlotly({
     expertiseLowPlotFunction(input$Country1)
   })
@@ -208,6 +207,6 @@ observe({
   output$Country4LowPlot<-renderPlotly({
     expertiseLowPlotFunction(input$Country4)
   })
-
+}
 })
 
