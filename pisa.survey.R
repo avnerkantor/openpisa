@@ -135,7 +135,7 @@ observe({
     
     
     ####ggplot####
-    gh<-ggplot(data=surveyTable, aes(x=answer, y=freq, fill=group)) +
+    gh<-ggplot(data=surveyTable, aes(x=answer, y=freq, fill=group, text=round(freq))) +
       geom_bar(position="dodge",stat="identity") + 
       coord_flip() +
       labs(title="", y="" ,x= "") +
@@ -166,7 +166,6 @@ observe({
         panel.grid.minor = element_blank(),
         axis.line.x = element_line(color="#c7c7c7", size = 0.3),
         axis.line.y = element_line(color="#c7c7c7", size = 0.3)) 
-    
     ggplotly(gh, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
                                                modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d", "hoverClosestCartesian"))
     
