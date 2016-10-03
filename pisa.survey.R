@@ -11,12 +11,12 @@ pisa2006<- tbl(pisadb, "pisa2006")
 observe({
   updateSelectInput(session, inputId="SurveyYear", label="", 
                     choices = c(2012)
-                      #list(
-                      #  'מבחן פיז"ה 2015 - בקרוב'=c('שאלון תלמידים'='student2015', 'שאלון בתי ספר'='school2015'),
-                      #'מבחן פיז"ה 2012'=c('שאלון תלמידים'='student2012', 'שאלון בתי ספר'='school2012')
-                      # 'מבחן פיז"ה 2009'=c("שאלון תלמידים"="student2009", "שאלון בתי ספר"="school2009"),
-                      #  'מבחן פיז"ה 2006'=c("שאלון תלמידים"="student2006", "שאלון בתי ספר"="school2006"),
-                      # 'שאלונים חוזרים - בקרוב'=c("זמינות ושימוש באמצעי תקשוב"="t1", "פתרון בעיות"="t2")
+                    #list(
+                    #  'מבחן פיז"ה 2015 - בקרוב'=c('שאלון תלמידים'='student2015', 'שאלון בתי ספר'='school2015'),
+                    #'מבחן פיז"ה 2012'=c('שאלון תלמידים'='student2012', 'שאלון בתי ספר'='school2012')
+                    # 'מבחן פיז"ה 2009'=c("שאלון תלמידים"="student2009", "שאלון בתי ספר"="school2009"),
+                    #  'מבחן פיז"ה 2006'=c("שאלון תלמידים"="student2006", "שאלון בתי ספר"="school2006"),
+                    # 'שאלונים חוזרים - בקרוב'=c("זמינות ושימוש באמצעי תקשוב"="t1", "פתרון בעיות"="t2")
                     , selected = 2012)
 })
 
@@ -64,20 +64,20 @@ observeEvent(input$SurveyCategory,{
 observe({
   
   SurveySelectedID <- as.vector(unlist(select(filter(pisaDictionary, Year == input$SurveyYear, HebSubject == input$SurveySubject, HebCategory==input$SurveyCategory, HebSubCategory==input$SurveySubCategory), ID))) 
-
+  surveyData<-pisa2012
   surveyPlotFunction<-function(country) {
     
     Country<-as.vector(unlist(Countries%>%filter(Hebrew==country)%>%select(CNT)))
     
-      # switch (object,
-      #   case = action
-      # )
-      
-      if(input$SurveyYear==2012)
-        surveyData<-pisa2012
-      
-      
-      surveyData1<-surveyData%>%select_("CNT", SurveySelectedID, "ST04Q01", "ESCS")%>%filter(CNT==Country)
+    # switch (object,
+    #   case = action
+    # )
+    
+    if(input$SurveyYear==2012)
+      surveyData<-pisa2012
+    
+    
+    surveyData1<-surveyData%>%select_("CNT", SurveySelectedID, "ST04Q01", "ESCS")%>%filter(CNT==Country)
     
     if(is.null(input$Gender)){
       if(is.null(input$Escs)){
@@ -109,7 +109,7 @@ observe({
           surveyTable<-collect(surveyTable)
           surveyTable<-surveyTable%>%   mutate(freq = round(100 * n/sum(n), 0))%>%
             rename_(answer=SurveySelectedID, group="ST04Q01")
-            
+          
         } else {
           surveyTable<-surveyData1%>%
             filter(ST04Q01  %in% c(input$Gender))%>%
@@ -132,9 +132,9 @@ observe({
           rename_(answer=SurveySelectedID, group="ST04Q01")
       } 
     }
-
     
-####ggplot####
+    
+    ####ggplot####
     gh<-ggplot(data=surveyTable, aes(x=answer, y=freq, fill=group)) +
       geom_bar(position="dodge",stat="identity") + 
       coord_flip() +
@@ -166,29 +166,33 @@ observe({
         panel.grid.minor = element_blank(),
         axis.line.x = element_line(color="#c7c7c7", size = 0.3),
         axis.line.y = element_line(color="#c7c7c7", size = 0.3)) 
-        
-      ggplotly(gh)
-     }
-  
-### Plots ####  
-
-  if(length(SurveySelectedID)==1){
-  output$Country1SurveyPlot<-renderPlotly({
-    surveyPlotFunction(input$Country1)
-  })
-
-  output$Country2SurveyPlot<-renderPlotly({
-    surveyPlotFunction(input$Country2)
-  })
-
-  output$Country3SurveyPlot<-renderPlotly({
-    surveyPlotFunction(input$Country3)
     
-  })
+  }
   
-  output$Country4SurveyPlot<-renderPlotly({
-    surveyPlotFunction(input$Country4)
-  })
+  ### Plots ####  
   
+  if(length(SurveySelectedID)==1){
+    #print(is.data.frame(get("surveyData")))
+    print(exists("surveyData"))
+    print(is.null(surveyData))
+    print(is.data.frame(get("surveyData")))
+    
+    output$Country1SurveyPlot<-renderPlotly({
+      surveyPlotFunction(input$Country1)
+    })
+    
+    output$Country2SurveyPlot<-renderPlotly({
+      surveyPlotFunction(input$Country2)
+    })
+    
+    output$Country3SurveyPlot<-renderPlotly({
+      surveyPlotFunction(input$Country3)
+      
+    })
+    
+    output$Country4SurveyPlot<-renderPlotly({
+      surveyPlotFunction(input$Country4)
+    })
+    
   }
 })

@@ -61,7 +61,7 @@ observe({
     
     x<-Countries%>%filter(Hebrew==country)%>%select(CNT)
     plotData3 <- plotData2%>%filter(Country==x[1,1])
-    
+
     gg<-ggplot(plotData3, aes(x=Year, y=Average, colour=GenderESCS, text=round(Average))) +
       scale_colour_manual(values = c(
         "General"="#b276b2", 
