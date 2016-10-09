@@ -63,20 +63,7 @@ observe({
     plotData3 <- plotData2%>%filter(Country==x[1,1])
 
     gg<-ggplot(plotData3, aes(x=Year, y=Average, colour=GenderESCS, text=round(Average))) +
-      scale_colour_manual(values = c(
-        "General"="#b276b2", 
-        "Male"="#5da5da", 
-        "Female"="#f17cb0", 
-        "GeneralLow"="#bc99c7", 
-        "GeneralMedium"="#b276b2", 
-        "GeneralHigh"="#7b3a96", 
-        "MaleHigh"="#265dab", 
-        "MaleLow"="#88bde6", 
-        "MaleMedium"="#5da5da", 
-        "FemaleHigh"="#e5126f", 
-        "FemaleLow"="#f6aac9", 
-        "FemaleMedium"="#f17cb0"
-      )) +
+      scale_colour_manual(values = groupColours) +
       guides(colour=FALSE) +
       
       labs(title="", y="" ,x= "") +
@@ -105,21 +92,18 @@ observe({
        #https://plot.ly/r/axes/
         gp<-gg+geom_line(size=1)
         #https://github.com/plotly/plotly.js/blob/master/src/components/modebar/buttons.js
-        ggplotly(gp, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
-        modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d", "hoverClosestCartesian"))
+        ggplotly(gp, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = FALSE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE)
 
       } else{
         gp<-gg+geom_point(size=2)
-        ggplotly(gp, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
-                                                   modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d"))
+        ggplotly(gp, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = FALSE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE)
       }
     } 
     else 
     {
       gg+annotate("text", label = "לא נבחנה",
                   x = 2012, y = 500, size = 6, 
-                  colour = "#c7c7c7")%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
-                                               modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d"))
+                  colour = "#c7c7c7")%>%config(p = ., staticPlot = FALSE, displayModeBar = FALSE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE)
     }
   }
   

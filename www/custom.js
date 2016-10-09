@@ -1,12 +1,14 @@
+//Buttons
 $(document).on('click', '#generalBtn', function (e) {
-    $("#maleBtn, #femaleBtn").removeClass('active');
-    // #alert("df");
+    $("#maleBtn, #femaleBtn, #lowBtn, #mediumBtn, #highBtn").removeClass('active');
 });
 
-$(document).on('click', '#maleBtn, femaleBtn', function (e) {
-    $("#generalBtn, #lowBtn, #mediumBtn, #highBtn").removeClass('active');
-    // #alert("df");
-});
+//$(document).on('click', '', function() {
+        //  alert('you clicked either button 1 or button 2');
+   //$("#lowBtn, #mediumBtn, #highBtn").removeClass('active');
+//}
+//);
+
 
 
 $(document).ready(function () {
@@ -33,14 +35,6 @@ $(document).ready(function () {
 
 // });
 
-// $(document).ready(function () {
-//     $(".shiny-plot-output").mousemove(function (event) {
-//         $(".plotTooltip").show().css({
-//             top: (event.pageY - 80) + "px",
-//             left: (event.pageX - 60) + "px"
-//         });
-//     });
-// });
 
 //http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_js_scrollspy_activate&stacked=h
 $(document).ready(function () {
@@ -50,6 +44,9 @@ $(document).ready(function () {
     //     $(this).scrollspy('refresh');
     // });
     //};
+    $("#surveyDashboard").hide();
+    $("#subjectsDashboard").show();
+
     $("#page-top").scrollspy({target: "#mainNav"});
     $("#mainNav").on("activate.bs.scrollspy", function () {
         var x = $(".nav li.active > a").attr('href');
@@ -65,6 +62,10 @@ $(document).ready(function () {
                 break;
             case "#about":
                 $("#surveyDashboard").show();
+                $("#subjectsDashboard").show();
+                break;
+            case "#scores":
+                $("#surveyDashboard").hide();
                 $("#subjectsDashboard").show();
                 break;
             default:

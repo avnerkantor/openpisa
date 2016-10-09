@@ -35,22 +35,9 @@ observe({
     plotHighData3 <- plotHighData2%>%filter(Country==x[1,1])
     
     gh<-ggplot(plotHighData3, aes(x=Year, y=Average, colour=GenderESCS, text=round(Average))) +
-      scale_colour_manual(values = c(
-        "General"="#b276b2", 
-        "Male"="#5da5da", 
-        "Female"="#f17cb0", 
-        "GeneralLow"="#bc99c7", 
-        "GeneralMedium"="#b276b2", 
-        "GeneralHigh"="#7b3a96", 
-        "MaleHigh"="#265dab", 
-        "MaleLow"="#88bde6", 
-        "MaleMedium"="#5da5da", 
-        "FemaleHigh"="#e5126f", 
-        "FemaleLow"="#f6aac9", 
-        "FemaleMedium"="#f17cb0"
-      )) +
+      scale_colour_manual(values =groupColours) +
       guides(colour=FALSE) +
-      labs(title="", y="" ,x= "") +
+      labs(title="", y="%" ,x= "") +
       theme_bw() +
       theme(plot.margin=unit(c(0,15,0,0), "pt"),
             panel.border = element_blank(),
@@ -68,18 +55,15 @@ observe({
     if("2012" %in% plotHighData3$Year) {
       if("2009" %in% plotHighData3$Year) {
         gd<-gh+geom_line(size=1)
-        ggplotly(gd, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
-                                                   modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d", "hoverClosestCartesian"))
+        ggplotly(gd, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = FALSE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE)
       } else{
         gd<-gh+geom_point(size=2)
-        ggplotly(gd, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
-                                                   modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d", "hoverClosestCartesian"))
+        ggplotly(gd, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = FALSE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE)
       }
     } else {
       gh+annotate("text", label = "לא נבחנה",
                   x = 2012, y = 500, size = 6, 
-                  colour = "#c7c7c7")%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
-                                               modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d", "hoverClosestCartesian"))
+                  colour = "#c7c7c7")%>%config(p = ., staticPlot = FALSE, displayModeBar = FALSE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE)
     }
   }
   
@@ -135,28 +119,14 @@ observe({
     } 
   }
   
-  
   expertiseLowPlotFunction<-function(country){
     x<-Countries%>%filter(Hebrew==country)%>%select(CNT)
     plotLowData3 <- plotLowData2%>%filter(Country==x[1,1])
     
     gh<-ggplot(plotLowData3, aes(x=Year, y=Average, colour=GenderESCS, text=round(Average))) +
-      scale_colour_manual(values = c(
-        "General"="#b276b2", 
-        "Male"="#5da5da", 
-        "Female"="#f17cb0", 
-        "GeneralLow"="#bc99c7", 
-        "GeneralMedium"="#b276b2", 
-        "GeneralHigh"="#7b3a96", 
-        "MaleHigh"="#265dab", 
-        "MaleLow"="#88bde6", 
-        "MaleMedium"="#5da5da", 
-        "FemaleHigh"="#e5126f", 
-        "FemaleLow"="#f6aac9", 
-        "FemaleMedium"="#f17cb0"
-      )) +
+      scale_colour_manual(values = groupColours) +
       guides(colour=FALSE) +
-      labs(title="", y="" ,x= "") +
+      labs(title="", y="%" ,x= "") +
       theme_bw() +
       theme(plot.margin=unit(c(0,15,0,0), "pt"),
             panel.border = element_blank(),
@@ -168,7 +138,7 @@ observe({
             axis.line.y = element_line(color="#c7c7c7", size = 0.3)
             ) + 
       scale_x_continuous(breaks=c(2006, 2009, 2012)) +
-      scale_y_continuous(limits=c(0, 100), breaks=c(20, 40, 60, 80),
+      scale_y_continuous(limits=c(0, 100), breaks=c(0, 20, 40, 60, 80, 100),
                          expand = c(0,0))
     
     if("2012" %in% plotLowData3$Year) {

@@ -1,11 +1,8 @@
 ####loading data####
-
-pisadb<-src_bigquery("r-shiny-1141", "pisa")
-pisa2012<- tbl(pisadb, "pisa2012")
-pisa2009<- tbl(pisadb, "pisa2009")
-pisa2006<- tbl(pisadb, "pisa2006")
-
-
+#pisadb<-src_bigquery("r-shiny-1141", "pisa")
+# pisa2012<- tbl(pisadb, "pisa2012")
+# pisa2009<- tbl(pisadb, "pisa2009")
+# pisa2006<- tbl(pisadb, "pisa2006")
 
 ######UI #####
 observe({
@@ -37,7 +34,6 @@ observeEvent(input$SurveyYear,{
               "בית הספר"="בית הספר",
               "מדיניות בית הספר"="מדיניות בית הספר"
               #"מנהיגות חינוכית"="מנהיגות חינוכית"
-              
             ),
             selected="לימודי מתמטיקה"
             )
@@ -46,11 +42,7 @@ observeEvent(input$SurveyYear,{
   )
 })
 
-
-
-
 observeEvent(input$SurveySubject,{
-  
   updateSelectInput(session, "SurveyCategory", "", as.vector(unlist(select(filter(pisaDictionary, Year == input$SurveyYear, HebSubject == input$SurveySubject), HebCategory))))
 })
 
@@ -59,23 +51,15 @@ observeEvent(input$SurveyCategory,{
   )
 })
 
-
-
 observe({
   
   SurveySelectedID <- as.vector(unlist(select(filter(pisaDictionary, Year == input$SurveyYear, HebSubject == input$SurveySubject, HebCategory==input$SurveyCategory, HebSubCategory==input$SurveySubCategory), ID))) 
-  surveyData<-pisa2012
+  
   surveyPlotFunction<-function(country) {
-    
     Country<-as.vector(unlist(Countries%>%filter(Hebrew==country)%>%select(CNT)))
-    
-    # switch (object,
-    #   case = action
-    # )
-    
+
     if(input$SurveyYear==2012)
-      surveyData<-pisa2012
-    
+      surveyData<-student2012
     
     surveyData1<-surveyData%>%select_("CNT", SurveySelectedID, "ST04Q01", "ESCS")%>%filter(CNT==Country)
     
@@ -84,8 +68,8 @@ observe({
         #General
         surveyTable<-surveyData1%>%
           count_(SurveySelectedID)
-        surveyTable<-collect(surveyTable)
-        surveyTable<-surveyTable%>% mutate(freq = round(100 * n/sum(n), 1), group="General")%>%
+        # surveyTable<-collect(surveyTable)
+        surveyTable<-surveyTable%>% mutate(freq = round(100 * n/sum(n), 1), groupColour="General")%>%
           rename_(answer=SurveySelectedID)
       } else {
         # General Escs
@@ -94,21 +78,23 @@ observe({
           group_by_("ESCS", SurveySelectedID)%>%
           tally  %>%
           group_by(ESCS)
-        surveyTable<-collect(surveyTable)
+        # surveyTable<-collect(surveyTable)
         surveyTable<-surveyTable%>%   mutate(freq = round(100 * n/sum(n), 0))%>%
-          rename_(answer=SurveySelectedID, group="ESCS")
+          rename_(answer=SurveySelectedID, group="ESCS") %>%
+          mutate(groupColour=str_c("General", group))
       }
     } else {
       if(length(input$Gender)==1){
         if(is.null(input$Escs)) {
+          #Only gender
           surveyTable<-surveyData1%>%
             filter(ST04Q01 %in% c(input$Gender))%>%
             group_by_("ST04Q01", SurveySelectedID)%>%
             tally  %>%
             group_by(ST04Q01)
-          surveyTable<-collect(surveyTable)
+          # surveyTable<-collect(surveyTable)
           surveyTable<-surveyTable%>%   mutate(freq = round(100 * n/sum(n), 0))%>%
-            rename_(answer=SurveySelectedID, group="ST04Q01")
+            rename_(answer=SurveySelectedID, groupColour="ST04Q01") 
           
         } else {
           surveyTable<-surveyData1%>%
@@ -117,9 +103,11 @@ observe({
             group_by_("ESCS", SurveySelectedID)%>%
             tally  %>%
             group_by(ESCS)
-          surveyTable<-collect(surveyTable)
-          surveyTable<-surveyTable%>%  mutate(freq = round(100 * n/sum(n), 0))%>%
-            rename_(answer=SurveySelectedID, group="ESCS")
+          # surveyTable<-collect(surveyTable)
+          surveyTable<-surveyTable%>%  mutate(freq = round(100 * n/sum(n), 0), group1=input$Gender)%>%
+            rename_(answer=SurveySelectedID, group="ESCS")%>%
+            mutate(groupColour=str_c(group1, group))
+          
         }
       } else {
         surveyTable<-surveyData1%>%
@@ -127,52 +115,42 @@ observe({
           group_by_("ST04Q01", SurveySelectedID)%>%
           tally  %>%
           group_by(ST04Q01)
-        surveyTable<-collect(surveyTable)
+        # surveyTable<-collect(surveyTable)
         surveyTable<-surveyTable%>%   mutate(freq = round(100 * n/sum(n), 0))%>%
-          rename_(answer=SurveySelectedID, group="ST04Q01")
+          rename_(answer=SurveySelectedID, groupColour="ST04Q01")
       } 
     }
-    
-    
+    #print(surveyTable)
     ####ggplot####
-    gh<-ggplot(data=surveyTable, aes(x=answer, y=freq, fill=group, text=round(freq))) +
-      geom_bar(position="dodge",stat="identity") + 
+    gh<-ggplot(data=surveyTable, aes(x=answer, y=freq, text=paste0(round(freq), "%"))) +
+      
+      geom_bar(aes(colour=groupColour, fill=groupColour), position = position_dodge(width = 0.2),stat="identity", width = 0.8) +
       coord_flip() +
+      scale_colour_manual(values =groupColours) +
+      scale_fill_manual(values = groupColours) +
       labs(title="", y="" ,x= "") +
-      #scale_y_discrete(breaks=c(0, 100))
       theme_bw() +
-      scale_colour_manual(values = c(
-        "General"="#b276b2", 
-        "Male"="#5da5da", 
-        "Female"="#f17cb0", 
-        "GeneralLow"="#bc99c7", 
-        "GeneralMedium"="#b276b2", 
-        "GeneralHigh"="#7b3a96", 
-        "MaleHigh"="#265dab", 
-        "MaleLow"="#88bde6", 
-        "MaleMedium"="#5da5da", 
-        "FemaleHigh"="#e5126f", 
-        "FemaleLow"="#f6aac9", 
-        "FemaleMedium"="#f17cb0"
-      )) +
-      facet_grid(. ~group) +
-      scale_y_continuous(breaks=c(0, 100)) +
-      theme(
+      guides(colour=FALSE) +
+      facet_grid(. ~groupColour) +
+      scale_y_continuous(breaks=c(0, 100), limits = c(0, 100)) +
+      theme(plot.margin=unit(c(0,0,0,0), "pt"),
         panel.border = element_blank(),
         panel.grid.major=element_blank(),
         axis.ticks = element_blank(),
         legend.position="none",
         strip.text.x = element_blank(),
         panel.grid.minor = element_blank(),
-        axis.line.x = element_line(color="#c7c7c7", size = 0.3),
-        axis.line.y = element_line(color="#c7c7c7", size = 0.3)) 
-    ggplotly(gh, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = TRUE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE,
-                                               modeBarButtonsToRemove = list("resetScale2d", "hoverCompareCartesian", "autoScale2d", "hoverClosestCartesian"))
+        axis.text.y = element_text(size=8, angle=0),
+        panel.margin.x=unit(2, "lines")
+        #axis.line.x = element_line(color="#c7c7c7", size = 0.3),
+        #axis.line.y = element_line(color="#c7c7c7", size = 0.3)
+        ) 
+    
+    ggplotly(gh, tooltip = c("text"))%>%config(p = ., staticPlot = FALSE, displayModeBar = FALSE, workspace = FALSE, editable = FALSE, sendData = FALSE, displaylogo = FALSE)
     
   }
   
   ### Plots ####  
-  
   if(length(SurveySelectedID)==1){
     #print(is.data.frame(get("surveyData")))
     # print(exists("surveyData"))
@@ -195,6 +173,5 @@ observe({
     output$Country4SurveyPlot<-renderPlotly({
       surveyPlotFunction(input$Country4)
     })
-    
   }
 })
