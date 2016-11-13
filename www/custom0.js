@@ -23,17 +23,17 @@ $(document).on('click', '#femaleBtn', function (e) {
     $("#lowBtn, #mediumBtn, #highBtn").toggleClass('female');
 });
 
-
 $(document).on('change', function() {
    //alert($('input[name="Subject"]:checked').val()); 
   $('input[name="Subject"]:not(:checked)').parent().removeClass("active");
   $('input[name="Subject"]:checked').parent().addClass("active");
-  
-  $('input[name="worldOrIsrael"]:not(:checked)').parent().removeClass("active");
-  $('input[name="worldOrIsrael"]:checked').parent().addClass("active");
-  
   //TODO: gender and escs
 });
+
+//Set countries width the same width as plots width
+$(window).on('resize', function(){
+  $("#Country1, #Country2, #Country3, #Country4, #SurveyYear, #SurveySubject, #SurveyCategory, #SurveySubCategory, #modelId, #analyzeVariables" ).css('width', ($("#Country1Plot").width()+'px'));
+}).resize();
 
 
 $(function() {
@@ -45,11 +45,6 @@ $(function() {
     });
 });
 
-//Set countries width the same width as plots width
-$(window).on('resize', function(){
-  $("#Country1, #Country2, #Country3, #Country4, #SurveyYear, #SurveySubject, #SurveyCategory, #SurveySubCategory, #modelId, #analyzeVariables" ).css('width', ($("#Country1Plot").width()+'px'));
-}).resize();
-
 //jQuery for page scrolling feature - requires jQuery Easing plugin
 $(document).ready(function () {
   $('a.page-scroll').bind('click', function(event) {
@@ -58,7 +53,7 @@ $(document).ready(function () {
     
     var $anchor = $(this);
         $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top - 325
+            scrollTop: $($anchor.attr('href')).offset().top
         }, 1500, 'easeInOutExpo');
     // Prevent default anchor click behavior
     event.preventDefault();
@@ -70,6 +65,7 @@ $(document).ready(function () {
 $(document).ready(function () {
    $("#surveyDashboard").hide();
 });
+
 
 $(document).on('activate.bs.scrollspy', function(e) {
    var x = $(".nav li.active > a").attr('href');
@@ -126,5 +122,4 @@ $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip({
         placement : 'top'
     });
-});
-
+});          

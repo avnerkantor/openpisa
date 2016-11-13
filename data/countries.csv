@@ -8,7 +8,7 @@ BRA,Brazil,ברזיל
 BGR,Bulgaria,בולגריה
 CAN,Canada,קנדה
 CHL,Chile,צילה
-QCN,Shanghai-China,שאנגחאי (סין)
+QCN,Shanghai,שאנגחאי (סין)
 TAP,Chinese Taipei,סין
 COL,Colombia,קולומביה
 CRI,Costa Rica,קוסטה-ריקה
@@ -20,7 +20,7 @@ FIN,Finland,פינלנד
 FRA,France,צרפת
 DEU,Germany,גרמניה
 GRC,Greece,יוון
-HKG,Hong Kong-China,הונג-קונג
+HKG,Hong Kong,הונג-קונג
 HUN,Hungary,הונגריה
 ISL,Iceland,איסלנד
 IDN,Indonesia,אינדונזיה
@@ -42,7 +42,7 @@ MNE,Montenegro,מונטגרו
 NLD,Netherlands,הולנד
 NZL,New Zealand,ניו-זילנד
 NOR,Norway,נורווגיה
-QRS,Perm (Russian Federation),פרם (רוסיה)
+QRS,Perm,פרם (רוסיה)
 PER,Peru,פרו
 POL,Poland,פולין
 PRT,Portugal,פורטוגל
@@ -60,8 +60,8 @@ THA,Thailand,תאילנד
 TUN,Tunisia,תוניסיה
 TUR,Turkey,טורקיה
 GBR,United Kingdom,בריטניה
-ARE,United Arab Emirates,סעודיה
-USA,United States of America,ארצות-הברית
+ARE,Arab Emirates,סעודיה
+USA,USA,ארצות-הברית
 URY,Uruguay,אורוגוואי
 VNM,Viet Nam,ויאטנם
 QUA,Florida (USA),פלורידה
