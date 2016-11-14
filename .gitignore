@@ -2,3 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
+/.idea
+/rsconnect
+.httr-outh
+Rplots.pdf
+ShinyServer-41d749479100.json
+rcommands.R
