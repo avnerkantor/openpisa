@@ -85,7 +85,6 @@ $(document).on('activate.bs.scrollspy', function(e) {
              // case "#analyze":
                // $("#surveyDashboard").show();
               //  $("#Subject").show();
-              //  break;
                // break;
             default:
                 $("#surveyDashboard").hide();

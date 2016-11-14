@@ -14,7 +14,6 @@ observe({
 
 output$pisaScoresTable <- DT::renderDataTable(
   filter='bottom',
-  #colnames = c('משתנה', 'תיאור באנגלית', 'נושא', 'קטגוריה', 'תת-קטגוריה'),
   options=list(
     pageLength = 5,
     searching=TRUE,
@@ -24,20 +23,19 @@ output$pisaScoresTable <- DT::renderDataTable(
     pisaDictionary%>%select(ID, Measure, Subject, Category, SubCategory)
   })
 
-
 #Analyze
 observe({
   SurveySelectedID <- as.vector(unlist(select(filter(pisaDictionary, Year == input$SurveyYear, Subject == input$SurveySubject, Category==input$SurveyCategory, SubCategory==input$SurveySubCategory), ID))) 
   
   analyzePlotFunction<-function(country) {
-    
-    Country<-as.vector(unlist(Countries%>%filter(Country==country)%>%select(CNT)))
+  Country<-as.vector(unlist(Countries%>%filter(Country==country)%>%select(CNT)))
     
     switch ( input$Subject,
              Math = {analyzeSubject<-"PV1MATH"},
              Science={analyzeSubject<-"PV1SCIE"},
              Reading={analyzeSubject<-"PV1READ"}
     )
+  
     surveyData<-pisa2012
     if(input$SurveyYear==2012)
       surveyData<-pisa2012
@@ -45,7 +43,6 @@ observe({
     #analyzeData1<-pisa2012%>%select_("CNT", "WEALTH", "ST04Q01", "ESCS", "PV1MATH")%>%filter(CNT=="ISR")
     #SurveySelectedID<-"WEALTH"
     #analyzeSubject<-"PV1MATH"
-    
     
     analyzeData1<-surveyData%>%select_("CNT", SurveySelectedID, "ST04Q01", "ESCS", analyzeSubject)%>%filter(CNT==Country)
     analyzeData1<-collect(analyzeData1)
@@ -97,7 +94,6 @@ observe({
     #analyzeData3<-setDT(analyzeData2)[, list(Slope = summary(lm(WEALTH ~ PV1MATH))$coeff[2], Pearson=cor(WEALTH, use="complete", PV1MATH, method = "pearson")), groupColour]
     
     
-    
     ggplot(data=analyzeData2, aes_string(y=analyzeSubject, x=SurveySelectedID)) +
       geom_smooth(method=input$modelId, aes(colour=groupColour)) + 
       scale_colour_manual(values = groupColours) +
@@ -127,19 +123,16 @@ observe({
   #### Plots ####
   if(length(SurveySelectedID)==1){
     # if(!input$Subject==""){
-    output$Country1AnalyzePlot<-renderPlotly({
+    output$Country1AnalyzePlot<-renderPlot({
       analyzePlotFunction(input$Country1)
     })
-    
-    output$Country2AnalyzePlot<-renderPlotly({
+    output$Country2AnalyzePlot<-renderPlot({
       analyzePlotFunction(input$Country2)
     })
-    
-    output$Country3AnalyzePlot<-renderPlotly({
+    output$Country3AnalyzePlot<-renderPlot({
       analyzePlotFunction(input$Country3)
     })
-    
-    output$Country4AnalyzePlot<-renderPlotly({
+    output$Country4AnalyzePlot<-renderPlot({
       analyzePlotFunction(input$Country4)
     })
   }

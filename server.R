@@ -1,9 +1,11 @@
 (shiny.sanitize.errors = FALSE)
+
 load("data/pisaData2.rda")
 load("data/pisaDictionary.rda")
-load("../pisa2012.rda")
-# pisadb<-src_bigquery("r-shiny-1141", "pisa")
-# pisa2012<- tbl(pisadb, "pisa2012")
+
+# load("../pisa2012.rda")
+pisadb<-src_bigquery("r-shiny-1141", "pisa")
+pisa2012<- tbl(pisadb, "pisa2012")
 #pisa2009<- tbl(pisadb, "pisa2009")
 #pisa2006<- tbl(pisadb, "pisa2006")
 
@@ -32,16 +34,13 @@ groupColours<- c(
   FemaleLow="#f6aac9", 
   FemaleMedium="#f17cb0"
 ) 
-shinyServer(function(input, output, session) {
 
-  #setwd("/srv/shiny-server/opisaEn") 
-  
+shinyServer(function(input, output, session) {
   source('pisa.scores.R', local=TRUE)
   source('pisa.expertise.R', local=TRUE)
   source('pisa.survey.R', local=TRUE)
   source('pisa.analyze.R', local=TRUE)
   source('urlSearch.R', local=TRUE)
-
 })
 
 

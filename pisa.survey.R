@@ -56,7 +56,7 @@ observe({
         #General
         surveyTable<-surveyData1%>%
           count_(SurveySelectedID)
-         # surveyTable<-collect(surveyTable)
+         surveyTable<-collect(surveyTable)
         surveyTable<-surveyTable%>% mutate(freq = round(100 * n/sum(n), 1), groupColour="General")%>%
           rename_(answer=SurveySelectedID)
       } else {
@@ -66,7 +66,7 @@ observe({
           group_by_("ESCS", SurveySelectedID)%>%
           tally  %>%
           group_by(ESCS)
-         # surveyTable<-collect(surveyTable)
+         surveyTable<-collect(surveyTable)
         surveyTable<-surveyTable%>%   mutate(freq = round(100 * n/sum(n), 0))%>%
           rename_(answer=SurveySelectedID, group="ESCS") %>%
           mutate(groupColour=str_c("General", group))
@@ -80,7 +80,7 @@ observe({
             group_by_("ST04Q01", SurveySelectedID)%>%
             tally  %>%
             group_by(ST04Q01)
-           # surveyTable<-collect(surveyTable)
+           surveyTable<-collect(surveyTable)
           surveyTable<-surveyTable%>%   mutate(freq = round(100 * n/sum(n), 0))%>%
             rename_(answer=SurveySelectedID, groupColour="ST04Q01") 
           
@@ -91,7 +91,7 @@ observe({
             group_by_("ESCS", SurveySelectedID)%>%
             tally  %>%
             group_by(ESCS)
-           # surveyTable<-collect(surveyTable)
+           surveyTable<-collect(surveyTable)
           surveyTable<-surveyTable%>%  mutate(freq = round(100 * n/sum(n), 0), group1=input$Gender)%>%
             rename_(answer=SurveySelectedID, group="ESCS")%>%
             mutate(groupColour=str_c(group1, group))
@@ -103,7 +103,7 @@ observe({
           group_by_("ST04Q01", SurveySelectedID)%>%
           tally  %>%
           group_by(ST04Q01)
-         # surveyTable<-collect(surveyTable)
+         surveyTable<-collect(surveyTable)
         surveyTable<-surveyTable%>%   mutate(freq = round(100 * n/sum(n), 0))%>%
           rename_(answer=SurveySelectedID, groupColour="ST04Q01")
       } 
