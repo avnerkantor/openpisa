@@ -1,5 +1,5 @@
 library(shiny)
-library(ggplot2)
+# library(ggplot2)
 #library(Cairo)
 library(httr)
 library(bigrquery)
@@ -9,8 +9,8 @@ library(htmltools)
 library(htmlwidgets)
 library(stringr)
 #library(gridExtra)
-library(DT)
-#library(scales)
+# library(DT)
+# library(scales)
 
 
 

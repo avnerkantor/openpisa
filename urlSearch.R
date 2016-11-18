@@ -22,9 +22,9 @@ observe({
   updateSelectInput(session, "Country4", selected=querySearch$country4)
   #updateNumericInput(session, "LevelNumber", selected=querySearch$level)
   #updateSelectInput(session, "SurveyYear", selected=querySearch$surveyYear)
-  updateSelectInput(session, "SurveySubject", selected=querySearch$hebSubject)
-  updateSelectInput(session, "SurveyCategory", selected=querySearch$hebCategory)
-  updateSelectInput(session, "SurveySubCategory", selected=querySearch$hebSubCategory)
+  # updateSelectInput(session, "SurveySubject", selected=querySearch$hebSubject)
+  # updateSelectInput(session, "SurveyCategory", selected=querySearch$hebCategory)
+  # updateSelectInput(session, "SurveySubCategory", selected=querySearch$hebSubCategory)
   #updateSelectInput(session, "ModelId", selected=querySearch$modelId)zz
 })
 
@@ -35,10 +35,11 @@ observe({
   data<-paste0(queryHash, "?subject=", input$Subject, 
                #"&gender=", input$Gender, "&escs=", input$Escs,
                "&country1=", input$Country1, "&country2=", input$Country2, "&country3=", input$Country3,
-               "&country4=", input$Country4,
+               "&country4=", input$Country4
                #"&level=", input$LevelNumber, 
-               "&surveyYear=", input$SurveyYear, "&hebSubject=", input$SurveySubject,
-               "&hebCategory=", input$SurveyCategory, "&hebSubCategory="=input$SurveySubCategory)
+               # "&surveyYear=", input$SurveyYear, "&hebSubject=", input$SurveySubject,
+               # "&hebCategory=", input$SurveyCategory, "&hebSubCategory="=input$SurveySubCategory
+               )
   # "$modelId=", ModelId)  
   session$sendCustomMessage(type='updateSelections', message=data)    
 })

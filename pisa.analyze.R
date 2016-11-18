@@ -1,53 +1,55 @@
 observe({
-  updateSelectizeInput(session, 'analyzeVariables',
-                       choices = as.character(pisaDictionary$ID),
-                       selected = "WEALTH",
-                       options=list(placeholder="Choose"))
+  updateSelectInput(session, inputId="AnalyzeYear", label="",
+                    choices = c(2012), selected = 2012)
 })
+
+observeEvent(input$AnalyzeYear, {
+  updateSelectInput(session, "AnalyzeVariable", "", as.vector(unlist(select(filter(pisaDictionary, Year == input$AnalyzeYear, Subject == "OECDindex"), Category))), selected = "Wealth")
+})
+
 observe({
   updateSelectInput(session, inputId="ModelId", label="", choices = c(
     "lm"="lm",
     "loess"="loess"
   ),
-  selected="loess")
+  selected="lm")
 })
 
-output$pisaScoresTable <- DT::renderDataTable(
-  filter='bottom',
-  options=list(
-    pageLength = 5,
-    searching=TRUE,
-    autoWidth = TRUE
-  ), rownames= FALSE,
-  {
-    pisaDictionary%>%select(ID, Measure, Subject, Category, SubCategory)
-  })
+# output$pisaScoresTable <- DT::renderDataTable(
+#   filter='bottom',
+#   options=list(
+#     pageLength = 5,
+#     searching=TRUE,
+#     autoWidth = TRUE
+#   ), rownames= FALSE,
+#   {
+#     pisaDictionary%>%select(ID, Measure, Subject, Category, SubCategory)
+#   })
 
 #Analyze
 observe({
-  SurveySelectedID <- as.vector(unlist(select(filter(pisaDictionary, Year == input$SurveyYear, Subject == input$SurveySubject, Category==input$SurveyCategory, SubCategory==input$SurveySubCategory), ID))) 
+  
+  switch(input$AnalyzeYear,
+         "2012"={surveyData<-pisa2012},
+         "2009"={surveyData<-pisa2012},
+         "2006"={surveyData<-pisa2012}
+  )
+  
+  switch (input$Subject,
+          Math = {analyzeSubject<-"PV1MATH"},
+          Science={analyzeSubject<-"PV1SCIE"},
+          Reading={analyzeSubject<-"PV1READ"},
+          ProblemSolving={analyzeSubject<-"PV1CPRO"},
+          Financial={analyzeSubject<-"PV1FLIT"}
+  )
+  
+  analyzeSelectedID <- as.vector(unlist(select(filter(pisaDictionary, Year == input$AnalyzeYear, Subject == "OECDindex", Category==input$AnalyzeVariable), ID))) 
   
   analyzePlotFunction<-function(country) {
-  Country<-as.vector(unlist(Countries%>%filter(Country==country)%>%select(CNT)))
-    
-    switch ( input$Subject,
-             Math = {analyzeSubject<-"PV1MATH"},
-             Science={analyzeSubject<-"PV1SCIE"},
-             Reading={analyzeSubject<-"PV1READ"}
-    )
-  
-    surveyData<-pisa2012
-    if(input$SurveyYear==2012)
-      surveyData<-pisa2012
-    
-    #analyzeData1<-pisa2012%>%select_("CNT", "WEALTH", "ST04Q01", "ESCS", "PV1MATH")%>%filter(CNT=="ISR")
-    #SurveySelectedID<-"WEALTH"
-    #analyzeSubject<-"PV1MATH"
-    
-    analyzeData1<-surveyData%>%select_("CNT", SurveySelectedID, "ST04Q01", "ESCS", analyzeSubject)%>%filter(CNT==Country)
+
+    Country<-as.vector(unlist(Countries%>%filter(Country==country)%>%select(CNT)))
+    analyzeData1<-surveyData%>%select_("CNT", analyzeSelectedID, "ST04Q01", "ESCS", analyzeSubject)%>%filter(CNT==Country)
     analyzeData1<-collect(analyzeData1)
-    
-    #analyzeData1$WEALTH<- as.numeric(as.character(analyzeData1$WEALTH))
     
     if(is.null(input$Gender)){
       if(is.null(input$Escs)){
@@ -94,13 +96,14 @@ observe({
     #analyzeData3<-setDT(analyzeData2)[, list(Slope = summary(lm(WEALTH ~ PV1MATH))$coeff[2], Pearson=cor(WEALTH, use="complete", PV1MATH, method = "pearson")), groupColour]
     
     
-    ggplot(data=analyzeData2, aes_string(y=analyzeSubject, x=SurveySelectedID)) +
-      geom_smooth(method=input$modelId, aes(colour=groupColour)) + 
+    ggplot(data=analyzeData2, aes_string(y=analyzeSubject, x=analyzeSelectedID)) +
+      geom_smooth(method=input$ModelId, aes(colour=groupColour)) + 
+      geom_point(aes(colour=groupColour)) +
       scale_colour_manual(values = groupColours) +
       labs(title="", y="" ,x= "") +
       theme_bw() +
       guides(colour=FALSE) +
-      theme(plot.margin=unit(c(0,15,5,10), "pt"),
+      theme(plot.margin=unit(c(0,0,15,0), "pt"),
             panel.border = element_blank(),
             axis.ticks = element_blank(),
             panel.grid.major.x=element_blank(),
@@ -121,7 +124,7 @@ observe({
   }
   
   #### Plots ####
-  if(length(SurveySelectedID)==1){
+  if(length(analyzeSelectedID)==1){
     # if(!input$Subject==""){
     output$Country1AnalyzePlot<-renderPlot({
       analyzePlotFunction(input$Country1)

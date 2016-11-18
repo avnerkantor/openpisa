@@ -28,10 +28,6 @@ $(document).on('change', function() {
    //alert($('input[name="Subject"]:checked').val()); 
   $('input[name="Subject"]:not(:checked)').parent().removeClass("active");
   $('input[name="Subject"]:checked').parent().addClass("active");
-  
-  $('input[name="worldOrIsrael"]:not(:checked)').parent().removeClass("active");
-  $('input[name="worldOrIsrael"]:checked').parent().addClass("active");
-  
   //TODO: gender and escs
 });
 
@@ -39,15 +35,19 @@ $(document).on('change', function() {
 $(function() {
     $('#dashboard').affix({
         offset: { 
-          top: $('#dashboard').offset().top-50,
-          bottom: $('#dashboard--wrap').height($("#dashboard").height())
+          top: $('#dashboard').offset().top,
+          bottom: $('#dashboard--wrap').height($("#dashboard").height()-40)
         }
     });
 });
 
+$(document).ready(function () {
+   $("#Country1, #Country2, #Country3, #Country4, #SurveyYear, #SurveySubject, #SurveyCategory, #SurveySubCategory, #AnalyzeYear, #AnalyzeVariable, #ModelId").css('width', ($("#Country1Plot").width()+'px'));
+});
+
 //Set countries width the same width as plots width
 $(window).on('resize', function(){
-  $("#Country1, #Country2, #Country3, #Country4, #SurveyYear, #SurveySubject, #SurveyCategory, #SurveySubCategory, #modelId, #analyzeVariables" ).css('width', ($("#Country1Plot").width()+'px'));
+  $("#Country1, #Country2, #Country3, #Country4, #SurveyYear, #SurveySubject, #SurveyCategory, #SurveySubCategory, #AnalyzeYear, #AnalyzeVariable, #ModelId").css('width', ($("#Country1Plot").width()+'px'));
 }).resize();
 
 //jQuery for page scrolling feature - requires jQuery Easing plugin
@@ -74,19 +74,23 @@ $(document).ready(function () {
 $(document).on('activate.bs.scrollspy', function(e) {
    var x = $(".nav li.active > a").attr('href');
         switch (x) {
+            case "#scores":
+                $("#surveyDashboard").hide();
+                $("#Subject").show();
+                break;
             case "#expertise":
                $("#surveyDashboard").show();
                 $("#Subject").hide();
                 break;
             case "#survey":
-                $("#surveyDashboard").show();
-                $("#Subject").hide();
+                $("#surveyDashboard").hide();
+                $("#Subject").show();
                 break;
-             // case "#analyze":
-               // $("#surveyDashboard").show();
-              //  $("#Subject").show();
-               // break;
-            default:
+            case "#analyze":
+                $("#surveyDashboard").show();
+                $("#Subject").show();
+                break;
+            case "#about":
                 $("#surveyDashboard").hide();
                 $("#Subject").show();
                 break;
@@ -104,15 +108,6 @@ $(document).on('activate.bs.scrollspy', function(e) {
   }
 });
 
-  // $(document).ready(function() {
-    //    $('#pisaScoresTable').dataTable( {
-      //      "language": {
-        //        "url": "dataTables.hebrew.lang"
-          //  }
-//        } );
-//    } );
-
-
 
 // This recieves messages from the server.
 Shiny.addCustomMessageHandler('updateSelections',
@@ -126,4 +121,7 @@ $(document).ready(function(){
         placement : 'top'
     });
 });
+
+
+
 

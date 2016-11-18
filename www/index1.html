@@ -1,275 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Open PISA - OECD PISA Data Explorer">
-    <meta name="author" content="Avner Kantor">
-
-    <title>Open PISA</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script type="application/shiny-singletons"></script>
-    <script type="application/html-dependencies">
-       json2[2014.02.04];jquery[1.12.4];shiny[0.14.1];selectize[0.11.2];bootstrap[3.3.7];htmlwidgets[0.7];plotlyjs[1.16.3];plotly-binding[4.5.5.9000]
-    </script>
-    <script src="shared/json2-min.js"></script>
-    <script src="shared/jquery.min.js"></script>
-    <link href="shared/shiny.css" rel="stylesheet"/>
-    <script src="shared/shiny.min.js"></script>
-    <link href="shared/selectize/css/selectize.bootstrap3.css" rel="stylesheet"/>
-    <script src="shared/selectize/js/selectize.min.js"></script>
-    <script src="js/htmlwidgets.js"></script>
-    <link href="css/plotly-htmlwidgets.css" rel="stylesheet"/>
-    <script src="js/plotly-latest.min.js"></script>
-    <script src="js/plotly.js"></script>
-    <script src="js/jquery.easing.min.js"></script>
-    <!--<script src="datatables.js"></script>-->
-    <link href="shared/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-    
-    <script src="shared/bootstrap/js/bootstrap.min.js"></script>
-    <script src="shared/bootstrap/shim/html5shiv.min.js"></script>
-    <script src="shared/bootstrap/shim/respond.min.js"></script>
-
-    <link href="style.css" rel="stylesheet">
-    <script src="custom.js"></script>
-    <link rel="short/cut icon" href="img/bag-512.png">
-
-</head>
-
 <body id="page-top" data-spy="scroll" data-target=".navbar">
-<!--Navbar and Dashboard-->
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <!--<div class="navbar-header">
+  <div class="container-fluid">
+         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a  class="navbar-brand" href="http://www.trump.org.il/"><img id="TrumpLogo" src="img/Trump-logo.png"></a>
-        <a  class="navbar-brand" href="http://infosoc.haifa.ac.il/index.php/he/"><img id="IC_logo" src="img/IC_logo.png" ></a>
-</div>-->
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-  <li>
+      
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-left">
+                                  <!-- Hidden li included to remove active class from about link when scrolled up past about section--> 
+                    <li class="hidden">
+                        <a class="page-scroll" href="#page-top"></a>
+                    </li>
+                    <li>
                     <a class="page-scroll" href="#scores">Scores</a>
                 </li>
-                <li>
+                  <li>
                     <a class="page-scroll" href="#expertise">Expertise</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="#survey">Survey</a>
                 </li>
                 <li>
-                <a class="page-scroll" href="#analyze">Analyze</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#about">About</a>
-                </li>
-                                <li>
-                <a class="page-scroll" href="http://www.tikhinuch.org/">עברית</a>
-                </li>
-                <!--<li>
-                    <a class="page-scroll" href="http://blog.tikhinuch.org">blog</a>
-                </li>-->
-              <a  href="http://infosoc.haifa.ac.il/index.php/en/"><img id="IC_logo" src="img/IC_logo.png" ></a>
+                      <a class="page-scroll" href="#analyze">Analyze</a>
+                  </li>
+                   <li>
+                      <a class="page-scroll" href="#about">About</a>
+                  </li>
+                      <li>
+                      <a class="page-scroll" href="http://opisa.org">עברית</a>
+                  </li>
+                   <a  href="http://infosoc.haifa.ac.il/index.php/en/"><img id="IC_logo" src="img/IC_logo.png" ></a>
                           <a  href="http://www.trump.org.il/"><img id="TrumpLogo" src="img/Trump-logo.png"></a>
+                    <!-- <li>
+                        <a class="page-scroll" href="http://opisa.org">English</a>
+                    </li>-->
+                   
+                  
+                  
+                <!--<li>-->
+                <!--<a class="page-scroll" href="#heterogeneity">פיזור</a>-->
+                <!--</li>-->
+              
+                
             </ul>
         </div>
     </div>
 </nav>
-    <header>
-        <div id="headerBar">
-            <div id="header-image"></div>
-            <div id="text-image">Open PISA</div>
-            <div id="underHeaderText">The OECD Programme for International Student Assessment is a study of 15-year-old school pupils' scholastic performance.
-   </div>
+<header>
+  <div id="myHeader">
+    <div class="header-image"></div>
+    <div class="text-image">Open PISA</div>
+    <div class="underHeaderText">The OECD Programme for International Student Assessment is a study of 15-year-old school pupils' scholastic performance.
+    </div>
+</div>
+</header>
+<!--Dashboard-->
+<div id="dashboard--wrap">
+    <div id="dashboard" class="container-fluid">
+     <br/>
+     <div id="Subject"
+     class="row text-center form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
+     <div class="shiny-options-group">
+        <form class="form-horizontal" method="post" action="">
+            <div data-toggle="buttons">
+                <div class="subjectButtons">
+                    <label class="radio-inline btn btn-default btn-circle btn-lg text-center active">
+                        <input type="radio" name="Subject" value="Math" checked="checked"/>
+                        <span><img src="img/math.png" class="subjectImage "/></span>
+                    </label>
+                   <small>Mathematics</small>
+                </div>
+                <div class="subjectButtons">
+                    <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
+                        <input type="radio" name="Subject" value="Science"/>
+                        <span><img src="img/science.png" class="subjectImage"/></span>
+                    </label>
+                   <small>Sciecnce</small>
+                </div>
+                <div class="subjectButtons">
+                    <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
+                        <input type="radio" name="Subject" value="Reading"/>
+                        <span><img src="img/reading.png" class="subjectImage"/></span>
+                    </label>
+                    <small>Reading</small>
+                </div>
+                <div class="subjectButtons">
+                    <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
+                        <input type="radio" name="Subject" value="ProblemSolving"/>
+                        <span><img src="img/problemSolving.png" class="subjectImage"/></span>
+                    </label>
+                    <small>Problem Solving</small>
+                </div>
+                <div class="subjectButtons" style="width: 90px">
+                    <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
+                        <input type="radio" name="Subject" value="Financial"/>
+                        <span><img src="img/financial.png" class="subjectImage"/></span>
+                    </label>
+                                    <small>Financial Orientation</small>                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="surveyDashboard" class="row">
+      <div class="col-xs-3">
+        <div class="form-group shiny-input-container">
+            <label class="control-label" for="SurveyYear"></label>
+            <div>
+                <select id="SurveyYear">
+                    <option value="" selected></option>
+                </select>
+                <script type="application/json" data-for="SurveyYear">{}</script>
+            </div>
         </div>
-    </header>
+    </div>
     
-    <!--Dashboard-->
-    <div id="dashboard--wrap">
-        <div id="dashboard" class="container-fluid">
-            <div id="subjectsDashboard" class="row text-center">
-                <div id="Subject"
-                     class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
-                    <div class="shiny-options-group">
-                        <form class="form-horizontal" method="post" action="">
-                            <div data-toggle="buttons">
-                                <div class="subjectButtons">
-                                    <label class="radio-inline btn btn-default btn-circle btn-lg text-center active">
-                                        <input type="radio" name="Subject" value="Math" checked="checked"/>
-                                        <span><img src="img/math.png" class="subjectImage "/></span>
-                                    </label>
-                                    <small>Mathematics</small>
-                                </div>
-                                <div class="subjectButtons">
-                                    <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
-                                        <input type="radio" name="Subject" value="Science"/>
-                                        <span><img src="img/science.png" class="subjectImage"/></span>
-                                    </label>
-                                    <small>Sciecnce</small>
-                                </div>
-                                <div class="subjectButtons">
-                                    <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
-                                        <input type="radio" name="Subject" value="Reading"/>
-                                        <span><img src="img/reading.png" class="subjectImage"/></span>
-                                    </label>
-                                    <small>Reading</small>
-                                </div>
-                                <div class="subjectButtons">
-                                    <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
-                                        <input type="radio" name="Subject" value="ProblemSolving"/>
-                                        <span><img src="img/problemSolving.png" class="subjectImage"/></span>
-                                    </label>
-                                    <small>Problem Solving</small>
-                                </div>
-                                <div class="subjectButtons" style="width: 90px">
-                                    <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
-                                        <input type="radio" name="Subject" value="Financial"/>
-                                        <span><img src="img/financial.png" class="subjectImage"/></span>
-                                    </label>
-                                    <small>Financial Orientation</small>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        <div class="col-xs-3">
+        <div class="form-group shiny-input-container">
+            <label class="control-label" for="SurveySubject"></label>
+            <div>
+                <select id="SurveySubject">
+                    <option value="" selected></option>
+                </select>
+                <script type="application/json" data-for="SurveySubject">{}</script>
             </div>
-            <div id="surveyDashboard" class="row">
-                
-                <div class="col-sm-3">
-                    <div class="form-group shiny-input-container">
-                        <label class="control-label" for="SurveySubCategory"></label>
-                        <div>
-                            <select id="SurveySubCategory">
-                                <option value="" selected></option>
-                            </select>
-                            <script type="application/json" data-for="SurveySubCategory">{}</script>
-                        </div>
-                    </div>
+        </div>
+    </div>
+   <div class="col-xs-3">
+        <div class="form-group shiny-input-container">
+            <label class="control-label" for="SurveyCategory"></label>
+            <div>
+                <select id="SurveyCategory">
+                    <option value="" selected></option>
+                </select>
+                <script type="application/json" data-for="SurveyCategory">{}</script>
+            </div>
+        </div>
+    </div>
 
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group shiny-input-container">
-                        <label class="control-label" for="SurveyCategory"></label>
-                        <div>
-                            <select id="SurveyCategory">
-                                <option value="" selected></option>
-                            </select>
-                            <script type="application/json" data-for="SurveyCategory">{}</script>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group shiny-input-container">
-                        <label class="control-label" for="SurveySubject"></label>
-                        <div>
-                            <select id="SurveySubject">
-                                <option value="" selected></option>
-                            </select>
-                            <script type="application/json" data-for="SurveySubject">{}</script>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group shiny-input-container">
-                        <label class="control-label" for="SurveyYear"></label>
-                        <div>
-                            <select id="SurveyYear">
-                                <option value="" selected></option>
-                            </select>
-                            <script type="application/json" data-for="SurveyYear">{}</script>
-                        </div>
-                    </div>
-                </div>
+    <div class="col-xs-3">
+        <div class="form-group shiny-input-container">
+            <label class="control-label" for="SurveySubCategory"></label>
+            <div>
+                <select id="SurveySubCategory">
+                    <option value="" selected></option>
+                </select>
+                <script type="application/json" data-for="SurveySubCategory">{}</script>
             </div>
-            <div id="measurmentsDashboard" class="row">
-                  <div class="co-xs-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+        </div>
+
+    </div>
+ 
+
+    
+</div>
+<div id="measurmentsDashboard" class="row">
+    <div id="genderDiv" class="col-xs-6 col-sm-4 col-md-3">
                         <small>Gender</small>
                         <div id="Gender"
-                             class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
-                            <div class="shiny-options-group btn-group" data-toggle="buttons">
-                                  <label class="btn btnMeasurments" id="generalBtn">
-                                    <input type="checkbox" id="Gender" value="General" checked="checked"/>
-                                    <span>All</span>
-                                </label>
-                                <label class="btn btnMeasurments" id="femaleBtn">
-                                    <input type="checkbox" name="Gender" value="Female"/>
-                                    <span>Female</span>
-                                </label>
-                                <label class="btn btnMeasurments" id="maleBtn">
-                                    <input type="checkbox" name="Gender" value="Male"/>
-                                    <span>Male</span>
-                                </label>
-                              
-                            </div>
-                        </div>
-                    </div>
-                <div class="co-xs-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
-                <small>ESCS</small>
-                <div id="Background"
-                             class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
-                            <div class="shiny-options-group btn-group" data-toggle="buttons">
-                                <label class="btn btnMeasurments" id="highBtn">
-                                    <input type="checkbox" name="Escs" value="High"/>
-                                    <span>High</span>
-                                </label>
-                                <label class="btn btnMeasurments" id="mediumBtn">
-                                    <input type="checkbox" name="Escs" value="Medium"/>
-                                    <span>Medium</span>
-                                </label>
-                                <label class="btn btnMeasurments" id="lowBtn">
-                                    <input type="checkbox" name="Escs" value="Low"/>
-                                    <span>Low</span>
-                                </label>
-                                <!--<label class="btn btnMeasurments" id="">
-                                    <input type="checkbox" name="Escs" value=""/>
-                                    <span>All</span>
-                                </label>-->
-                            </div>
-                        </div>
-                    </div>
-     
-                </div>
-            <div id="countriesDashboard" class="row text-center">
-                <div class="col-xs-3">
-                    <div class="form-group shiny-input-container">
-                        <label class="control-label" for="Country4"></label>
-                        <div>
-                            <select id="Country4">
-                                <option value="" selected></option>
-                            </select>
-                            <script type="application/json" data-for="Country4">{}</script>
+                        class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
+                        <div class="shiny-options-group btn-group" data-toggle="buttons">
+                                 <label class="btn btnMeasurments" id="generalBtn">
+                                <input type="checkbox" id="Gender" value="General" checked="checked"/>
+                                <span>All</span>
+                            </label>
+                            <label class="btn btnMeasurments" id="femaleBtn">
+                                <input type="checkbox" name="Gender" value="Female"/>
+                                <span>Female</span>
+                            </label>
+                            <label class="btn btnMeasurments" id="maleBtn">
+                                <input type="checkbox" name="Gender" value="Male"/>
+                                <span>Male</span>
+                            </label>
+                     
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-3">
-                    <div class="form-group shiny-input-container">
-                        <label class="control-label" for="Country3"></label>
-                        <div>
-                            <select id="Country3">
-                                <option value="" selected></option>
-                            </select>
-                            <script type="application/json" data-for="Country3">{}</script>
-                        </div>
-                    </div>
+  <div id="escsDiv" class="col-xs-6 col-sm-4 col-md-3">
+    <small>ESCS</small>
+      <div id="Escs"
+      class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
+      <div class="shiny-options-group btn-group" data-toggle="buttons">
+                <label class="btn btnMeasurments" id="lowBtn">
+            <input type="checkbox" name="Escs" value="Low"/>
+            <span>Low</span>
+        </label>
 
-                </div>
-                <div class="col-xs-3">
-                    <div class="form-group shiny-input-container">
-                        <label class="control-label" for="Country2"></label>
-                        <div>
-                            <select id="Country2">
-                                <option value="" selected></option>
-                            </select>
-                            <script type="application/json" data-for="Country2">{}</script>
+        <label class="btn btnMeasurments" id="mediumBtn">
+            <input type="checkbox" name="Escs" value="Medium"/>
+            <span>Middle</span>
+        </label>
+                <label class="btn btnMeasurments" id="highBtn">
+            <input type="checkbox" name="Escs" value="High"/>
+            <span>High</span>
+        </label>
+                            </div>
                         </div>
                     </div>
-                </div>
+            </div>
+            <div id="countriesDashboard" class="row text-center">
                 <div class="col-xs-3">
                     <div class="form-group shiny-input-container">
                         <label class="control-label" for="Country1"></label>
@@ -281,152 +216,206 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-xs-3">
+                    <div class="form-group shiny-input-container">
+                        <label class="control-label" for="Country2"></label>
+                        <div>
+                            <select id="Country2">
+                                <option value="" selected></option>
+                            </select>
+                            <script type="application/json" data-for="Country2">{}</script>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group shiny-input-container">
+                        <label class="control-label" for="Country3"></label>
+                        <div>
+                            <select id="Country3">
+                                <option value="" selected></option>
+                            </select>
+                            <script type="application/json" data-for="Country3">{}</script>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group shiny-input-container">
+                        <label class="control-label" for="Country4"></label>
+                        <div>
+                            <select id="Country4">
+                                <option value="" selected></option>
+                            </select>
+                            <script type="application/json" data-for="Country4">{}</script>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
+</div>
 <!--Scores-->
 <section>
-    <div id="scores" class="container-fluid">
-        <div class="row" style="direction: ltr">
-            <div class="col-xs-3">
-                <div id="Country4Plot" class="plotly html-widget html-widget-output"></div>
+<div id="scores" class="container-fluid">
+            <div class="row" >
+                <div class="col-xs-3 ">
+                    <div id="Country1Plot" class="plotly html-widget html-widget-output"></div>
+                </div>
+                <div class="col-xs-3 ">
+                    <div id="Country2Plot" class="plotly html-widget html-widget-output"></div>
+                </div>
+                <div class="col-xs-3 ">
+                    <div id="Country3Plot" class="plotly html-widget html-widget-output"></div>
+                </div>
+                <div class="col-xs-3 ">
+                    <div id="Country4Plot" class="plotly html-widget html-widget-output"></div>
+                </div>
             </div>
-            <div class="col-xs-3">
-                <div id="Country3Plot" class="plotly html-widget html-widget-output"></div>
+            <div class="row">
+                <br>
+                <div class="col-xs-12 text-center">
+                  <p>PISA  assesses  students  and  uses  the  outcomes  of  that  assessment  to  produce  estimates  of  students’ 
+proficiency in relation to a number of literacy variables:</p>
+              </div>
+                            <div id="LevelNumberDiv" class="form-group shiny-input-container col-xs-2">
+                <span>Proficiency</span>
+                <input id="LevelNumber" type="number" class="form-control" value="3" min="1" max="6" step="1"/>
             </div>
-            <div class="col-xs-3">
-                <div id="Country2Plot" class="plotly html-widget html-widget-output"></div>
-            </div>
-            <div class="col-xs-3">
-                <div id="Country1Plot" class="plotly html-widget html-widget-output"></div>
-            </div>
+              <div id="ExplenationTable" class="shiny-html-output col-xs-10"></div>
         </div>
-      
     </div>
 </section>
 <!--Expertise-->
 <section>
     <div id="expertise" class="container-fluid">
         <div class="row text-center" style="height: 30px; margin-top: 30px">
-            <div class="col-sm-5 col-md-5" style="border-bottom: 1px solid #c7c7c7; left: 10px;"></div>
-            <div class="col-sm-2 col-md-2" style="color: #777777; margin-top: -10px; font-size: 16px">
+            <div class="col-xs-5" style="border-bottom: 1px solid #c7c7c7; left: 10px;"></div>
+            <div class="col-xs-2" style="color: #777777; margin-top: -10px; font-size: 16px">
                 <span>High</span></div>
-            <div class="col-sm-5 col-md-5 " style="border-bottom: 1px solid #c7c7c7; right: 10px; "></div>
-        </div>
-        <div class="row" style="direction: ltr">
-            <div class="col-xs-3">
-                <div id="Country4HighPlot" class="plotly html-widget html-widget-output"></div>
+                <div class="col-xs-5 " style="border-bottom: 1px solid #c7c7c7; right: 10px; "></div>
             </div>
-            <div class="col-xs-3">
-                <div id="Country3HighPlot" class="plotly html-widget html-widget-output"></div>
+            <div class="row" >
+                <div class="col-xs-3 ">
+                    <div id="Country1HighPlot" class="plotly html-widget html-widget-output"></div>
+                </div>
+                <div class="col-xs-3 ">
+                    <div id="Country2HighPlot" class="plotly html-widget html-widget-output"></div>
+                </div>
+                <div class="col-xs-3 ">
+                    <div id="Country3HighPlot" class="plotly html-widget html-widget-output"></div>
+                </div>
+                <div class="col-xs-3">
+                    <div id="Country4HighPlot" class="plotly html-widget html-widget-output"></div>
+                </div>
             </div>
-            <div class="col-xs-3">
-                <div id="Country2HighPlot" class="plotly html-widget html-widget-output"></div>
+            <div class="row text-center" style="height: 30px; margin-top: 30px">
+                <div class="col-xs-5" style="border-bottom: 1px solid #c7c7c7; left: 10px;"></div>
+                <div class="col-xs-2" style="color: #777777; margin-top: -10px; font-size: 16px">
+                    <span>Low</span></div>
+                    <div class="col-xs-5 " style="border-bottom: 1px solid #c7c7c7; right: 10px; "></div>
+                </div>
+                <div class="row" >
+                    <div class="col-xs-3">
+                        <div id="Country1LowPlot" class="plotly html-widget html-widget-output"></div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div id="Country2LowPlot" class="plotly html-widget html-widget-output"></div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div id="Country3LowPlot" class="plotly html-widget html-widget-output"></div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div id="Country4LowPlot" class="plotly html-widget html-widget-output"></div>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-3">
-                <div id="Country1HighPlot" class="plotly html-widget html-widget-output"></div>
-            </div>
-        </div>
-        <div class="row text-center" style="height: 30px; margin-top: 30px">
-            <div class="col-sm-5 col-md-5" style="border-bottom: 1px solid #c7c7c7; left: 10px;"></div>
-            <div class="col-sm-2 col-md-2" style="color: #777777; margin-top: -10px; font-size: 16px">
-                <span>Low</span></div>
-            <div class="col-sm-5 col-md-5 " style="border-bottom: 1px solid #c7c7c7; right: 10px; "></div>
-        </div>
-        <div class="row" style="direction: ltr">
-            <div class="col-xs-3">
-                <div id="Country4LowPlot" class="plotly html-widget html-widget-output"></div>
-            </div>
-            <div class="col-xs-3">
-                <div id="Country3LowPlot" class="plotly html-widget html-widget-output"></div>
-            </div>
-            <div class="col-xs-3">
-                <div id="Country2LowPlot" class="plotly html-widget html-widget-output"></div>
-            </div>
-            <div class="col-xs-3">
-                <div id="Country1LowPlot" class="plotly html-widget html-widget-output"></div>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 <!--Survey-->
 <section>
-    <div id="survey" class="container-fluid">
-        <div class="row col-sm-12 col-md-12" style="height: 30px; "></div>
-        <div class="row" style="direction: ltr">
-            <div class="col-xs-3">
-                <div id="Country4SurveyPlot" class="plotly html-widget html-widget-output"></div>
-            </div>
-            <div class="col-xs-3">
-                <div id="Country3SurveyPlot" class="plotly html-widget html-widget-output"></div>
-            </div>
-            <div class="col-xs-3">
-                <div id="Country2SurveyPlot" class="plotly html-widget html-widget-output"></div>
-            </div>
-            <div class="col-xs-3">
-                <div id="Country1SurveyPlot" class="plotly html-widget html-widget-output"></div>
-            </div>
-        </div>
-        <br/>
-         <p id="SurveySelectedIDOutput" class="shiny-text-output"></p>
-    </div>
-</section>
-<!--Analyze-->
-<section>
-      <div id="analyze" class="container-fluid">
-        <div class="row" style="direction: ltr">
-            <div class="col-xs-3">
-                <div id="Country1AnalyzePlot" class="shiny-plot-output shiny-bound-output">
-                </div>
-            </div>
-            <div class="col-xs-3">
-                <div id="Country2AnalyzePlot" class="shiny-plot-output shiny-bound-output">
-                </div>
-            </div>
-            <div class="col-xs-3">
-                <div id="Country3AnalyzePlot" class="shiny-plot-output shiny-bound-output">
-                </div>
-            </div>
-            <div class="col-xs-3">
-                <div id="Country4AnalyzePlot" class="shiny-plot-output shiny-bound-output">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6">
-                <form>
-                    <div class="form-group shiny-input-container">
-                        <span>Variables</span>
-                        <select style="display: none;" tabindex="-1" id="analyzeVariables"
-                        class="form-control selectized shiny-bound-input"
-                        multiple="multiple">
-                    </select>
-                    <script type="application/json" data-for="analyzeVariables">{}</script>
-                </div>
-            </form>
-        </div>
+<div id="survey" class="container-fluid">
+                <div class="row col-xs-12" style="height: 30px; "></div>
+                <div class="row">
                     <div class="col-xs-3">
-                <div class="form-group shiny-input-container">
-                    <span>Model</span>
-                    <select id="ModelId">
-                    </select>
-                    <script type="application/json" data-for="ModelId">{}</script>
+                        <div id="Country1SurveyPlot" class="plotly html-widget html-widget-output"></div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div id="Country2SurveyPlot" class="plotly html-widget html-widget-output"></div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div id="Country3SurveyPlot" class="plotly html-widget html-widget-output"></div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div id="Country4SurveyPlot" class="plotly html-widget html-widget-output"></div>
+                    </div>
+                </div>
+                <br/>
+                    <!--<p id="SurveySelectedIDOutput" class="shiny-text-output"></p>-->
+</div>
+</section>
+<!--Analyze
+shiny-plot-output shiny-bound-output
+-->
+<section>
+  <div id="analyze" class="container-fluid">
+                     <div class="row">
+                        <div class="col-xs-3 ">
+                          <div id="Country1AnalyzePlot" class="plotly html-widget html-widget-output">
+                          </div>
+                      </div>
+                      <div class="col-xs-3">
+                        <div id="Country2AnalyzePlot" class="plotly html-widget html-widget-output">
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div id="Country3AnalyzePlot" class="plotly html-widget html-widget-output">
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div id="Country4AnalyzePlot" class="plotly html-widget html-widget-output">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5 col-sm-3">
+                        <form>
+                            <div class="form-group shiny-input-container">
+                                <span>Variables</span>
+                                <select style="display: none;" tabindex="-1" id="analyzeVariables"
+                                class="form-control selectized shiny-bound-input"
+                                multiple="multiple">
+                            </select>
+                            <script type="application/json" data-for="analyzeVariables">{}</script>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-5 col-sm-3 ">
+                    <div class="form-group shiny-input-container">
+                        <span>Model</span>
+                        <select id="ModelId">
+                        </select>
+                        <script type="application/json" data-for="ModelId">{}</script>
+                    </div>
                 </div>
             </div>
-    </div>
-    <div class="row">
-        <div id="pisaScoresTable" style="width:80%; height:auto; "
-        class="datatables html-widget html-widget-output"></div>
-    </div>
-    
+            <!--
+  <div class="row">
+        <div id="pisaScoresTable" class="datatables html-widget html-widget-output"></div>
+    </div> -->
 </div>
+
 </section>
 <!--About-->
 <section>
     <div id="about" class="container-fluid">
+      <h1>About</h1>
+    <div id="about" class="container-fluid">
       The Programme for International Student Assessment (PISA) is a worldwide study by the Organisation for Economic Co-operation and Development (OECD) in member and non-member nations of 15-year-old school pupils' scholastic performance on mathematics, science, and reading. It was first performed in 2000 and then repeated every three years. It is done with a view to improving education policies and outcomes. It measures problem solving and cognition in daily life.
     </div>
-</section>
 
+</div>
+    <!--
+    <iframe width="800" height="1200" frameborder="0" scrolling="no" src="http://blog.tikhinuch.org"></iframe>
+
+-->
+</section>
 </body>
 </html>

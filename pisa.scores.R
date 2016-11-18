@@ -1,10 +1,10 @@
 ###UI
 
 observe({
-    updateSelectInput(session, "Country1", choices = names(oecdList), selected = "Israel")
-    updateSelectInput(session, "Country2", choices = names(oecdList), selected = "Finland")
-    updateSelectInput(session, "Country3", choices = names(oecdList), selected = "Spain")
-    updateSelectInput(session, "Country4", choices = names(oecdList), selected = "Italy")
+    updateSelectInput(session, "Country1", choices = names(countriesList), selected = "Israel")
+    updateSelectInput(session, "Country2", choices = names(countriesList), selected = "Finland")
+    updateSelectInput(session, "Country3", choices = names(countriesList), selected = "Spain")
+    updateSelectInput(session, "Country4", choices = names(countriesList), selected = "Italy")
 })
 ####
 observe({
@@ -113,6 +113,18 @@ observe({
     })
   }
 })
+
+observeEvent(input$Subject,{
+  minLevel<-min(LevelExplenation%>%filter(Subject==input$Subject)%>%select(Level))
+  maxLevel<-max(LevelExplenation%>%filter(Subject==input$Subject)%>%select(Level))
+  
+  updateNumericInput(session, "LevelNumber", "", min=minLevel, max=maxLevel, value=3, step=1)
+  
+  output$ExplenationTable <- renderTable({
+    LevelExplenation%>%filter(Subject==input$Subject, Level==input$LevelNumber)%>%select(Explenation)
+  }, include.rownames=FALSE, include.colnames=FALSE)
+})
+
 
 
 

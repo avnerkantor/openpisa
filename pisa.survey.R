@@ -108,6 +108,8 @@ observe({
           rename_(answer=SurveySelectedID, groupColour="ST04Q01")
       } 
     }
+    
+    if(nrow(surveyTable)>1){
     #print(surveyTable)
     ####ggplot####
     gh<-ggplot(data=surveyTable, aes(x=answer, y=freq, text=paste0(round(freq, digits = 1), "%"))) +
@@ -137,7 +139,7 @@ observe({
     ggplotly(gh, tooltip = c("text"))%>%
       config(p = ., displayModeBar = FALSE)%>%
       layout(hovermode="y")
-    
+    }
   }
   
   ### Plots ####  

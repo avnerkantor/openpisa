@@ -1,24 +1,3 @@
-/*http://stackoverflow.com/questions/23438319/using-import-for-google-fonts-is-not-working-on-internet-explorer*/
-/*
-@font-face {
-    font-family: 'Open Sans Hebrew';
-    font-style: normal;
-    font-weight: 400;
-    src: url(css/type/opensanshebrew-regular-webfont.eot);
-    src: url(css/type/opensanshebrew-regular-webfont.eot?#iefix) format('embedded-opentype'),
-    url(css/type/opensanshebrew-regular-webfont.woff) format('woff'),
-    url(css/type/opensanshebrew-regular-webfont.ttf) format('truetype');
-}
-@font-face {
-    font-family: 'Open Sans Hebrew';
-    font-style: normal;
-    font-weight: 700;
-    src: url(font/opensanshebrew-bold-webfont.eot);
-    src: url(font/opensanshebrew-bold-webfont.eot?#iefix) format('embedded-opentype'),
-    url(font/opensanshebrew-bold-webfont.woff) format('woff'),
-    url(font/opensanshebrew-bold-webfont.ttf) format('truetype');
-}
-*/
 @import url(http://fonts.googleapis.com/earlyaccess/opensanshebrew.css);
 @import url(http://fonts.googleapis.com/earlyaccess/opensanshebrewcondensed.css);
 
@@ -39,7 +18,7 @@ html {
     overflow-x: hidden !important;
 }
 
-#dashboard  {
+#dashboard, #dashboard--wrap  {
    z-index:999; 
    background-image: url("img/bg.jpg");
    width:100%;
@@ -50,27 +29,28 @@ html {
   width:100%;
 }
 
-
-
 #myHeader{
   min-height:230px;
 }
 
 #scores {
-  
   width:100%;
 }
 
 #expertise {
-  
 }
 
 #survey {
- padding-top:50px;
- padding-bottom:50px;
+  padding-bottom:150px;
 }
 
 #analyze {
+ 
+ padding-bottom:50px;
+}
+
+#about {
+  
 }
 
 
@@ -281,21 +261,6 @@ input[type="checkbox"] {
     line-height: 0.7;
 }
 
-/*TODO if has only general class
-#measurmentsDashboard {
-   
-}
-#theWell {
-    background-color: white;
-    border-width: 1px;
-    border-color: #c7c7c7;
-    border-radius: 0;
-    height: 52px;
-    margin-top: 10px;
-    margin-left: -15px;
-}
-*/
-
 /*countries*/
 .btn-countries {
     background-color: #E0E0E0;
@@ -324,13 +289,36 @@ input[type="checkbox"] {
     color: #777777;
 }
 
-.plotly {
+.selectize-input > * {
+  vertical-align: middle;
+}
+.selectize-input .item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  
+}
+
+/* respnonsive */
+.selectize-input {
+  display: table !important;
+  table-layout: fixed;
+  width: 100%;
+}
+.selectize-input > * {
+  vertical-align: middle;
+}
+.selectize-input .item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 80%;
+}
+
+.plotly, .shiny-plot-output {
     height: 200px;
     cursor:pointer;
 }
-
-
-
 
 #LevelNumberDiv {
     width: 100px;
