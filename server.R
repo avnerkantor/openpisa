@@ -6,9 +6,9 @@ load("data/pisaData2.rda")
 pisaDictionary<-read.csv("data/pisaDictionary.csv", header = TRUE, sep=",")
 #load("data/pisaDictionary.rda")
 
-# load("../pisa2012.rda")
+load("../pisa2012.rda")
 pisadb<-src_bigquery("r-shiny-1141", "pisa")
-pisa2012<- tbl(pisadb, "pisa2012")
+#pisa2012<- tbl(pisadb, "pisa2012")
 pisa2009<- tbl(pisadb, "pisa2009")
 pisa2006<- tbl(pisadb, "pisa2006")
 

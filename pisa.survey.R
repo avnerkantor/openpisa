@@ -1,28 +1,32 @@
 ######UI #####
 observe({
   updateSelectInput(session, inputId="SurveyYear", label="", 
-                    choices = c(2012), selected = 2012)
+                    choices = c(2012, 2009, 2006), selected = 2012)
 })
 
 observeEvent(input$SurveyYear,{
   switch (input$SurveyYear,
           "2012" = {
             updateSelectInput(session, inputId="SurveySubject", label="", choices = c(
-              "Family and Home"="Family and Home",
-              "Learning Mathematics"="Learning Mathematics",
-              "Problem Solving"="Problem Solving",
-              "Computer Orientation"="Computer Orientation",
-              "The Structure and Organisation of the School"="The Structure and Organisation of the School",
-              "The Student and Teacher Body"="The Student and Teacher Body",
-              "The School's Resources"="The School's Resources",
-              "School Instruction Curriculum and Assessment"="School Instruction Curriculum and Assessment",
-              "School Climate"="School Climate",
-              "School Policies and Practices"="School Policies and Practices"
+              unique(pisaDictionary%>%filter(Year=="2012")%>%select(Subject))
             ),
             selected="Learning Mathematics"
             )
           },
-          "2009"={print("asdf") }
+          "2009"={
+            updateSelectInput(session, inputId="SurveySubject", label="", choices = c(
+              unique(pisaDictionary%>%filter(Year=="2009")%>%select(Subject))
+            ),
+            selected="Computer Orientation"
+            )
+          },
+          "2006"={
+            updateSelectInput(session, inputId="SurveySubject", label="", choices = c(
+              unique(pisaDictionary%>%filter(Year=="2006")%>%select(Subject))
+            ),
+            selected="Computer Orientation"
+            )
+          }
   )
 })
 
@@ -46,9 +50,12 @@ observe({
   surveyPlotFunction<-function(country) {
     Country<-as.vector(unlist(Countries%>%filter(Country==country)%>%select(CNT)))
 
-    if(input$SurveyYear==2012)
-      surveyData<-pisa2012
-    
+    switch(input$SurveyYear,
+    "2012"={surveyData<-pisa2012},
+    "2009"={surveyData<-pisa2009},
+    "2006"={surveyData<-pisa2006}
+    )
+      
     surveyData1<-surveyData%>%select_("CNT", SurveySelectedID, "ST04Q01", "ESCS")%>%filter(CNT==Country)
     
     if(is.null(input$Gender)){
@@ -56,7 +63,7 @@ observe({
         #General
         surveyTable<-surveyData1%>%
           count_(SurveySelectedID)
-         surveyTable<-collect(surveyTable)
+         # surveyTable<-collect(surveyTable)
         surveyTable<-surveyTable%>% mutate(freq = round(100 * n/sum(n), 1), groupColour="General")%>%
           rename_(answer=SurveySelectedID)
       } else {
@@ -66,7 +73,7 @@ observe({
           group_by_("ESCS", SurveySelectedID)%>%
           tally  %>%
           group_by(ESCS)
-         surveyTable<-collect(surveyTable)
+         # surveyTable<-collect(surveyTable)
         surveyTable<-surveyTable%>%   mutate(freq = round(100 * n/sum(n), 0))%>%
           rename_(answer=SurveySelectedID, group="ESCS") %>%
           mutate(groupColour=str_c("General", group))
@@ -80,7 +87,7 @@ observe({
             group_by_("ST04Q01", SurveySelectedID)%>%
             tally  %>%
             group_by(ST04Q01)
-           surveyTable<-collect(surveyTable)
+           # surveyTable<-collect(surveyTable)
           surveyTable<-surveyTable%>%   mutate(freq = round(100 * n/sum(n), 0))%>%
             rename_(answer=SurveySelectedID, groupColour="ST04Q01") 
           
@@ -91,7 +98,7 @@ observe({
             group_by_("ESCS", SurveySelectedID)%>%
             tally  %>%
             group_by(ESCS)
-           surveyTable<-collect(surveyTable)
+           # surveyTable<-collect(surveyTable)
           surveyTable<-surveyTable%>%  mutate(freq = round(100 * n/sum(n), 0), group1=input$Gender)%>%
             rename_(answer=SurveySelectedID, group="ESCS")%>%
             mutate(groupColour=str_c(group1, group))
@@ -103,7 +110,7 @@ observe({
           group_by_("ST04Q01", SurveySelectedID)%>%
           tally  %>%
           group_by(ST04Q01)
-         surveyTable<-collect(surveyTable)
+         # surveyTable<-collect(surveyTable)
         surveyTable<-surveyTable%>%   mutate(freq = round(100 * n/sum(n), 0))%>%
           rename_(answer=SurveySelectedID, groupColour="ST04Q01")
       } 

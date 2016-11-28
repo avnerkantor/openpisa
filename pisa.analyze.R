@@ -1,16 +1,15 @@
 observe({
   updateSelectInput(session, inputId="AnalyzeYear", label="",
-                    choices = c(2012), selected = 2012)
+                    choices = c(2012, 2009, 2006), selected = 2012)
 })
 
-observeEvent(input$AnalyzeYear, {
-  updateSelectInput(session, "AnalyzeVariable", "", as.vector(unlist(select(filter(pisaDictionary, Year == input$AnalyzeYear, Subject == "OECDindex"), Category))), selected = "Wealth")
+observe({
+  updateSelectInput(session, "AnalyzeVariable", "", as.vector(unlist(select(filter(pisaDictionary, Year == input$AnalyzeYear, Subject %in% c("OECDindex", "SchoolIndex")), Category))), selected = "Wealth")
 })
 
 observe({
   updateSelectInput(session, inputId="ModelId", label="", choices = c(
-    "lm"="lm",
-    "loess"="loess"
+    "lm", "loess"
   ),
   selected="lm")
 })
@@ -31,8 +30,8 @@ observe({
   
   switch(input$AnalyzeYear,
          "2012"={surveyData<-pisa2012},
-         "2009"={surveyData<-pisa2012},
-         "2006"={surveyData<-pisa2012}
+         "2009"={surveyData<-pisa2009},
+         "2006"={surveyData<-pisa2006}
   )
   
   switch (input$Subject,
@@ -49,7 +48,8 @@ observe({
 
     Country<-as.vector(unlist(Countries%>%filter(Country==country)%>%select(CNT)))
     analyzeData1<-surveyData%>%select_("CNT", analyzeSelectedID, "ST04Q01", "ESCS", analyzeSubject)%>%filter(CNT==Country)
-    analyzeData1<-collect(analyzeData1)
+    # analyzeData1<-collect(analyzeData1)
+    
     
     if(is.null(input$Gender)){
       if(is.null(input$Escs)){
@@ -79,6 +79,18 @@ observe({
           rename_(groupColour="ST04Q01") 
       } 
     }
+    analyzeData1[, analyzeSelectedID]<-as.numeric(analyzeData1[, analyzeSelectedID])
+    analyzeData1[, analyzeSubject]<-as.numeric(analyzeData1[, analyzeSubject])
+    
+    analyzeData3<-analyzeData2 %>% group_by(groupColour) %>% summarize(correlation = cor(analyzeData2[,analyzeSubject], analyzeData2[,analyzeSelectedID], use="complete", method = "pearson"))
+    corData<-as.data.frame(analyzeData3)
+    names(corData)<-c("Group", "Cor")
+    corData$Cor<-round(corData$Cor, digits = 2)
+    #tbl <- tableGrob(corData, rows=NULL)
+    # print(tbl)
+    # output$analyzeData <- renderText({
+    #   paste("Variable Name", SurveySelectedID[1])
+    # })
     
     #lm
     #lm(WEALTH~PV1MATH, analyzeData1)
@@ -97,13 +109,14 @@ observe({
     
     
     ggplot(data=analyzeData2, aes_string(y=analyzeSubject, x=analyzeSelectedID)) +
-      geom_smooth(method=input$ModelId, aes(colour=groupColour)) + 
-      geom_point(aes(colour=groupColour)) +
+      geom_smooth(method=input$ModelId, aes(colour=groupColour), se=FALSE) + 
+      # geom_point(aes(colour=groupColour)) +
+      geom_text(data=corData, aes(x=0, y=800, label=paste("Cor", Cor), show_guide=F)) +
       scale_colour_manual(values = groupColours) +
       labs(title="", y="" ,x= "") +
       theme_bw() +
       guides(colour=FALSE) +
-      theme(plot.margin=unit(c(0,0,15,0), "pt"),
+      theme(plot.margin=unit(c(0,15,5,10), "pt"),
             panel.border = element_blank(),
             axis.ticks = element_blank(),
             panel.grid.major.x=element_blank(),
@@ -114,20 +127,33 @@ observe({
             strip.background = element_blank(),
             strip.text.x = element_blank(),
             axis.title.x=element_blank(),
-            axis.text.x=element_blank(),
-            axis.ticks.x=element_blank()
-      )
-    
+            #axis.text.x=element_blank()
+            axis.ticks.x=element_blank() 
+      ) +
+      scale_y_continuous(limits = c(0,800)) 
+      
     # ggplotly(gh, tooltip = c("text"))%>%
     # config(p = ., displayModeBar = FALSE)%>%
     # layout(hovermode="y")
+    
+    # grid.arrange(plt, tbl,
+    #              nrow=2,
+    #              heights=c(3,1))
+    
   }
+  
+  # analyzeFunction<-function(country) {
+  #   paste("Variable Name", SurveySelectedID[1])
+  # }
   
   #### Plots ####
   if(length(analyzeSelectedID)==1){
     # if(!input$Subject==""){
     output$Country1AnalyzePlot<-renderPlot({
       analyzePlotFunction(input$Country1)
+    })
+    output$analyzeText <- renderText({
+      analyzeFunction(input$Country1)
     })
     output$Country2AnalyzePlot<-renderPlot({
       analyzePlotFunction(input$Country2)
