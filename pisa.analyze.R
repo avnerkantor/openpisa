@@ -1,6 +1,6 @@
 observe({
   updateSelectInput(session, inputId="AnalyzeYear", label="",
-                    choices = c(2012, 2009, 2006), selected = 2012)
+                    choices = c(2012), selected = 2012)
 })
 
 observe({
@@ -29,9 +29,9 @@ observe({
 observe({
   
   switch(input$AnalyzeYear,
-         "2012"={surveyData<-pisa2012},
-         "2009"={surveyData<-pisa2009},
-         "2006"={surveyData<-pisa2006}
+         "2012"={surveyData<-pisa2012}
+         # "2009"={surveyData<-pisa2009},
+         # "2006"={surveyData<-pisa2006}
   )
   
   switch (input$Subject,
@@ -42,13 +42,13 @@ observe({
           Financial={analyzeSubject<-"PV1FLIT"}
   )
   
-  analyzeSelectedID <- as.vector(unlist(select(filter(pisaDictionary, Year == input$AnalyzeYear, Subject == "OECDindex", Category==input$AnalyzeVariable), ID))) 
+  analyzeSelectedID <- as.vector(unlist(select(filter(pisaDictionary, Year == input$AnalyzeYear, Subject %in% c("OECDindex", "SchoolIndex"), Category==input$AnalyzeVariable), ID))) 
   
   analyzePlotFunction<-function(country) {
 
     Country<-as.vector(unlist(Countries%>%filter(Country==country)%>%select(CNT)))
     analyzeData1<-surveyData%>%select_("CNT", analyzeSelectedID, "ST04Q01", "ESCS", analyzeSubject)%>%filter(CNT==Country)
-    # analyzeData1<-collect(analyzeData1)
+    analyzeData1<-collect(analyzeData1)
     
     
     if(is.null(input$Gender)){
@@ -81,7 +81,7 @@ observe({
     }
     analyzeData1[, analyzeSelectedID]<-as.numeric(analyzeData1[, analyzeSelectedID])
     analyzeData1[, analyzeSubject]<-as.numeric(analyzeData1[, analyzeSubject])
-    
+
     analyzeData3<-analyzeData2 %>% group_by(groupColour) %>% summarize(correlation = cor(analyzeData2[,analyzeSubject], analyzeData2[,analyzeSelectedID], use="complete", method = "pearson"))
     corData<-as.data.frame(analyzeData3)
     names(corData)<-c("Group", "Cor")
