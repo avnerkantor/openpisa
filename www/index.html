@@ -82,12 +82,12 @@
         <li>
           <a class="page-scroll" href="#analyze">Analyze</a>
       </li>
+      <!-- 
       <li>
           <a class="page-scroll" href="#about">About</a>
       </li>
-                         <li>
-                        <a class="page-scroll" href="http://blog.opisa.org">Blog</a>
-                    </li>
+      <li> <a class="page-scroll" href="http://blog.opisa.org">Blog</a>
+                    </li>-->
       <li>
           <a class="page-scroll" href="http://opisa.org">עברית</a>
       </li>
@@ -394,6 +394,9 @@
                 </div>
                 <br/>
                 <!--<p id="SurveySelectedIDOutput" class="shiny-text-output"></p>-->
+                  <div class="row">
+        <div id="pisaScoresTable" class="datatables html-widget html-widget-output"></div>
+    </div>
             </div>
         </section>
 <!--Analyze
@@ -455,43 +458,17 @@ shiny-plot-output shiny-bound-output
     </div>
 </div>
 </div>
-
-                <!--
-                <div class="row">
-                    <div class="col-xs-5 col-sm-3">
-                        <form>
-                            <div class="form-group shiny-input-container">
-                                <span>Variables</span>
-                                <select style="display: none;" tabindex="-1" id="analyzeVariables"
-                                class="form-control selectized shiny-bound-input"
-                                multiple="multiple">
-                            </select>
-                            <script type="application/json" data-for="analyzeVariables">{}</script>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-xs-5 col-sm-3 ">
-                    <div class="form-group shiny-input-container">
-                        <span>Model</span>
-                        <select id="ModelId">
-                        </select>
-                        <script type="application/json" data-for="ModelId">{}</script>
-                    </div>
-                </div>
-            </div>
             
-  <div class="row">
-        <div id="pisaScoresTable" class="datatables html-widget html-widget-output"></div>
-    </div> -->
+
 </div>
 
 </section>
-<!--About-->
+<!--About
 <section>
     <div id="about" class="container-fluid">
         <iframe width= "100%" height="300px" frameborder="0" scrolling="no" src="http://blog.opisa.org/post1/about-open-pisa/"></iframe>
 </div>
 
-</section>
+</section>-->
 </body>
 </html>

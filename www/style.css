@@ -29,30 +29,18 @@ html {
   width:100%;
 }
 
-#myHeader{
-  min-height:230px;
-}
-
 #scores {
   width:100%;
 }
 
-#expertise {
+#survey{
+  padding-top:50px;
+  padding-bottom:50px;
 }
 
-#survey {
-  padding-bottom:150px;
+#analyze{
+  padding-bottom:50px;
 }
-
-#analyze {
- 
- padding-bottom:50px;
-}
-
-#about {
-  
-}
-
 
 /*navbar*/
 nav {

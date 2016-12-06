@@ -14,16 +14,6 @@ observe({
   selected="lm")
 })
 
-# output$pisaScoresTable <- DT::renderDataTable(
-#   filter='bottom',
-#   options=list(
-#     pageLength = 5,
-#     searching=TRUE,
-#     autoWidth = TRUE
-#   ), rownames= FALSE,
-#   {
-#     pisaDictionary%>%select(ID, Measure, Subject, Category, SubCategory)
-#   })
 
 #Analyze
 observe({
@@ -48,7 +38,7 @@ observe({
 
     Country<-as.vector(unlist(Countries%>%filter(Country==country)%>%select(CNT)))
     analyzeData1<-surveyData%>%select_("CNT", analyzeSelectedID, "ST04Q01", "ESCS", analyzeSubject)%>%filter(CNT==Country)
-    analyzeData1<-collect(analyzeData1)
+    # analyzeData1<-collect(analyzeData1)
     
     
     if(is.null(input$Gender)){
