@@ -1,11 +1,14 @@
 (shiny.sanitize.errors = FALSE)
 
-load("data/pisaData2.rda")
+load("data/pisaData.rda")
 
-#download.file(url = "https://docs.google.com/spreadsheets/d/1aNfTVO9PGfNicmrdLHPdCtkOEyhCekLFdBpFPbgagg0/pub?gid=991054399&single=true&output=csv", destfile="data/pisaDictionary.csv", 'curl')
+#download.file(url = "https://docs.google.com/spreadsheets/d/1LYmlzL14xQlF-nRen9a6morTmU0FsULSoee8xWEw9fA/pub?gid=1417149183&single=true&output=csv", destfile="data/pisaDictionary.csv", 'curl')
 pisaDictionary<-read.csv("data/pisaDictionary.csv", header = TRUE, sep=",")
 #load("data/pisaDictionary.rda")
 
+print("loading pisa 2015")
+load("../pisa2015.rda")
+print("loading pisa 2012")
 load("../pisa2012.rda")
 # pisadb<-src_bigquery("r-shiny-1141", "pisa")
 # pisa2012<- tbl(pisadb, "pisa2012")

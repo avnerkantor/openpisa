@@ -1,74 +1,88 @@
-CNT,Country,Hebrew
-ALB,Albania,אלבניה
-ARG,Argentina,ארגנטינה
-AUS,Australia,אוסטרליה
-AUT,Austria,אוסטריה
-BEL,Belgium,בלגיה
-BRA,Brazil,ברזיל
-BGR,Bulgaria,בולגריה
-CAN,Canada,קנדה
-CHL,Chile,צילה
-QCN,Shanghai,שאנגחאי (סין)
-TAP,Chinese Taipei,סין
-COL,Colombia,קולומביה
-CRI,Costa Rica,קוסטה-ריקה
-HRV,Croatia,קרואטיה
-CZE,Czech Republic,צ'כיה
-DNK,Denmark,דנמרק
-EST,Estonia,אסטוניה
-FIN,Finland,פינלנד
-FRA,France,צרפת
-DEU,Germany,גרמניה
-GRC,Greece,יוון
-HKG,Hong Kong,הונג-קונג
-HUN,Hungary,הונגריה
-ISL,Iceland,איסלנד
-IDN,Indonesia,אינדונזיה
-IRL,Ireland,אירלנד
-ISR,Israel,ישראל
-ITA,Italy,איטליה
-JPN,Japan,יפן
-JOR,Jordan,ירדן
-KAZ,Kazakhstan,קזחסטן
-KOR,Korea,דרום-קוריאה
-LVA,Latvia,לטביה
-LIE,Liechtenstein,ליכטנשטיין
-LTU,Lithuania,לטביה
-LUX,Luxembourg,לוקסמבורג
-MAC,Macao-China,מקאו (סין)
-MYS,Malaysia,מלזיה
-MEX,Mexico,מקסיקו
-MNE,Montenegro,מונטגרו
-NLD,Netherlands,הולנד
-NZL,New Zealand,ניו-זילנד
-NOR,Norway,נורווגיה
-QRS,Perm,פרם (רוסיה)
-PER,Peru,פרו
-POL,Poland,פולין
-PRT,Portugal,פורטוגל
-QAT,Qatar,קאטר
-ROU,Romania,רומניה
-RUS,Russian Federation,רוסיה
-SRB,Serbia,סרביה
-SGP,Singapore,סינגפור
-SVK,Slovak Republic,סלובקיה
-SVN,Slovenia,סלובניה
-ESP,Spain,ספרד
-SWE,Sweden,שוודיה
-CHE,Switzerland,שוויץ
-THA,Thailand,תאילנד
-TUN,Tunisia,תוניסיה
-TUR,Turkey,טורקיה
-GBR,United Kingdom,בריטניה
-ARE,Arab Emirates,סעודיה
-USA,USA,ארצות-הברית
-URY,Uruguay,אורוגוואי
-VNM,Viet Nam,ויאטנם
-QUA,Florida (USA),פלורידה
-QUB,Connecticut (USA),קונטיקט
-QUC,Massachusetts (USA),מסצ'וסטס
-ISR_Hebrew,Israel Hebrew,דוברי עברית
-ISR_Arabic,Israel Arabic,דוברי ערבית
-ISR_Hebrew_Secular,Israel Hebrew Secular,חינוך-ממלכתי
-ISR_Hebrew_Religious,Israel Hebrew Religious,ממלכתי-דתי
-ISR_Ultra_Orthodox_Girls,Israel Ultra Orthodox Girls,חרדים-בנות
+CNT,Country
+ALB,Albania
+ARE,United Arab Emirates
+ARG,Argentina
+AUS,Australia
+AUT,Austria
+BEL,Belgium
+BGR,Bulgaria
+BRA,Brazil
+CAN,Canada
+CHE,Switzerland
+CHL,Chile
+COL,Colombia
+CRI,Costa Rica
+CZE,Czech Republic
+DEU,Germany
+DNK,Denmark
+DOM,Dominican Republic
+DZA,Algeria
+ESP,Spain
+EST,Estonia
+FIN,Finland
+FRA,France
+GBR,United Kingdom
+GEO,Georgia
+GRC,Greece
+HKG,Hong Kong-China
+HRV,Croatia
+HUN,Hungary
+IDN,Indonesia
+IRL,Ireland
+ISL,Iceland
+ISR,Israel
+ISR_Arabic,Israel Arabic
+ISR_Hebrew,Israel Hebrew
+ISR_Hebrew_Religious,Israel Hebrew Religious
+ISR_Hebrew_Secular,Israel Hebrew Secular
+ISR_Ultra_Orthodox_Girls,Israel Ultra Orthodox Girls
+ITA,Italy
+JOR,Jordan
+JPN,Japan
+KAZ,Kazakhstan
+KOR,Korea
+KSV,Kosovo
+LBN,Lebanon
+LIE,Liechtenstein
+LTU,Lithuania
+LUX,Luxembourg
+LVA,Latvia
+MAC,Macao-China
+MDA,Moldova
+MEX,Mexico
+MKD,Macedonia
+MLT,Malta
+MNE,Montenegro
+MYS,Malaysia
+NLD,Netherlands
+NOR,Norway
+NZL,New Zealand
+PER,Peru
+POL,Poland
+PRT,Portugal
+QAR,Argentina (Ciudad Autónoma de Buenos)
+QAT,Qatar
+QCH,B-S-J-G (China)
+QCN,Shanghai-China
+QES,Spain (Regions)
+QRS,Perm (Russian Federation)
+QUA,Florida (USA)
+QUB,Connecticut (USA)
+QUC,Massachusetts (USA)
+QUD,Puerto Rico (USA)
+QUE,North Carolina (USA)
+ROU,Romania
+RUS,Russian Federation
+SGP,Singapore
+SRB,Serbia
+SVK,Slovak Republic
+SVN,Slovenia
+SWE,Sweden
+TAP,Chinese Taipei
+THA,Thailand
+TTO,Trinidad and Tobago
+TUN,Tunisia
+TUR,Turkey
+URY,Uruguay
+USA,United States of America
+VNM,Viet Nam

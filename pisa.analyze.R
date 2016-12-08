@@ -1,27 +1,28 @@
 observe({
   updateSelectInput(session, inputId="AnalyzeYear", label="",
-                    choices = c(2012), selected = 2012)
+                    choices = c("2015", "2012"), selected = "2015")
 })
 
 observe({
-  updateSelectInput(session, "AnalyzeVariable", "", as.vector(unlist(select(filter(pisaDictionary, Year == input$AnalyzeYear, Subject %in% c("OECDindex", "SchoolIndex")), Category))), selected = "Wealth")
+  updateSelectInput(session, "AnalyzeVariable", "", as.vector(unlist(select(filter(pisaDictionary, Year == input$AnalyzeYear, Subject %in% c("OECDindex", "SchoolIndex")), Category))), selected = "Family wealth (WLE)")
 })
 
-observe({
-  updateSelectInput(session, inputId="ModelId", label="", choices = c(
-    "lm", "loess"
-  ),
-  selected="lm")
-})
+# observe({
+#   updateSelectInput(session, inputId="ModelId", label="", choices = c(
+#     "lm", "loess"
+#   ),
+#   selected="lm")
+# })
 
 
 #Analyze
 observe({
   
   switch(input$AnalyzeYear,
-         "2012"={surveyData<-pisa2012}
-         # "2009"={surveyData<-pisa2009},
-         # "2006"={surveyData<-pisa2006}
+         "2015"={surveyData<-pisa2015},
+         "2012"={surveyData<-pisa2012},
+         "2009"={surveyData<-pisa2009},
+         "2006"={surveyData<-pisa2006}
   )
   
   switch (input$Subject,
@@ -36,10 +37,8 @@ observe({
   
   analyzePlotFunction<-function(country) {
 
-    Country<-as.vector(unlist(Countries%>%filter(Country==country)%>%select(CNT)))
-    analyzeData1<-surveyData%>%select_("CNT", analyzeSelectedID, "ST04Q01", "ESCS", analyzeSubject)%>%filter(CNT==Country)
+    analyzeData1<-surveyData%>%select_("COUNTRY", analyzeSelectedID, "ST04Q01", "ESCS", analyzeSubject)%>%filter(COUNTRY==country)
     # analyzeData1<-collect(analyzeData1)
-    
     
     if(is.null(input$Gender)){
       if(is.null(input$Escs)){
@@ -99,13 +98,14 @@ observe({
     
     
     ggplot(data=analyzeData2, aes_string(y=analyzeSubject, x=analyzeSelectedID)) +
-      geom_smooth(method=input$ModelId, aes(colour=groupColour), se=FALSE) + 
+      geom_smooth(method="lm", aes(colour=groupColour), se=TRUE) + 
       # geom_point(aes(colour=groupColour)) +
       geom_text(data=corData, aes(x=0, y=800, label=paste("Cor", Cor), show_guide=F)) +
       scale_colour_manual(values = groupColours) +
       labs(title="", y="" ,x= "") +
       theme_bw() +
       guides(colour=FALSE) +
+      scale_y_continuous(limits = c(0,800)) +
       theme(plot.margin=unit(c(0,15,5,10), "pt"),
             panel.border = element_blank(),
             axis.ticks = element_blank(),
@@ -119,23 +119,9 @@ observe({
             axis.title.x=element_blank(),
             #axis.text.x=element_blank()
             axis.ticks.x=element_blank() 
-      ) +
-      scale_y_continuous(limits = c(0,800)) 
-      
-    # ggplotly(gh, tooltip = c("text"))%>%
-    # config(p = ., displayModeBar = FALSE)%>%
-    # layout(hovermode="y")
-    
-    # grid.arrange(plt, tbl,
-    #              nrow=2,
-    #              heights=c(3,1))
-    
+      ) 
   }
-  
-  # analyzeFunction<-function(country) {
-  #   paste("Variable Name", SurveySelectedID[1])
-  # }
-  
+      
   #### Plots ####
   if(length(analyzeSelectedID)==1){
     # if(!input$Subject==""){

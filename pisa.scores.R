@@ -13,7 +13,7 @@ observe({
     select(Level, contains(input$Subject))%>%
     filter(!is.na(input$Subject))
   
-  plotData1<-pisaData2%>%filter(Subject==input$Subject, Performers==0)%>%select(-Subject, -Performers)
+  plotData1<-pisaData%>%filter(Subject==input$Subject, Performers==0)%>%select(-Subject, -Performers)
   #print(input$Gender)#if(input$Gender=="General"){
   #TODO
   if(is.null(input$Gender)){
@@ -45,8 +45,8 @@ observe({
   
   scoresPlotFunction<-function(country){
     
-    x<-Countries%>%filter(Country==country)%>%select(CNT)
-    plotData3 <- plotData2%>%filter(Country==x[1,1])
+    plotData3 <- plotData2%>%filter(COUNTRY==country)
+    participatedNumber<-length(unique(plotData3$Year))
 
     gg<-ggplot(plotData3, aes(x=Year, y=Average, colour=GenderESCS, text=round(Average))) +
       scale_colour_manual(values = groupColours) +
@@ -64,7 +64,7 @@ observe({
             axis.line.x = element_line(color="#c7c7c7", size = 0.3),
             axis.line.y = element_line(color="#c7c7c7", size = 0.3)
       ) +
-      scale_x_continuous(breaks=c(2006, 2009, 2012)) +
+      scale_x_continuous(breaks=c(2006, 2009, 2012, 2015)) +
       scale_y_continuous(
         #minor_breaks=SubjectExpertiseLevels[2],
         breaks=SubjectExpertiseLevels[2],
@@ -72,9 +72,9 @@ observe({
         #limits = c(200,700),
         limits=c(as.numeric(unlist(ExpertiseLevelsLimits[input$Subject])))
         )
-    
-    if("2012" %in% plotData3$Year) {
-      if("2009" %in% plotData3$Year) {
+
+    if(participatedNumber>0) {
+      if(participatedNumber>1) {
        #https://plot.ly/r/axes/
         gp<-gg+geom_line(size=1)
         #https://plot.ly/r/reference

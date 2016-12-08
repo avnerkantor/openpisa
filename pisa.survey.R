@@ -1,11 +1,16 @@
 ######UI #####
 observe({
   updateSelectInput(session, inputId="SurveyYear", label="", 
-                    choices = c(2012, 2009, 2006), selected = 2012)
+                    choices = c(2015, 2012, 2009, 2006), selected = 2015)
 })
 
 observeEvent(input$SurveyYear,{
   switch (input$SurveyYear,
+          "2015" = {
+            updateSelectInput(session, inputId="SurveySubject", label="", choices = c(
+              unique(pisaDictionary%>%filter(Year=="2015")%>%select(Subject))
+            ))
+          },
           "2012" = {
             updateSelectInput(session, inputId="SurveySubject", label="", choices = c(
               unique(pisaDictionary%>%filter(Year=="2012")%>%select(Subject))
@@ -48,15 +53,14 @@ observe({
     })
   
   surveyPlotFunction<-function(country) {
-    Country<-as.vector(unlist(Countries%>%filter(Country==country)%>%select(CNT)))
-
     switch(input$SurveyYear,
+    "2015"={surveyData<-pisa2015},
     "2012"={surveyData<-pisa2012},
     "2009"={surveyData<-pisa2009},
     "2006"={surveyData<-pisa2006}
     )
       
-    surveyData1<-surveyData%>%select_("CNT", SurveySelectedID, "ST04Q01", "ESCS")%>%filter(CNT==Country)
+    surveyData1<-surveyData%>%select_("COUNTRY", SurveySelectedID, "ST04Q01", "ESCS")%>%filter(COUNTRY==country)
     
     if(is.null(input$Gender)){
       if(is.null(input$Escs)){
