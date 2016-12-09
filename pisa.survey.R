@@ -178,5 +178,5 @@ output$pisaScoresTable <- DT::renderDataTable(
     autoWidth = TRUE
   ), rownames= FALSE,
   {
-    pisaDictionary%>%select(ID, Measure, Subject, Category, SubCategory)
+    pisaDictionary%>%filter(Year==input$SurveyYear)%>%select(ID, Measure, Subject, Category, SubCategory)
   })

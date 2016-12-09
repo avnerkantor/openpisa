@@ -45,7 +45,7 @@ observe({
   
   scoresPlotFunction<-function(country){
     
-    plotData3 <- plotData2%>%filter(COUNTRY==country)
+    plotData3 <- plotData2%>%filter(Country==country)
     participatedNumber<-length(unique(plotData3$Year))
 
     gg<-ggplot(plotData3, aes(x=Year, y=Average, colour=GenderESCS, text=round(Average))) +

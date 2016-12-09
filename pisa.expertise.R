@@ -31,7 +31,7 @@ observe({
   }
   
   expertiseHighPlotFunction<-function(country){
-    plotHighData3 <- plotHighData2%>%filter(COUNTRY==country)
+    plotHighData3 <- plotHighData2%>%filter(Country==country)
     participatedNumber<-length(unique(plotHighData3$Year))
     
     gh<-ggplot(plotHighData3, aes(x=Year, y=Average, colour=GenderESCS, text=round(Average, digits = 1))) +
@@ -127,7 +127,7 @@ observe({
   }
   
   expertiseLowPlotFunction<-function(country){
-    plotLowData3 <- plotLowData2%>%filter(COUNTRY==country)
+    plotLowData3 <- plotLowData2%>%filter(Country==country)
     participatedNumber<-length(unique(plotLowData3$Year))
     
     gh<-ggplot(plotLowData3, aes(x=Year, y=Average, colour=GenderESCS, text=round(Average, digits = 1))) +
