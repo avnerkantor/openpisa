@@ -9,7 +9,9 @@ observeEvent(input$SurveyYear,{
           "2015" = {
             updateSelectInput(session, inputId="SurveySubject", label="", choices = c(
               unique(pisaDictionary%>%filter(Year=="2015")%>%select(Subject))
-            ))
+            ),
+            selected = "Learning Science"
+            )
           },
           "2012" = {
             updateSelectInput(session, inputId="SurveySubject", label="", choices = c(
