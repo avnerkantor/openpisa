@@ -1,40 +1,13 @@
 ######UI #####
 observe({
   updateSelectInput(session, inputId="SurveyYear", label="", 
-                    choices = c(2015, 2012, 2009, 2006), selected = 2015)
+                    choices = c(2015, 2012), selected = 2015)
 })
 
 observeEvent(input$SurveyYear,{
-  switch (input$SurveyYear,
-          "2015" = {
-            updateSelectInput(session, inputId="SurveySubject", label="", choices = c(
-              unique(pisaDictionary%>%filter(Year=="2015")%>%select(Subject))
-            ),
-            selected = "Learning Science"
-            )
-          },
-          "2012" = {
-            updateSelectInput(session, inputId="SurveySubject", label="", choices = c(
-              unique(pisaDictionary%>%filter(Year=="2012")%>%select(Subject))
-            ),
-            selected="Learning Mathematics"
-            )
-          },
-          "2009"={
-            updateSelectInput(session, inputId="SurveySubject", label="", choices = c(
-              unique(pisaDictionary%>%filter(Year=="2009")%>%select(Subject))
-            ),
-            selected="Computer Orientation"
-            )
-          },
-          "2006"={
-            updateSelectInput(session, inputId="SurveySubject", label="", choices = c(
-              unique(pisaDictionary%>%filter(Year=="2006")%>%select(Subject))
-            ),
-            selected="Computer Orientation"
-            )
-          }
-  )
+  updateSelectInput(session, inputId="SurveySubject", label="", choices = c(
+    unique(pisaDictionary%>%filter(Year==input$SurveyYear)%>%select(Subject))), 
+    selected = "Computer Orientation")
 })
 
 observeEvent(input$SurveySubject,{
@@ -122,11 +95,7 @@ observe({
       } 
     }
     
-    if(nrow(surveyTable)>1){
-    #print(surveyTable)
-    ####ggplot####
     gh<-ggplot(data=surveyTable, aes(x=answer, y=freq, text=paste0(round(freq, digits = 1), "%"))) +
-      
       geom_bar(aes(colour=groupColour, fill=groupColour), stat="identity") +
       coord_flip() +
       scale_colour_manual(values =groupColours) +
@@ -153,7 +122,6 @@ observe({
       config(p = ., displayModeBar = FALSE)%>%
       layout(hovermode="y")
     }
-  }
   
   ### Plots ####  
   if(length(SurveySelectedID)==1){

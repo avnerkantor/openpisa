@@ -66,9 +66,10 @@ nav {
 
 .header-image {
     background-image: url("img/PISA_TopBG.jpg");
-    background-position: left;
-    width: 100%;
-    height: 187px;
+    background-position: left top; 
+    background-size: cover;
+    background-repeat:no-repeat;
+    height: 200px;
     left: 10px;
     /*width: 90%;
     position: absolute;
@@ -326,6 +327,11 @@ input[type="checkbox"] {
 
 .js-plotly-plot .plotly .modebar {
     z-index: 0;
+}
+
+.dragcover{
+  cursor:pointer;
+  pointer-events:all;
 }
 
 @media(min-width:767px) {
