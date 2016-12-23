@@ -35,8 +35,8 @@ $(document).on('change', function() {
 $(function() {
     $('#dashboard').affix({
         offset: { 
-          top: $('#dashboard').offset().top-40,
-          bottom: $('#dashboard--wrap').height($("#dashboard").height())
+          top: $('#dashboard').offset().top,
+          bottom: $('#dashboard--wrap').height($("#dashboard").height()-40)
         }
     });
 });
