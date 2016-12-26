@@ -7,7 +7,7 @@ observe({
 observeEvent(input$SurveyYear,{
   updateSelectInput(session, inputId="SurveySubject", label="", choices = c(
     unique(pisaDictionary%>%filter(Year==input$SurveyYear)%>%select(Subject))), 
-    selected = "Computer Orientation")
+    selected = "School Policies and Practices")
 })
 
 observeEvent(input$SurveySubject,{
@@ -23,11 +23,12 @@ observe({
   
   SurveySelectedID <- as.vector(unlist(select(filter(pisaDictionary, Year == input$SurveyYear, Subject == input$SurveySubject, Category==input$SurveyCategory, SubCategory==input$SurveySubCategory), ID))) 
   
-  output$SurveySelectedIDOutput <- renderText({
-  paste("Variable Name", SurveySelectedID[1])
-    })
+  # output$SurveySelectedIDOutput <- renderText({
+  # paste("Variable Name", SurveySelectedID[1])
+  #   })
   
   surveyPlotFunction<-function(country) {
+    
     switch(input$SurveyYear,
     "2015"={surveyData<-pisa2015},
     "2012"={surveyData<-pisa2012},
@@ -35,10 +36,10 @@ observe({
     "2006"={surveyData<-pisa2006}
     )
       
-    surveyData1<-surveyData%>%select_("COUNTRY", SurveySelectedID, "ST04Q01", "ESCS")%>%filter(COUNTRY==country)
+    surveyData1<-surveyData%>%select_("COUNTRY", SurveySelectedID, "ST04Q01", "ESCS")%>%filter(COUNTRY==country)%>%na.omit
     
-    if(is.null(input$Gender)){
-      if(is.null(input$Escs)){
+    if(is.null(v$Gender)){
+      if(is.null(v$Escs)){
         #General
         surveyTable<-surveyData1%>%
           count_(SurveySelectedID)
@@ -48,7 +49,7 @@ observe({
       } else {
         # General Escs
         surveyTable<-surveyData1%>%
-          filter(ESCS %in% c(input$Escs))%>%
+          filter(ESCS %in% c(v$Escs))%>%
           group_by_("ESCS", SurveySelectedID)%>%
           tally  %>%
           group_by(ESCS)
@@ -58,11 +59,11 @@ observe({
           mutate(groupColour=str_c("General", group))
       }
     } else {
-      if(length(input$Gender)==1){
-        if(is.null(input$Escs)) {
+      if(length(v$Gender)==1){
+        if(is.null(v$Escs)) {
           #Only gender
           surveyTable<-surveyData1%>%
-            filter(ST04Q01 %in% c(input$Gender))%>%
+            filter(ST04Q01 %in% c(v$Gender))%>%
             group_by_("ST04Q01", SurveySelectedID)%>%
             tally  %>%
             group_by(ST04Q01)
@@ -72,20 +73,20 @@ observe({
           
         } else {
           surveyTable<-surveyData1%>%
-            filter(ST04Q01  %in% c(input$Gender))%>%
-            filter(ESCS %in% c(input$Escs))%>%
+            filter(ST04Q01  %in% c(v$Gender))%>%
+            filter(ESCS %in% c(v$Escs))%>%
             group_by_("ESCS", SurveySelectedID)%>%
             tally  %>%
             group_by(ESCS)
            # surveyTable<-collect(surveyTable)
-          surveyTable<-surveyTable%>%  mutate(freq = round(100 * n/sum(n), 0), group1=input$Gender)%>%
+          surveyTable<-surveyTable%>%  mutate(freq = round(100 * n/sum(n), 0), group1=v$Gender)%>%
             rename_(answer=SurveySelectedID, group="ESCS")%>%
             mutate(groupColour=str_c(group1, group))
           
         }
       } else {
         surveyTable<-surveyData1%>%
-          filter(ST04Q01 %in% c(input$Gender))%>%
+          filter(ST04Q01 %in% c(v$Gender))%>%
           group_by_("ST04Q01", SurveySelectedID)%>%
           tally  %>%
           group_by(ST04Q01)

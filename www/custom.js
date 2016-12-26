@@ -7,6 +7,7 @@ $(document).ready(function () {
 
 $(document).on('click', '#generalBtn', function (e) {
   //, #lowBtn, #mediumBtn, #highBtn"
+    $("#generalBtn").addClass('active');
     $("#maleBtn, #femaleBtn").removeClass('active');
     $("#lowBtn, #mediumBtn, #highBtn").addClass('general').removeClass('male').removeClass('female');
 });
@@ -41,14 +42,13 @@ $(function() {
     });
 });
 
-$(document).ready(function () {
-   $("#Country1, #Country2, #Country3, #Country4, #SurveyYear, #SurveySubject, #SurveyCategory, #SurveySubCategory, #AnalyzeYear, #AnalyzeVariable, #ModelId").css('width', ($("#Country1Plot").width()+'px'));
-});
-
 //Set countries width the same width as plots width
-$(window).on('resize', function(){
-  $("#Country1, #Country2, #Country3, #Country4, #SurveyYear, #SurveySubject, #SurveyCategory, #SurveySubCategory, #AnalyzeYear, #AnalyzeVariable, #ModelId").css('width', ($("#Country1Plot").width()+'px'));
-}).resize();
+$(document).ready(function(){
+  $("#Country1, #Country2, #Country3, #Country4, #SurveyYear, #SurveySubject, #SurveyCategory, #SurveySubCategory").css('width', ($("#Country1Plot").width()+'px'));
+});
+$(window).resize(function(){
+    $(".selectize-input").css('width', ($("#Country1Plot").width()+'px'));
+});
 
 //jQuery for page scrolling feature - requires jQuery Easing plugin
 $(document).ready(function () {
@@ -83,15 +83,11 @@ $(document).on('activate.bs.scrollspy', function(e) {
                 $("#Subject").hide();
                 break;
             case "#survey":
-                $("#surveyDashboard").hide();
+                $("#surveyDashboard").show();
                 $("#Subject").show();
                 break;
             case "#analyze":
                 $("#surveyDashboard").show();
-                $("#Subject").show();
-                break;
-            case "#about":
-                $("#surveyDashboard").hide();
                 $("#Subject").show();
                 break;
         }

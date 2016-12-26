@@ -2,14 +2,14 @@
 
 load("data/pisaData.rda")
 
-download.file(url = "https://docs.google.com/spreadsheets/d/1LYmlzL14xQlF-nRen9a6morTmU0FsULSoee8xWEw9fA/pub?gid=1417149183&single=true&output=csv", destfile="data/pisaDictionary.csv", 'curl')
+#download.file(url = "https://docs.google.com/spreadsheets/d/1LYmlzL14xQlF-nRen9a6morTmU0FsULSoee8xWEw9fA/pub?gid=1417149183&single=true&output=csv", destfile="data/pisaDictionary.csv", 'curl')
 pisaDictionary<-read.csv("data/pisaDictionary.csv", header = TRUE, sep=",")
 #load("data/pisaDictionary.rda")
 
 print("loading pisa 2015")
 load("../pisa2015.rda")
 print("loading pisa 2012")
-load("../pisa2012.rda")
+load("../pisa2012b.rda")
 # pisadb<-src_bigquery("r-shiny-1141", "pisa")
 # pisa2012<- tbl(pisadb, "pisa2012")
 # pisa2009<- tbl(pisadb, "pisa2009")
@@ -45,6 +45,3 @@ shinyServer(function(input, output, session) {
   source('pisa.analyze.R', local=TRUE)
   source('urlSearch.R', local=TRUE)
 })
-
-
-

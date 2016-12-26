@@ -215,10 +215,14 @@
         <div id="Gender"
         class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
         <div class="shiny-options-group btn-group" data-toggle="buttons">
-           <label class="btn btnMeasurments" id="generalBtn">
-            <input type="checkbox" id="Gender" value="General" checked="checked"/>
+           
+        <!--   <label class="btn btnMeasurments" id="generalBtn">            <input type="checkbox" id="Gender" value="General" checked="checked"/>
             <span>All</span>
-        </label>
+        </label>-->
+        
+      <button type="button" class="btn btnMeasurments action-button" id="generalBtn">
+<span>All</span></button>
+        
         <label class="btn btnMeasurments" id="femaleBtn">
             <input type="checkbox" name="Gender" value="Female"/>
             <span>Female</span>
@@ -433,46 +437,9 @@
     </div> </div>--> 
             </div>
         </section>
-<!--Analyze
-shiny-plot-output shiny-bound-output
--->
+
 <section>
   <div id="analyze" class="container-fluid">
-    <div id="analyzeDashboard" class="row">
-  <div class="col-xs-3">
-    <div class="form-group shiny-input-container">
-        <label class="control-label" for="AnalyzeYear"></label>
-        <span>PISA Year</span>
-        <div>
-            <select id="AnalyzeYear">
-                <option value="" selected></option>
-            </select>
-            <script type="application/json" data-for="AnalyzeYear">{}</script>
-        </div>
-    </div>
-</div>
-<div class="col-xs-3">
-    <div class="form-group shiny-input-container">
-        <label class="control-label" for="AnalyzeVariable"></label>
-        <span>Index</span>
-        <div>
-            <select id="AnalyzeVariable">
-                <option value="" selected></option>
-            </select>
-            <script type="application/json" data-for="AnalyzeVariable">{}</script>
-        </div>
-    </div>
-</div>
-<div class="col-xs-3 ">
-    <div class="form-group shiny-input-container">
-        <span>Model</span>
-        <select id="ModelId">
-        </select>
-        <script type="application/json" data-for="ModelId">{}</script>
-    </div>
-</div>
-
-</div>
 <br/>
    <div class="row">
     <div class="col-xs-3 ">
@@ -492,8 +459,6 @@ shiny-plot-output shiny-bound-output
     <div id="Country4AnalyzePlotText" class="shiny-text-output"></div>
 </div>
 </div>
-<div class="row col-xs-12" style="height: 30px; "></div>
-            
 
 </div>
 

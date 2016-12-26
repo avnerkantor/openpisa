@@ -30,6 +30,7 @@ html {
 }
 
 #scores {
+  padding-top:30px;
   width:100%;
 }
 
@@ -274,34 +275,8 @@ input[type="checkbox"] {
 .selectize-input {
     border-radius: 0;
     line-height: 1.333333333;
-    font-size: 18pt;
+    font-size: 1.5vw;
     color: #777777;
-}
-
-.selectize-input > * {
-  vertical-align: middle;
-}
-.selectize-input .item {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  
-}
-
-/* respnonsive */
-.selectize-input {
-  display: table !important;
-  table-layout: fixed;
-  width: 100%;
-}
-.selectize-input > * {
-  vertical-align: middle;
-}
-.selectize-input .item {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 80%;
 }
 
 .plotly, .shiny-plot-output {

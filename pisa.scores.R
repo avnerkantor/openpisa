@@ -1,12 +1,27 @@
-###UI
-
 observe({
     updateSelectInput(session, "Country1", choices = names(countriesList), selected = "Israel")
     updateSelectInput(session, "Country2", choices = names(countriesList), selected = "Finland")
     updateSelectInput(session, "Country3", choices = names(countriesList), selected = "Spain")
     updateSelectInput(session, "Country4", choices = names(countriesList), selected = "United States of America")
 })
-####
+
+#Reset button (generalBtn)
+v <- reactiveValues(data = NULL)
+
+observeEvent(input$Gender, {
+  v$Gender <- input$Gender
+})
+
+observeEvent(input$Escs, {
+  v$Escs <- input$Escs
+})
+
+
+observeEvent(input$generalBtn, {
+  v$Gender <- NULL
+})
+
+
 observe({
   
   SubjectExpertiseLevels<-ExpertiseLevels %>%
@@ -14,31 +29,30 @@ observe({
     filter(!is.na(input$Subject))
   
   plotData1<-pisaData%>%filter(Subject==input$Subject, Performers==0)%>%select(-Subject, -Performers)
-  #print(input$Gender)#if(input$Gender=="General"){
-  #TODO
-  if(is.null(input$Gender)){
-    if(is.null(input$Escs)){
+  
+  if(is.null(v$Gender)){
+    if(is.null(v$Escs)){
       plotData2<-plotData1 %>%
         filter(Gender==0, ESCS==0)
     } else {
       plotData2<- plotData1 %>%
         filter(Gender == 0)%>%
-        filter(ESCS %in% c(input$Escs))
+        filter(ESCS %in% c(v$Escs))
     }
   } else {
-    if(length(input$Gender)==1){
-      if(is.null(input$Escs)) {
+    if(length(v$Gender)==1){
+      if(is.null(v$Escs)) {
         plotData2<- plotData1 %>%
-          filter(Gender  == input$Gender)%>%
+          filter(Gender  == v$Gender)%>%
           filter(ESCS == 0)
       } else {
         plotData2<- plotData1 %>%
-          filter(Gender  == input$Gender)%>%
-          filter(ESCS %in% c(input$Escs))
+          filter(Gender  == v$Gender)%>%
+          filter(ESCS %in% c(v$Escs))
       }
     } else {
       plotData2<- plotData1 %>%
-        filter(Gender %in% c(input$Gender))%>%
+        filter(Gender %in% c(v$Gender))%>%
         filter(ESCS == 0)
     } 
   }

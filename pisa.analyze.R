@@ -1,27 +1,10 @@
+surveyData<-pisa2015
 observe({
-  updateSelectInput(session, inputId="AnalyzeYear", label="",
-                    choices = c("2015", "2012"), selected = "2015")
-})
 
-observe({
-  updateSelectInput(session, "AnalyzeVariable", "", as.vector(unlist(select(filter(pisaDictionary, Year == input$AnalyzeYear, Subject %in% c("OECDindex", "SchoolIndex")), Category))), selected = "Family wealth (WLE)")
-})
+  
 
-observe({
-  updateSelectInput(session, inputId="ModelId", label="", choices = c(
-    "Linear regression"="lm",
-    "Local regression"="loess"
-  ),
-  selected="lm")
-})
-
-observe({
-  switch(input$AnalyzeYear,
-         "2015"={surveyData<-pisa2015},
-         "2012"={surveyData<-pisa2012},
-         "2009"={surveyData<-pisa2009},
-         "2006"={surveyData<-pisa2006}
-  )
+  
+  analyzeSelectedID <- as.vector(unlist(select(filter(pisaDictionary, Year == input$SurveyYear, Subject == input$SurveySubject, Category==input$SurveyCategory, SubCategory==input$SurveySubCategory), ID))) 
   
   switch (input$Subject,
           Math = {analyzeSubject<-"PV1MATH"},
@@ -31,51 +14,63 @@ observe({
           Financial={analyzeSubject<-"PV1FLIT"}
   )
   
-  analyzeSelectedID <- as.vector(unlist(select(filter(pisaDictionary, Year == input$AnalyzeYear, Subject %in% c("OECDindex", "SchoolIndex"), Category==input$AnalyzeVariable), ID))) 
-  
-  
   analyzePlotFunction<-function(country) {
+    switch(input$SurveyYear,
+           "2015"={surveyData<-pisa2015},
+           "2012"={surveyData<-pisa2012},
+           "2009"={surveyData<-pisa2009},
+           "2006"={surveyData<-pisa2006}
+    )
+    
+    
     analyzeData1<-surveyData%>%select_("COUNTRY", analyzeSelectedID, "ST04Q01", "ESCS", analyzeSubject)%>%filter(COUNTRY==country)
+    
     # analyzeData1<-collect(analyzeData1)
-    if(is.null(input$Gender)){
-      if(is.null(input$Escs)){
+    
+    if(is.null(v$Gender)){
+      if(is.null(v$Escs)){
         #General
         analyzeData2<-analyzeData1%>%
           mutate(groupColour="General")
       } else {
         # General Escs
         analyzeData2<-analyzeData1%>%
+          filter(ESCS %in% c(v$Escs))%>%
+          group_by_("ESCS", analyzeSelectedID)%>%
           rename_(group="ESCS") %>%
           mutate(groupColour=str_c("General", group))
       }
     } else {
-      if(length(input$Gender)==1){
-        if(is.null(input$Escs)) {
+      if(length(v$Gender)==1){
+        if(is.null(v$Escs)) {
           #Only gender
           analyzeData2<-analyzeData1%>%
+            filter(ST04Q01 %in% c(v$Gender))%>%
+            group_by_("ST04Q01", analyzeSelectedID)%>%
             rename_(groupColour="ST04Q01") 
         } else {
           analyzeData2<-analyzeData1%>%
-            mutate(group1=input$Gender)%>%
+            filter(ST04Q01  %in% c(v$Gender))%>%
+            filter(ESCS %in% c(v$Escs))%>%
+            group_by_("ESCS", analyzeSelectedID)%>%
+            mutate(group1=v$Gender)%>%
             rename_(group="ESCS")%>%
             mutate(groupColour=str_c(group1, group))
         }
       } else {
         analyzeData2<-analyzeData1%>%
+          filter(ST04Q01 %in% c(v$Gender))%>%
+          group_by_("ST04Q01", analyzeSelectedID)%>%
           rename_(groupColour="ST04Q01") 
       } 
     }
     
-    # analyzeData1[, analyzeSelectedID]<-as.numeric(analyzeData1[, analyzeSelectedID])
-    # analyzeData1[, analyzeSubject]<-as.numeric(analyzeData1[, analyzeSubject])
-    # analyzeData3<-analyzeData2 %>% group_by(groupColour) %>% do(glance(lm(get(analyzeSubject) ~ get(analyzeSelectedID), data=.)))
-
     ggplot(data=analyzeData2, aes_string(y=analyzeSubject, x=analyzeSelectedID)) +
-      geom_smooth(method=input$ModelId, aes(colour=groupColour), se=TRUE) + 
+      geom_smooth(method="lm", aes(colour=groupColour), se=TRUE) + 
       geom_point(aes(colour=groupColour), alpha = 0.1) +
       #geom_text(data=analyzeData3, aes(x=0, y=800, label=paste("R²=", round(r.squared), digits=3), show_guide=F, colour=groupColour)) +
       scale_colour_manual(values = groupColours) +
-      labs(title="", y="Score" ,x= input$AnalyzeVariable) +
+      labs(title="", y="Score" ,x= "") +
       theme_bw() +
       guides(colour=FALSE) +
       scale_y_continuous(limits = c(0,800)) +
@@ -99,41 +94,51 @@ observe({
   analyzeFunction<-function(country) {
     analyzeData1<-surveyData%>%select_("COUNTRY", analyzeSelectedID, "ST04Q01", "ESCS", analyzeSubject)%>%filter(COUNTRY==country)
     # analyzeData1<-collect(analyzeData1)
-    if(is.null(input$Gender)){
-      if(is.null(input$Escs)){
+    
+    if(is.null(v$Gender)){
+      if(is.null(v$Escs)){
         #General
         analyzeData2<-analyzeData1%>%
           mutate(groupColour="General")
       } else {
         # General Escs
         analyzeData2<-analyzeData1%>%
+          filter(ESCS %in% c(v$Escs))%>%
+          group_by_("ESCS", analyzeSelectedID)%>%
           rename_(group="ESCS") %>%
           mutate(groupColour=str_c("General", group))
       }
     } else {
-      if(length(input$Gender)==1){
-        if(is.null(input$Escs)) {
+      if(length(v$Gender)==1){
+        if(is.null(v$Escs)) {
           #Only gender
           analyzeData2<-analyzeData1%>%
-            rename_(groupColour="ST04Q01")
+            filter(ST04Q01 %in% c(v$Gender))%>%
+            group_by_("ST04Q01", analyzeSelectedID)%>%
+            rename_(groupColour="ST04Q01") 
         } else {
           analyzeData2<-analyzeData1%>%
-            mutate(group1=input$Gender)%>%
+            filter(ST04Q01  %in% c(v$Gender))%>%
+            filter(ESCS %in% c(v$Escs))%>%
+            group_by_("ESCS", analyzeSelectedID)%>%
+            mutate(group1=v$Gender)%>%
             rename_(group="ESCS")%>%
             mutate(groupColour=str_c(group1, group))
         }
       } else {
         analyzeData2<-analyzeData1%>%
-          rename_(groupColour="ST04Q01")
-      }
+          filter(ST04Q01 %in% c(v$Gender))%>%
+          group_by_("ST04Q01", analyzeSelectedID)%>%
+          rename_(groupColour="ST04Q01") 
+      } 
     }
     
-    analyzeData1[, analyzeSelectedID]<-as.numeric(analyzeData1[, analyzeSelectedID])
-    analyzeData1[, analyzeSubject]<-as.numeric(analyzeData1[, analyzeSubject])
+    analyzeData2[, analyzeSelectedID]<-as.numeric(unlist(analyzeData2[, analyzeSelectedID]))
+    analyzeData2[, analyzeSubject]<-as.numeric(unlist(analyzeData2[, analyzeSubject]))
     analyzeData3<-analyzeData2 %>% group_by(groupColour) %>% do(glance(lm(get(analyzeSubject) ~ get(analyzeSelectedID), data=.)))
     # analyzeData4<-analyzeData2 %>% group_by(groupColour) %>% do(tidy(lm(get(analyzeSubject) ~ get(analyzeSelectedID), data=.)))
     
-    paste0(input$Gender, ":", input$Escs, " R²=", round(analyzeData3$r.squared, digits=3), ", df.residual=", analyzeData3$df.residual, ".  ")
+    paste0(v$Gender, ":", v$Escs, " R²=", round(analyzeData3$r.squared, digits=3), ", df.residual=", analyzeData3$df.residual, ".  ")
     # paste0("Variables: ", analyzeSubject, ", ", analyzeSelectedID)
     
     # analyzeData3<-analyzeData2 %>% group_by(groupColour) %>% summarize(correlation = cor(analyzeData2[,analyzeSubject], analyzeData2[,analyzeSelectedID], use="complete", method = "pearson"))
