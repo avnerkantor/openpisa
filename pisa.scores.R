@@ -106,9 +106,10 @@ observe({
     } 
     else 
     {
-      gg+annotate("text", label = "Didn't Participate",
-                  x = 2012, y = 500, size = 6, 
-                  colour = "#c7c7c7")%>%config(p = ., displayModeBar = FALSE)
+      ggplot() + annotate("text", label = "Didn't participate",
+                          x = 2012, y = 500, size = 6, 
+                          colour = "#c7c7c7")%>%config(p = ., displayModeBar = FALSE) +
+        theme_void() + theme(legend.position="none")
     }
   }
   

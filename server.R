@@ -6,14 +6,16 @@ load("data/pisaData.rda")
 pisaDictionary<-read.csv("data/pisaDictionary.csv", header = TRUE, sep=",")
 #load("data/pisaDictionary.rda")
 
-print("loading pisa 2015")
-load("../pisa2015.rda")
-print("loading pisa 2012")
-load("../pisa2012b.rda")
 # pisadb<-src_bigquery("r-shiny-1141", "pisa")
 # pisa2012<- tbl(pisadb, "pisa2012")
 # pisa2009<- tbl(pisadb, "pisa2009")
 # pisa2006<- tbl(pisadb, "pisa2006")
+
+print("loading pisa 2015")
+load("../pisa2015.rda")
+print("loading pisa 2012")
+load("../pisa2012b.rda")
+
 
 Countries<-read.csv("data/countries.csv", header = TRUE, sep=",")
 countriesList<-Countries$CNT
@@ -36,12 +38,12 @@ groupColours<- c(
   FemaleHigh="#e5126f", 
   FemaleLow="#f6aac9", 
   FemaleMedium="#f17cb0"
-) 
+)
 
 shinyServer(function(input, output, session) {
   source('pisa.scores.R', local=TRUE)
   source('pisa.expertise.R', local=TRUE)
+  source('urlSearch.R', local=TRUE)
   source('pisa.survey.R', local=TRUE)
   source('pisa.analyze.R', local=TRUE)
-  source('urlSearch.R', local=TRUE)
 })
