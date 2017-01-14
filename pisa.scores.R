@@ -66,7 +66,7 @@ observe({
       scale_colour_manual(values = groupColours) +
       guides(colour=FALSE) +
       
-      labs(title="", y="" ,x= "") +
+      labs(title="", y="Proficiency Level" ,x= "Test Year") +
       theme_bw() +
       #geom_label() +
       theme(plot.margin=unit(c(0,15,5,10), "pt"),
@@ -75,8 +75,8 @@ observe({
             panel.grid.major.x=element_blank(),
             panel.grid.major.y = element_line(colour="#e0e0e0", size=0.3),
             legend.position="none",
-            axis.line.x = element_line(color="#c7c7c7", size = 0.3),
-            axis.line.y = element_line(color="#c7c7c7", size = 0.3)
+            axis.line = element_line(color="#c7c7c7", size = 0.3),
+            axis.title=element_text(colour="#777777")
       ) +
       scale_x_continuous(breaks=c(2006, 2009, 2012, 2015)) +
       scale_y_continuous(

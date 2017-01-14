@@ -113,7 +113,7 @@ observe({
         coord_flip() +
         scale_colour_manual(values =groupColours) +
         scale_fill_manual(values = groupColours) +
-        labs(title="", y="" ,x= "") +
+        labs(title="", y="Percentage" ,x= "") +
         theme_bw() +
         guides(colour=FALSE) +
         facet_grid(. ~groupColour) +
@@ -126,7 +126,8 @@ observe({
               strip.text.x = element_blank(),
               panel.grid.minor = element_blank(),
               axis.text.y = element_text(size=8, angle=0),
-              panel.spacing.x=unit(2, "lines")
+              panel.spacing.x=unit(2, "lines"),
+              axis.title=element_text(colour="#777777")
               #axis.line.x = element_line(color="#c7c7c7", size = 0.3),
               #axis.line.y = element_line(color="#c7c7c7", size = 0.3)
         ) 

@@ -74,7 +74,7 @@ $(document).ready(function () {
 $(document).on('activate.bs.scrollspy', function(e) {
    var x = $(".nav li.active > a").attr('href');
         switch (x) {
-            case "#scores":
+            case "#proficiency":
                 $("#surveyDashboard").hide();
                 $("#Subject").show();
                 break;
@@ -82,7 +82,7 @@ $(document).on('activate.bs.scrollspy', function(e) {
                $("#surveyDashboard").show();
                 $("#Subject").hide();
                 break;
-            case "#survey":
+            case "#questionnaire":
                 $("#surveyDashboard").show();
                 $("#Subject").show();
                 break;
