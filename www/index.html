@@ -83,6 +83,9 @@
           <a class="page-scroll" href="#analyze">Analyze</a>
       </li>
       <li>
+          <a class="page-scroll" href="#dictionary" data-toggle="modal">Dictionary</a>
+      </li>
+      <li>
           <a class="page-scroll" href="#about">About</a>
       </li>
             <!-- 
@@ -111,8 +114,9 @@
 <div id="dashboard--wrap">
     <div id="dashboard" class="container-fluid">
        <br/>
+       <div class="row">
        <div id="Subject"
-       class="row text-center form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
+       class="text-center form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline col-xs-3">
        <div class="shiny-options-group">
         <form class="form-horizontal" method="post" action="">
             <div data-toggle="buttons">
@@ -128,7 +132,7 @@
                         <input type="radio" name="Subject" value="Science"/>
                         <span><img src="img/science.png" class="subjectImage"/></span>
                     </label>
-                    <small>Sciecnce</small>
+                    <small>Science</small>
                 </div>
                 <div class="subjectButtons">
                     <label class="radio-inline btn btn-default btn-circle btn-lg text-center">
@@ -155,6 +159,48 @@
             </form>
         </div>
     </div>
+        <div id="genderDiv" class="col-xs-3">
+        <small>Gender</small>
+        <div id="Gender"
+        class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
+        <div class="shiny-options-group btn-group" data-toggle="buttons">
+      <button type="button" class="btn btnMeasurments action-button" id="generalBtn">
+<span>All</span></button>
+        
+        <label class="btn btnMeasurments" id="femaleBtn">
+            <input type="checkbox" name="Gender" value="Female"/>
+            <span>Female</span>
+        </label>
+        <label class="btn btnMeasurments" id="maleBtn">
+            <input type="checkbox" name="Gender" value="Male"/>
+            <span>Male</span>
+        </label>
+        
+    </div>
+</div>
+</div>
+<div id="escsDiv" class="col-xs-3">
+    <small>ESCS</small>
+    <div id="Escs"
+    class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
+    <div class="shiny-options-group btn-group" data-toggle="buttons">
+        <label class="btn btnMeasurments" id="lowBtn">
+            <input type="checkbox" name="Escs" value="Low"/>
+            <span>Low</span>
+        </label>
+
+        <label class="btn btnMeasurments" id="mediumBtn">
+            <input type="checkbox" name="Escs" value="Medium"/>
+            <span>Middle</span>
+        </label>
+        <label class="btn btnMeasurments" id="highBtn">
+            <input type="checkbox" name="Escs" value="High"/>
+            <span>High</span>
+        </label>
+    </div>
+</div>
+</div>
+</div>
     <div id="surveyDashboard" class="row">
       <div class="col-xs-3">
         <div class="form-group shiny-input-container">
@@ -208,75 +254,6 @@
     </div>
 </div>
 
-<div id="measurmentsDashboard" class="row">
-    <div id="genderDiv" class="col-xs-3">
-        <small>Gender</small>
-        <div id="Gender"
-        class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
-        <div class="shiny-options-group btn-group" data-toggle="buttons">
-      <button type="button" class="btn btnMeasurments action-button" id="generalBtn">
-<span>All</span></button>
-        
-        <label class="btn btnMeasurments" id="femaleBtn">
-            <input type="checkbox" name="Gender" value="Female"/>
-            <span>Female</span>
-        </label>
-        <label class="btn btnMeasurments" id="maleBtn">
-            <input type="checkbox" name="Gender" value="Male"/>
-            <span>Male</span>
-        </label>
-        
-    </div>
-</div>
-</div>
-<div id="escsDiv" class="col-xs-3">
-    <small>ESCS</small>
-    <div id="Escs"
-    class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline">
-    <div class="shiny-options-group btn-group" data-toggle="buttons">
-        <label class="btn btnMeasurments" id="lowBtn">
-            <input type="checkbox" name="Escs" value="Low"/>
-            <span>Low</span>
-        </label>
-
-        <label class="btn btnMeasurments" id="mediumBtn">
-            <input type="checkbox" name="Escs" value="Medium"/>
-            <span>Middle</span>
-        </label>
-        <label class="btn btnMeasurments" id="highBtn">
-            <input type="checkbox" name="Escs" value="High"/>
-            <span>High</span>
-        </label>
-    </div>
-</div>
-</div>
-<div class="col-xs-3">
-  <span>Questionnaire</span>
-  <div>
-   <button type="button" class="btn btn-countries" data-toggle="modal" data-target="#myModal">
-  Questions
-</button>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">PISA Questions</h4>
-      </div>
-      <div class="modal-body">
-        <div id="pisaScoresTable" class="datatables html-widget html-widget-output"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-</div>
 <div id="countriesDashboard" class="row">
     <div class="col-xs-3">
         <div class="form-group shiny-input-container">
@@ -329,6 +306,7 @@
 <!--Proficiency-->
 <section>
     <div id="proficiency" class="container-fluid">
+      <p>When students start their life as adults how much skill and knowledge do they have?</p>
         <div class="row" >
             <div class="col-xs-3 ">
                 <div id="Country1Plot" class="plotly html-widget html-widget-output"></div>
@@ -345,10 +323,6 @@
         </div>
         <div class="row">
             <br>
-            <div class="col-xs-12 text-center">
-              <p>PISA  assesses  students  and  uses  the  outcomes  of  that  assessment  to  produce  estimates  of  students’ 
-                proficiency in relation to a number of literacy variables:</p>
-            </div>
             <div id="LevelNumberDiv" class="form-group shiny-input-container col-xs-2">
                 <span>Proficiency</span>
                 <input id="LevelNumber" type="number" class="form-control" value="3" min="1" max="6" step="1"/>
@@ -361,6 +335,7 @@
 <section>
     <div id="expertise" class="container-fluid">
       <h4>Expertise</h4>
+      <p>Does the Education system succeeds in increasing the amount of students that excel in their studies? Do they succeed in decreasing the amount of students that have difficulties?</p>
         <div class="row text-center" style="height: 30px; margin-top: 30px">
             <div class="col-xs-5" style="border-bottom: 1px solid #c7c7c7; left: 10px;"></div>
             <div class="col-xs-2" style="color: #777777; margin-top: -10px; font-size: 16px">
@@ -407,6 +382,8 @@
         <section>
             <div id="questionnaire" class="container-fluid">
                <h4>Questionnaire</h4>
+               <p>The Pisa test collects a lot of information regarding the student's background, educational improvement, and their perception on the school syllabus. School principals are asked about school policies, atmosphere, the number of hours of teaching and more. This is the story of the education system.</p>
+               <p>The students' answers include their bias.</p>
                 <div class="row col-xs-12" style="height: 30px; "></div>
                 <div class="row">
                     <div class="col-xs-3">
@@ -428,6 +405,8 @@
 <section>
   <div id="analyze" class="container-fluid">
      <h4>Analyze</h4>
+     <p>How do help the students to get good grades? Can you explain the success of students with their background?</p>
+     <p>The data is being calculated on the spot, so you might have to wait a few seconds.</p>
 <br/>
    <div class="row">
     <div class="col-xs-3 ">
@@ -451,10 +430,31 @@
 </div>
 
 </section>
+
+<!-- Dictionary Modal -->
+<section>
+  <div class="modal fade" id="dictionary" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">PISA Questionnaire Items</h4>
+      </div>
+      <div class="modal-body">
+        <div id="pisaScoresTable" class="datatables html-widget html-widget-output"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
 <section>
     <div id="about" class="container-fluid">
       <h4>About</h4>
-        <iframe width= "100%" height="500px" frameborder="0" scrolling="no" src="http://blog.opisa.org/post1/about-open-pisa/"></iframe>
+        <iframe width= "100%" height="1400px" frameborder="0" scrolling="no" src="http://tikhinuch.herokuapp.com/blog/post1/about-open-pisa/"></iframe>
 </div>
 
 </section>

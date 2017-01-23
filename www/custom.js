@@ -58,7 +58,7 @@ $(document).ready(function () {
     
     var $anchor = $(this);
         $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top - 325
+            scrollTop: $($anchor.attr('href')).offset().top - 250
         }, 1500, 'easeInOutExpo');
     // Prevent default anchor click behavior
     event.preventDefault();
@@ -76,19 +76,18 @@ $(document).on('activate.bs.scrollspy', function(e) {
         switch (x) {
             case "#proficiency":
                 $("#surveyDashboard").hide();
-                $("#Subject").show();
                 break;
             case "#expertise":
                $("#surveyDashboard").show();
-                $("#Subject").hide();
                 break;
             case "#questionnaire":
                 $("#surveyDashboard").show();
-                $("#Subject").show();
                 break;
             case "#analyze":
                 $("#surveyDashboard").show();
-                $("#Subject").show();
+                break;
+             case "#about":
+                $("#surveyDashboard").hide();
                 break;
         }
         

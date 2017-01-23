@@ -30,7 +30,6 @@ html {
 }
 
 #proficiency {
-  padding-top:30px;
   width:100%;
 }
 
@@ -97,7 +96,6 @@ nav {
 .subjectButtons {
     width: 85px;
     float: left;
-    margin-left:20px;
 }
 
 small{

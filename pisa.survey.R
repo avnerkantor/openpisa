@@ -8,15 +8,14 @@ observeEvent(input$SurveyYear,{
   choices<-list("Student questionnarie"=c("Family and Home", "Computer Orientation", "Learning Science", "Additional Instruction", 
                                           "Additional Instruction in Science", "Additional Instruction in Mathematics", 
                                           " Additional Instruction in Reading", "Physical Education", "Parents"), 
-                "School questionnarie"=c("School", "School science", "Principal Attitudes", "Responsibility", "School Policies and Practices", 
-                                         "The Structure and Organisation of the School", "School instruction hindered", 
+                "School questionnarie"=c("School", "Principal Attitudes", "Responsibility", "School instruction hindered", 
                                          "The Student and Teacher Body", "School Instruction Curriculum and Assessment", "School Climate"), 
                 "Indexes"=c("Student Index", "School Index"))
   switch(input$SurveyYear,
          "2015"={choices<-choices},
          "2012"={choices<-c(unique(pisaDictionary%>%filter(Year=="2012")%>%select(Subject)))}
   )
-  updateSelectInput(session, "SurveySubject", "", choices = choices, selected="School Policies and Practices")
+  updateSelectInput(session, "SurveySubject", "", choices = choices, selected="School Climate")
 })
 
 
@@ -127,7 +126,7 @@ observe({
               panel.grid.minor = element_blank(),
               axis.text.y = element_text(size=8, angle=0),
               panel.spacing.x=unit(2, "lines"),
-              axis.title=element_text(colour="#777777")
+              axis.title=element_text(colour="#777777", size = 10)
               #axis.line.x = element_line(color="#c7c7c7", size = 0.3),
               #axis.line.y = element_line(color="#c7c7c7", size = 0.3)
         ) 
