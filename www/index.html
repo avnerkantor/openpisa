@@ -13,6 +13,7 @@
     <script type="application/html-dependencies">
         json2[2014.02.04];
         jquery[1.12.4];
+        babel-polyfill[6.7.2];
         shiny[0.14.1];
         selectize[0.11.2];
         bootstrap[3.3.7];
@@ -23,6 +24,7 @@
     </script>
     <script src="shared/json2-min.js"></script>
     <script src="shared/jquery.js"></script>
+    <script src="shared/babel-polyfill.min.js"></script>
     <link href="shared/shiny.css" rel="stylesheet"/>
     <script src="shared/shiny.js"></script>
     <link href="shared/selectize/css/selectize.bootstrap3.css" rel="stylesheet"/>
@@ -37,7 +39,10 @@
     <script src="shared/bootstrap/js/bootstrap.min.js"></script>
     <script src="shared/bootstrap/shim/html5shiv.min.js"></script>
     <script src="shared/bootstrap/shim/respond.min.js"></script>
-
+      <script src="js/ace.js"></script>
+  <script src="js/ext-language_tools.js"></script>
+  <script src="js/shinyAce.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/shinyAce.css"/>
     <link href="style.css" rel="stylesheet">
     <script src="custom.js"></script>
     <link rel="short/cut icon" href="img/bag-512.png">
@@ -425,6 +430,18 @@
     <div id="Country4AnalyzePlot" class="shiny-plot-output"></div>
     <div id="Country4AnalyzePlotText" class="shiny-text-output"></div>
 </div>
+</div>
+<div class="row" style="margin-top: 30px">
+     <!-- <div class="col-xs-6">
+    <pre id="rmd" class="shiny-ace" style="height: 300px"></pre>
+        <script type="text/javascript">var editor__rmd = ace.edit('rmd');editor__rmd.getSession().setMode('ace/mode/markdown');editor__rmd.setValue('#Examples (under construction):\ndata<-pisa2015%>%select(COUNTRY, WEALTH, ST04Q01, ESCS, PV1MATH)%>%\nfilter(COUNTRY=="Israel")\nhead(data)', -1);document.getElementById('rmd').style.fontSize='12px'; $('#rmd').data('debounce',1000);$('#rmd').data('aceEditor',editor__rmd);</script>
+
+        <button id="eval" type="button" class="btn btn-default action-button">Run</button>
+        </div>
+            <div class="col-xs-6">
+        <pre id="knitDoc" class="shiny-html-output" style="height: 300px"></pre>-->
+                <!--<button id="save" type="button" class="btn btn-default action-button">Save Data</button>-->
+        </div>
 </div>
 
 </div>

@@ -171,5 +171,19 @@ observe({
     output$Country4AnalyzePlotText <-renderText({
       analyzeFunction(input$Country4)
     })
+    
   }
+  
+  #https://github.com/trestletech/shinyAce/tree/master/inst/examples
+  #Security
+  #https://github.com/Rapporter/sandboxR
+  #
+  # output$knitDoc <- renderUI({
+  #   input$eval
+  #   return(isolate(HTML(knit2html(text=input$rmd,  fragment.only = TRUE, quiet = TRUE))))
+  # }) 
+  # output$knitDoc <- renderPrint({
+  #   input$eval
+  #   return(isolate(eval(parse(text=input$rmd))))
+  # })
 })
