@@ -416,7 +416,7 @@
      <p>How do help the students to get good grades? Can you explain the success of students with their background?</p>
      <p>The data is being calculated on the spot, so you might have to wait a few seconds.</p>
 <br/>
-   <div class="row">
+   <div class="row" style="margin-bottom: 60px">
     <div class="col-xs-3 ">
       <div id="Country1AnalyzePlot" class="shiny-plot-output"></div>
        <div id="Country1AnalyzePlotText" class="shiny-text-output"></div>
@@ -437,8 +437,11 @@
 <!-- <div class="row" style="margin-top: 30px"></div>
             <p>Available packages: dplyr, broom, rmarkdown, stringr, ineq, MLmetrices</p>
   <iframe width= "100%" height="300px" frameborder="0" scrolling="yes" src="http://146.148.14.169:3838/lab/"></iframe>-->
-    <div class="row" style="margin-top: 30px">
+  
+  
+   <!-- <div class="row" style="margin-top: 30px">
       <div class="col-sm-6">
+        
         <pre id="code" class="shiny-ace" style="height: 300px"></pre>
         <script type="text/javascript">var editor__code = ace.edit('code');editor__code.getSession().setMode('ace/mode/r');editor__code.setValue("data<-pisa2015%>%\nselect(COUNTRY, WEALTH, ST04Q01, ESCS, PV1MATH)%>%\nfilter(COUNTRY=='Finland')\nhead(data)", -1);document.getElementById('code').style.fontSize='14px'; $('#code').data('debounce',1000);$('#code').data('aceEditor',editor__code);</script>
         <button id="eval" type="button" class="btn btn-default action-button">Run</button>
@@ -446,7 +449,19 @@
       <div class="col-sm-6">
         <pre id="output" class="shiny-text-output noplaceholder"></pre>
       </div>
+    </div>-->
+
+<div class="row" >
+      <div class="col-sm-6">
+        <pre id="rmd" class="shiny-ace" style="height: 300px"></pre>
+        <script type="text/javascript">var editor__rmd = ace.edit('rmd');editor__rmd.getSession().setMode('ace/mode/markdown');editor__rmd.setValue('This is some markdown text. It may also have embedded R code\nwhich will be executed. It can even include graphical elements.\n```{r, echo=FALSE}\ndata<-pisa2015%>%\nselect(COUNTRY, WEALTH, ST04Q01, ESCS, PV1MATH)%>%\nfilter(COUNTRY=="Finland")\nhead(data)\n```', -1);document.getElementById('rmd').style.fontSize='14px'; $('#rmd').data('debounce',1000);$('#rmd').data('aceEditor',editor__rmd);</script>
+        <button id="eval" type="button" class="btn btn-default action-button">Run</button>
+      </div>
+      <div class="col-sm-6">
+        <div id="knitDoc" class="shiny-html-output"></div>
+      </div>
     </div>
+
 
 </div>
 

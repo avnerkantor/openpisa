@@ -47,9 +47,12 @@ shinyServer(function(input, output, session) {
   source('pisa.survey.R', local=TRUE)
   source('pisa.analyze.R', local=TRUE)
   
-  output$output <- renderPrint({
+  # output$output <- renderPrint({
+  #   input$eval
+  #   return(isolate(eval(parse(text=input$code))))
+  # }) 
+  output$knitDoc <- renderUI({
     input$eval
-    return(isolate(eval(parse(text=input$code))))
+    return(isolate(HTML(knit2html(text = input$rmd, fragment.only = TRUE, quiet = TRUE))))
   }) 
-  
 })
