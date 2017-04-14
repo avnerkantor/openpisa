@@ -4,9 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Open PISA - OECD PISA 2015 Data Explorer Platform">
-    <meta name="author" content="Avner Kantor">
-
+    <meta name="description" content="OECD PISA 2015 Data Explorer Platform">
+    <meta name="author" content="The Center for Internet Research">
+    <meta property="og:image" content="http://openpisa.org/img/PISAchart.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="450">
+    <meta property="og:image:height" content="310">
     <title>Open PISA</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script type="application/shiny-singletons"></script>
@@ -431,9 +434,19 @@
     <div id="Country4AnalyzePlotText" class="shiny-text-output"></div>
 </div>
 </div>
-<div class="row" style="margin-top: 30px">
-  <iframe width= "100%" height="300px" frameborder="0" scrolling="no" src="http://146.148.14.169:3838/openpisa/"></iframe>
-</div>
+<!-- <div class="row" style="margin-top: 30px"></div>
+            <p>Available packages: dplyr, broom, rmarkdown, stringr, ineq, MLmetrices</p>
+  <iframe width= "100%" height="300px" frameborder="0" scrolling="yes" src="http://146.148.14.169:3838/lab/"></iframe>-->
+    <div class="row" style="margin-top: 30px">
+      <div class="col-sm-6">
+        <pre id="code" class="shiny-ace" style="height: 300px"></pre>
+        <script type="text/javascript">var editor__code = ace.edit('code');editor__code.getSession().setMode('ace/mode/r');editor__code.setValue("data<-pisa2015%>%\nselect(COUNTRY, WEALTH, ST04Q01, ESCS, PV1MATH)%>%\nfilter(COUNTRY=='Finland')\nhead(data)", -1);document.getElementById('code').style.fontSize='14px'; $('#code').data('debounce',1000);$('#code').data('aceEditor',editor__code);</script>
+        <button id="eval" type="button" class="btn btn-default action-button">Run</button>
+      </div>
+      <div class="col-sm-6">
+        <pre id="output" class="shiny-text-output noplaceholder"></pre>
+      </div>
+    </div>
 
 </div>
 

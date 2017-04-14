@@ -47,4 +47,9 @@ shinyServer(function(input, output, session) {
   source('pisa.survey.R', local=TRUE)
   source('pisa.analyze.R', local=TRUE)
   
+  output$output <- renderPrint({
+    input$eval
+    return(isolate(eval(parse(text=input$code))))
+  }) 
+  
 })
