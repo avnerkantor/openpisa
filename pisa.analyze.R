@@ -20,7 +20,6 @@ observe({
     )
     
     analyzeData1<-surveyData%>%select_("COUNTRY", analyzeSelectedID, "ST04Q01", "ESCS", analyzeSubject)%>%filter(COUNTRY==country)
-    
     # analyzeData1<-collect(analyzeData1)
     if(all(is.na(analyzeData1[,analyzeSelectedID]))){
       ggplot() + annotate("text", label = "Didn't participate",
@@ -94,7 +93,6 @@ observe({
   
   analyzeFunction<-function(country) {
     analyzeData1<-surveyData%>%select_("COUNTRY", analyzeSelectedID, "ST04Q01", "ESCS", analyzeSubject)%>%filter(COUNTRY==country)
-    # analyzeData1<-collect(analyzeData1)
     if(all(is.na(analyzeData1[,analyzeSelectedID]))){
       paste("")
     } else {

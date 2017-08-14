@@ -454,7 +454,7 @@
 <div class="row" >
       <div class="col-sm-6">
         <pre id="rmd" class="shiny-ace" style="height: 300px"></pre>
-        <script type="text/javascript">var editor__rmd = ace.edit('rmd');editor__rmd.getSession().setMode('ace/mode/markdown');editor__rmd.setValue('This is some markdown text. It may also have embedded R code\nwhich will be executed. It can even include graphical elements.\n```{r, echo=FALSE}\ndata<-pisa2015%>%\nselect(COUNTRY, WEALTH, ST04Q01, ESCS, PV1MATH)%>%\nfilter(COUNTRY=="Finland")\nhead(data)\n```', -1);document.getElementById('rmd').style.fontSize='14px'; $('#rmd').data('debounce',1000);$('#rmd').data('aceEditor',editor__rmd);</script>
+        <script type="text/javascript">var editor__rmd = ace.edit('rmd');editor__rmd.getSession().setMode('ace/mode/markdown');editor__rmd.setValue('```{r, echo=FALSE}\ndata<-pisa2015%>%filter(COUNTRY=="Finland")\nfit<-lm(PV1MATH~COMPICT+AUTICT, data)\nsummary(fit)\n```', -1);document.getElementById('rmd').style.fontSize='14px'; $('#rmd').data('debounce',1000);$('#rmd').data('aceEditor',editor__rmd);</script>
         <button id="eval" type="button" class="btn btn-default action-button">Run</button>
       </div>
       <div class="col-sm-6">

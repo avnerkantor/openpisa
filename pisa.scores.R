@@ -1,26 +1,3 @@
-observe({
-    updateSelectInput(session, "Country1", choices = names(countriesList), selected = "Israel")
-    updateSelectInput(session, "Country2", choices = names(countriesList), selected = "Finland")
-    updateSelectInput(session, "Country3", choices = names(countriesList), selected = "Korea")
-    updateSelectInput(session, "Country4", choices = names(countriesList), selected = "United States of America")
-})
-
-#Reset button (generalBtn)
-v <- reactiveValues(data = NULL)
-
-observeEvent(input$Gender, {
-  v$Gender <- input$Gender
-})
-
-observeEvent(input$Escs, {
-  v$Escs <- input$Escs
-})
-
-
-observeEvent(input$generalBtn, {
-  v$Gender <- NULL
-})
-
 
 observe({
   
